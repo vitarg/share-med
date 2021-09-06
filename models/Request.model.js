@@ -5,7 +5,7 @@ const requestSchema = mongoose.Schema({
   tel: String,
   email: String,
   message: String,
-  medication: {
+  medicationId: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Medication'
   }

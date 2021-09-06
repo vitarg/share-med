@@ -4,8 +4,8 @@ const { requestsController } = require('../controllers/requests.controller')
 
 const router = Router();
 
-router.post('/request/medication/:id', requestsController.addRequest);
-router.get('/getRequest/medication/:id', requestsController.getRequestMedication);
+router.post('/requests/:medicationId', requestsController.addRequest);
+router.get('/requests/:medicationId', requestsController.getRequestByMedication);
 
 module.exports = router;
 
