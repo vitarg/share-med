@@ -1,4 +1,6 @@
+const path = require("path");
 const Medication = require("../models/Medication.model");
+const { v4: uuidv4 } = require("uuid");
 
 module.exports.medicationsController = {
   createMedication: async (req, res) => {
@@ -43,8 +45,28 @@ module.exports.medicationsController = {
   },
   getMedicationsByCategory: async (req, res) => {
     try {
-      const data = await Medication.findById({ category: req.params.id });
+      const data = await Medication.find({ category: req.params.id });
       res.json(data);
+    } catch (err) {
+      res.json(err);
+    }
+  },
+  addImageForMedication: async (req, res) => {
+    try {
+      const newFileName = `/image/${uuidv4()}${path.extname(
+        req.files.image.name
+      )}`;
+
+      req.files.image.mv(`./public${newFileName}`, async (err) => {
+        if (err) {
+          console.log(err);
+        } else {
+          await Medication.findByIdAndUpdate(req.params.id, {
+            image: newFileName,
+          });
+          res.json("Файл загружен");
+        }
+      });
     } catch (err) {
       res.json(err);
     }
