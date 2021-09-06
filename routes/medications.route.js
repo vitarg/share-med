@@ -13,5 +13,6 @@ router.get(
   "/medications/categories/:id",
   medicationsController.getMedicationsByCategory
 );
+router.post("/medications/:id", medicationsController.addImageForMedication);
 
 module.exports = router;

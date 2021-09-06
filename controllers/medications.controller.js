@@ -14,7 +14,7 @@ module.exports.medicationsController = {
         hasRecipe: req.body.hasRecipe,
         expiryDate: req.body.expiryDate,
       });
-      res.json(data);
+      res.json("Лекарство добавлено");
     } catch (err) {
       res.json(err);
     }
