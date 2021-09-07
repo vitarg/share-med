@@ -9,7 +9,6 @@ const requestSchema = mongoose.Schema({
     type: mongoose.Schema.Types.ObjectId,
     ref: 'Medication'
   }
-
 }, {timestamps: true});
 
 const Request = mongoose.model('Request', requestSchema);
