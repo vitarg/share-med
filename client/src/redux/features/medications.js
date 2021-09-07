@@ -1,8 +1,6 @@
 const initialState = {
-  item: null,
-  signinUp: false,
-  signinIn: false,
-  token: null,
+  item: [],
+  loading: false,
 };
 
 export default function medications(state = initialState, action) {
