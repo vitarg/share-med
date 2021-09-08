@@ -35,16 +35,3 @@ export const getMedications = () => {
     }
   };
 };
-
-export const getSingleMedication = (id) => {
-  return async (dispatch) => {
-    try {
-      const response = await fetch(`http://localhost:4000/medications/${id}`);
-      const json = await response.json();
-
-      dispatch({ type: "medications/single/fulfilled", payload: json });
-    } catch (e) {
-      dispatch({ type: "medications/single/rejected", error: e.toString() });
-    }
-  };
-};
