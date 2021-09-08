@@ -5,6 +5,7 @@ import Sidebar from "./sidebar/Sidebar";
 import MainPage from "./pages/MainPage";
 import { Grid } from "@material-ui/core";
 import SinglePage from "./pages/SinglePage";
+import RequestPage from './pages/RequestPage';
 
 function App() {
   return (
@@ -23,6 +24,12 @@ function App() {
             </Route>
             <Route path="/medications/:id">
               <SinglePage />
+            </Route>
+            <Route path="/requests/:medicationId">
+              <RequestPage />
+            </Route>
+            <Route path="/great">
+              Заявка успешно отправлена, ответ придет на почту
             </Route>
           </Switch>
         </Grid>

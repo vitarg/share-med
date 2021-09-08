@@ -3,6 +3,7 @@ import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { getMedications } from "../../redux/features/medications"
+import { Link } from 'react-router-dom';
 
 function SinglePage() {
   const dispatch = useDispatch();
@@ -27,6 +28,14 @@ function SinglePage() {
       <Grid item xs={7}>
         <Typography component="h1" variant="h4">{find.name}</Typography>
         <Grid container>
+          <Typography component="h1" variant="h5">{find.descr}</Typography>
+        </Grid>
+        <Grid container>
+          <Grid item xs={3}><Typography component="h1" variant="h6">{find.price}₽</Typography></Grid>
+          <Grid item xs={3}></Grid>
+          <Grid item xs={6}><Button variant="contained" color="primary"><Link to={`/requests/${id}`}>
+            Оставить заявку
+          </Link></Button></Grid>
         <Typography component="h1" variant="h5">{find.descr}</Typography>
         </Grid>
         <Grid container>
@@ -35,7 +44,7 @@ function SinglePage() {
          <Grid item xs={6}><Button variant="contained" color="primary">Primary</Button></Grid>
         </Grid>
       </Grid>
-    </Grid> 
+    </Grid>
   );
 }
 
