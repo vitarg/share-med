@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import Sidebar from "./sidebar/Sidebar";
 import MainPage from "./pages/MainPage";
 import { Grid } from "@material-ui/core";
+import SinglePage from "./pages/SinglePage";
 
 function App() {
   return (
@@ -14,11 +15,14 @@ function App() {
         </Grid>
         <Grid item xs={10}>
           <Switch>
-            <Route path="/" exact>
+            <Route exact path="/">
               <MainPage />
             </Route>
-            <Route path="/medications/categories/:id">
+            <Route exact path="/medications/categories/:id">
               <MainPage />
+            </Route>
+            <Route path="/medications/:id">
+              <SinglePage />
             </Route>
           </Switch>
         </Grid>

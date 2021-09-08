@@ -11,13 +11,13 @@ function Sidebar() {
   useEffect(() => {
     dispatch(fetchAllCategories());
   }, []);
-  console.log(categories);
+
   return (
     <List component="nav" aria-label="secondary mailbox folders">
       {categories.map((item) => {
         return (
           <ListItem key={item._id}>
-            <NavLink to={`/medications/categories/${item._id}`}>
+            <NavLink exact to={`/medications/categories/${item._id}`}>
               {item.name}
             </NavLink>
           </ListItem>

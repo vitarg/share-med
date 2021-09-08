@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMedications } from "../../redux/features/medications";
 import { useParams } from "react-router";
+import { Link } from "react-router-dom";
 import {
   Button,
   Card,
@@ -17,13 +18,12 @@ const MainPage = () => {
   const dispatch = useDispatch();
   const { medications } = useSelector((state) => state.medications);
 
-  console.log(medications);
   useEffect(() => {
     dispatch(getMedications());
   }, []);
 
   const { id } = useParams();
-  console.log(id);
+
   if (id) {
     return (
       <Grid container justifyContent={"space-around"}>
@@ -31,7 +31,7 @@ const MainPage = () => {
           .filter((item) => item.category === id)
           .map((item) => {
             return (
-              <Grid item xs={3} key={item.id}>
+              <Grid item xs={3} key={item._id}>
                 <Card>
                   <CardActionArea>
                     <CardMedia
@@ -53,7 +53,7 @@ const MainPage = () => {
                   </CardActionArea>
                   <CardActions>
                     <Button size="small" color="primary">
-                      Подробнее
+                    <Link to={`/medications/${item._id}`} >Подробнее</Link>
                     </Button>
                   </CardActions>
                 </Card>
