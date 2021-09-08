@@ -16,13 +16,13 @@ import {
 
 const MainPage = () => {
   const dispatch = useDispatch();
-  const { medications } = useSelector((state) => state.medications);
+  const { id } = useParams();
 
   useEffect(() => {
     dispatch(getMedications());
-  }, []);
-
-  const { id } = useParams();
+  }, [id]);
+  const { medications } = useSelector((state) => state.medications);
+  console.log(medications)
 
   if (id) {
     return (
@@ -92,7 +92,7 @@ const MainPage = () => {
               </CardActionArea>
               <CardActions>
                 <Button size="small" color="primary">
-                  Подробнее
+                  <Link to={`/medications/${item._id}`} >Подробнее</Link>
                 </Button>
               </CardActions>
             </Card>
