@@ -20,10 +20,12 @@ const MainPage = () => {
 
   useEffect(() => {
     dispatch(getMedications());
+    console.log(1)
   }, []);
 
   const { id } = useParams();
 
+  console.log(medications)
   if (id) {
     return (
       <Grid container justifyContent={"space-around"}>
@@ -92,7 +94,7 @@ const MainPage = () => {
               </CardActionArea>
               <CardActions>
                 <Button size="small" color="primary">
-                  Подробнее
+                  <Link to={`/medications/${item._id}`} >Подробнее</Link>
                 </Button>
               </CardActions>
             </Card>
