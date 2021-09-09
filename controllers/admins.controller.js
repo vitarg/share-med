@@ -1,48 +1,53 @@
-const Admin = require('../models/Admin.model');
-const bcrypt = require('bcrypt');
-const jwt = require('jsonwebtoken')
+const Admin = require("../models/Admin.model");
+const bcrypt = require("bcrypt");
+const jwt = require("jsonwebtoken");
 
 module.exports.adminsController = {
   registerAdmin: async (req, res) => {
     try {
 
-      const hash = await bcrypt.hash(req.body.password, 10) // в файле .env нужно сделать переменную BCRYPT_ROUNDS с значением 10 и поставить вместо второго параметра
+      const { name, login, password } = req.body;
 
-      const admin1 = await Admin.create({
-        login: req.body.login,
-        password: hash
+      const hash = await bcrypt.hash(
+        password,
+        Number(process.env.BCRYPT_ROUNDS)
+      );
+
+      await Admin.create({
+        name: name,
+        login: login,
+        password: hash,
       });
 
-      res.json(admin1)
+      return res.json("Аккаунт успешно зарегистрирован");
     } catch (e) {
-      res.json("Ошибка в registerAdmin")
+      return res.status(400).json(`Ошибка при регистрации: ${e.toString()}`);
     }
   },
   login: async (req, res) => {
-    const { login, password } = req.body
+    const { login, password } = req.body;
 
     const candidate = await Admin.findOne({ login });
 
     if (!candidate) {
-      return res.status(401).json("неверный логин")
-    };
+      return res.status(401).json("неверный логин");
+    }
 
     const valid = await bcrypt.compare(password, candidate.password);
 
     if (!valid) {
-      res.status(401).json('неверный пароль')
-    };
+      res.status(401).json("неверный пароль");
+    }
 
     const payload = {
       id: candidate._id,
-      login: candidate.login
-    }
-
+      login: candidate.login,
+    };
 
     const token = await jwt.sign(payload, process.env.SECRET_JWT_KEY, {
-      expiresIn: '24h'
-    } )
+      expiresIn: "24h",
+    });
 
-    res.json({token})
-  }
-}
+    res.json({ token });
+  },
+};

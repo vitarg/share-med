@@ -11,7 +11,7 @@ function Sidebar() {
   useEffect(() => {
     dispatch(fetchAllCategories())
   }, [])
-  console.log(categories)
+
   return (
     <List component="nav" aria-label="secondary mailbox folders">
           {categories.map((item) => {
