@@ -28,9 +28,6 @@ function App() {
             <Route path="/requests/:medicationId">
               <RequestPage />
             </Route>
-            <Route path="/great">
-              Заявка успешно отправлена, ответ придет на почту
-            </Route>
           </Switch>
         </Grid>
       </Grid>

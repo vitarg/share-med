@@ -10,7 +10,7 @@ import {
   CardActions,
   CardContent,
   CardMedia,
-  Grid,
+  Grid, TextField,
   Typography,
 } from "@material-ui/core";
 
@@ -25,7 +25,6 @@ const MainPage = () => {
 
   const { id } = useParams();
 
-  console.log(medications)
   if (id) {
     return (
       <Grid container justifyContent={"space-around"}>

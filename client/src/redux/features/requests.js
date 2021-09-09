@@ -4,19 +4,14 @@ const initialState = {
   error: null
 }
 
-export default function (state = initialState, action) {
+export default function requests(state = initialState, action) {
   switch (action.type) {
-    case "medications/fetch/fulfilled":
+    case "requests/fetch/fulfilled":
       return {
         ...state,
         requests: action.payload
       }
-    case "medications/fetch/rejected":
-      return {
-        ...state,
-        error: action.error
-      }
-    case "categories/fetch/rejected":
+    case "requests/fetch/rejected":
       return {
         ...state,
         error: action.error
@@ -37,13 +32,13 @@ export const fetchRequest = (medicationId, name, tel, email, message) => {
       const json = await response.json();
 
       if (json.error) {
-        dispatch({ type: "medications/fetch/rejected", error: json.error });
+        dispatch({ type: "requests/fetch/rejected", error: json.error });
       } else {
-        dispatch({ type: "medications/fetch/fulfilled", payload: json });
+        dispatch({ type: "requests/fetch/fulfilled", payload: json });
       }
 
     } catch (e) {
-      dispatch({ type: "categories/fetch/rejected", error: e.toString() });
+      dispatch({ type: "requests/fetch/rejected", error: e.toString() });
     }
   };
 }

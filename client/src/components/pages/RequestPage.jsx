@@ -8,7 +8,7 @@ import {
   TextField,
   Typography
 } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { fetchRequest } from '../../redux/features/requests';
 import { Route } from 'react-router-dom';
@@ -35,6 +35,7 @@ const RequestPage = () => {
   }));
 
     const classes = useStyles();
+  const { medications } = useSelector((state) => state.medications);
 
     const { medicationId } = useParams()
   console.log(medicationId)
@@ -45,11 +46,10 @@ const RequestPage = () => {
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
 
-  const history = useHistory()
-
+  const [text, setText] = useState('')
     const sendRequest = () => {
       dispatch(fetchRequest(medicationId, name, tel, email, message))
-      history.push('/great')
+      setText('Заявка успешно отправлена')
     }
   return <div className={classes.root}>
     <Paper elevation={3}>
@@ -110,6 +110,9 @@ const RequestPage = () => {
           <Button variant="contained" color="secondary" onClick={sendRequest}>
             Отправить запрос
           </Button>
+        </Grid>
+        <Grid item xs={12} sm={8}>
+          {text}
         </Grid>
       </Grid>
     </Paper>
