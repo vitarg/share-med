@@ -35,22 +35,15 @@ function App() {
             <Route path="/medications/:id">
               <SinglePage />
             </Route>
-<<<<<<< HEAD
-=======
             <Route path="/requests/:medicationId">
               <RequestPage />
             </Route>
-            <Route path="/great">
-              Заявка успешно отправлена, ответ придет на почту
-            </Route>
-
             <Route path={"/sign-in"}>
               <SignInPage />
             </Route>
             <Route path={"/sign-up"}>
               <SignUpPage />
             </Route>
->>>>>>> 89bed83185bb530c4904045c76e9efb4fdf2314b
           </Switch>
         </Grid>
       </Grid>
