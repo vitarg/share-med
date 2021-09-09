@@ -5,7 +5,6 @@ const jwt = require("jsonwebtoken");
 module.exports.adminsController = {
   registerAdmin: async (req, res) => {
     try {
-
       const { name, login, password } = req.body;
 
       const hash = await bcrypt.hash(
@@ -22,7 +21,6 @@ module.exports.adminsController = {
       return res.json("Аккаунт успешно зарегистрирован");
     } catch (e) {
       return res.status(400).json(`Ошибка при регистрации: ${e.toString()}`);
-
     }
   },
   login: async (req, res) => {
@@ -31,13 +29,13 @@ module.exports.adminsController = {
     const candidate = await Admin.findOne({ login });
 
     if (!candidate) {
-      return res.status(401).json("неверный логин");
+      return res.status(401).json({ error: "неверный логин" });
     }
 
     const valid = await bcrypt.compare(password, candidate.password);
 
     if (!valid) {
-      res.status(401).json("неверный пароль");
+      res.status(401).json({ error: "неверный пароль" });
     }
 
     const payload = {
