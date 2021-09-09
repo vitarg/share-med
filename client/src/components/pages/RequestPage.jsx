@@ -38,7 +38,6 @@ const RequestPage = () => {
   const { medications } = useSelector((state) => state.medications);
 
     const { medicationId } = useParams()
-  console.log(medicationId)
     const dispatch = useDispatch();
 
     const [name, setName] = useState('')

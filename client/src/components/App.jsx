@@ -25,9 +25,6 @@ function App() {
             <Route path="/medications/:id">
               <SinglePage />
             </Route>
-            <Route path="/requests/:medicationId">
-              <RequestPage />
-            </Route>
           </Switch>
         </Grid>
       </Grid>

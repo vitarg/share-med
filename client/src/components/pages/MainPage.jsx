@@ -16,14 +16,15 @@ import {
 
 const MainPage = () => {
   const dispatch = useDispatch();
-  const { medications } = useSelector((state) => state.medications);
 
   useEffect(() => {
     dispatch(getMedications());
-    console.log(1)
   }, []);
 
   const { id } = useParams();
+
+  const { medications } = useSelector((state) => state.medications);
+
 
   if (id) {
     return (

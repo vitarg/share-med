@@ -36,6 +36,12 @@ function SinglePage() {
           <Grid item xs={6}><Button variant="contained" color="primary"><Link to={`/requests/${id}`}>
             Оставить заявку
           </Link></Button></Grid>
+        <Typography component="h1" variant="h5">{find.descr}</Typography>
+        </Grid>
+        <Grid container>
+         <Grid item xs={3}><Typography component="h1" variant="h6">{find.price}₽</Typography></Grid>
+         <Grid item xs={3}></Grid>
+         <Grid item xs={6}><Button variant="contained" color="primary">Primary</Button></Grid>
         </Grid>
       </Grid>
     </Grid>
