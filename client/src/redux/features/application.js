@@ -88,3 +88,7 @@ export const auth = (login, password) => async (dispatch) => {
     localStorage.setItem("token", json.token);
   }
 };
+
+export const logOut = () => {
+  localStorage.setItem("token", null);
+};
