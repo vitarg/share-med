@@ -2,14 +2,24 @@ import React from "react";
 import { Route, Switch } from "react-router-dom";
 import { BrowserRouter } from "react-router-dom";
 import Sidebar from "./sidebar/Sidebar";
+import Header from "./header/Header";
+import SignInPage from "./pages/SignInPage";
+import SignUpPage from "./pages/SignUpPage";
 import MainPage from "./pages/MainPage";
 import { Grid } from "@material-ui/core";
 import SinglePage from "./pages/SinglePage";
-import RequestPage from './pages/RequestPage';
+import RequestPage from "./pages/RequestPage";
+import { useSelector } from "react-redux";
 
 function App() {
+  const token = useSelector((state) => state.application.token);
+
+  console.log(token);
+
   return (
     <BrowserRouter>
+      <Header />
+
       <Grid container>
         <Grid item xs={2}>
           <Sidebar />
@@ -25,6 +35,22 @@ function App() {
             <Route path="/medications/:id">
               <SinglePage />
             </Route>
+<<<<<<< HEAD
+=======
+            <Route path="/requests/:medicationId">
+              <RequestPage />
+            </Route>
+            <Route path="/great">
+              Заявка успешно отправлена, ответ придет на почту
+            </Route>
+
+            <Route path={"/sign-in"}>
+              <SignInPage />
+            </Route>
+            <Route path={"/sign-up"}>
+              <SignUpPage />
+            </Route>
+>>>>>>> 89bed83185bb530c4904045c76e9efb4fdf2314b
           </Switch>
         </Grid>
       </Grid>
