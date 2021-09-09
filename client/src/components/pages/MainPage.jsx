@@ -22,14 +22,8 @@ const MainPage = () => {
     dispatch(getMedications());
   }, []);
 
-  const { id } = useParams();
-
-
   const { medications } = useSelector((state) => state.medications);
-  console.log(medications)
 
-
-  console.log(medications)
   if (id) {
     return (
       <Grid container justifyContent={"space-around"}>
