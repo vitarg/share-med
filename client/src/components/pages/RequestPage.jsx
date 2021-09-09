@@ -4,14 +4,12 @@ import {
   Grid,
   makeStyles,
   Paper,
-  TextareaAutosize,
   TextField,
   Typography
 } from '@material-ui/core';
 import { useDispatch } from 'react-redux';
 import { useHistory, useParams } from 'react-router';
 import { fetchRequest } from '../../redux/features/requests';
-import { Route } from 'react-router-dom';
 
 
 const RequestPage = () => {

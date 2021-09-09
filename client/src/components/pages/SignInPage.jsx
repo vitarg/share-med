@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import {
-  Avatar, Box,
+  Avatar,
+  Box,
   Button,
   Container,
   CssBaseline,
@@ -102,6 +103,7 @@ const SignInPage = () => {
           />
 
           <Button
+            disabled={signingIn}
             type="submit"
             fullWidth
             variant="contained"

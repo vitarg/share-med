@@ -20,16 +20,10 @@ const MainPage = () => {
 
   useEffect(() => {
     dispatch(getMedications());
-  }, []);
-
-  const { id } = useParams();
-
+  }, [dispatch]);
 
   const { medications } = useSelector((state) => state.medications);
-  console.log(medications)
 
-
-  console.log(medications)
   if (id) {
     return (
       <Grid container justifyContent={"space-around"}>
@@ -59,7 +53,7 @@ const MainPage = () => {
                   </CardActionArea>
                   <CardActions>
                     <Button size="small" color="primary">
-                    <Link to={`/medications/${item._id}`} >Подробнее</Link>
+                      <Link to={`/medications/${item._id}`}>Подробнее</Link>
                     </Button>
                   </CardActions>
                 </Card>
@@ -98,7 +92,7 @@ const MainPage = () => {
               </CardActionArea>
               <CardActions>
                 <Button size="small" color="primary">
-                  <Link to={`/medications/${item._id}`} >Подробнее</Link>
+                  <Link to={`/medications/${item._id}`}>Подробнее</Link>
                 </Button>
               </CardActions>
             </Card>
