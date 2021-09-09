@@ -11,13 +11,6 @@ export default function medications(state = initialState, action) {
         loading: false,
         medications: action.payload,
       };
-    case "medications/single/fulfilled":
-      return {
-        ...state,
-        loading: false,
-        medications: action.payload,
-      };
-
     default:
       return state;
   }
@@ -31,7 +24,7 @@ export const getMedications = () => {
 
       dispatch({ type: "medications/fetch/fulfilled", payload: json });
     } catch (e) {
-      dispatch({ type: "categories/fetch/rejected", error: e.toString() });
+      dispatch({ type: "medications/fetch/rejected", error: e.toString() });
     }
   };
 };
