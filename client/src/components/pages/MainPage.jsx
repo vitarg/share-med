@@ -20,7 +20,7 @@ const MainPage = () => {
 
   useEffect(() => {
     dispatch(getMedications());
-  }, [dispatch]);
+  }, []);
 
   const { medications } = useSelector((state) => state.medications);
 
