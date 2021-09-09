@@ -1,6 +1,3 @@
-import { Link } from 'react-router-dom';
-import React from 'react';
-
 const initialState = {
   medications: [],
   loading: false,
