@@ -1,12 +1,27 @@
 import React from "react";
-import { AppBar} from "@material-ui/core";
+import { AppBar, Button } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
 
 const Header = () => {
+  const dispatch = useDispatch();
+
+  const token = useSelector((state) => state.application.token);
+
+  const handleLogout = () => {
+    localStorage.removeItem("token");
+  };
+
   return (
-    <AppBar>
+    <AppBar position={"static"}>
       <Link to={"/"}>Share medication</Link>
-      <Link to={"/sign-in"}>Вход для админа</Link>
+      {token ? (
+        <Button variant={"contained"} onClick={handleLogout}>
+          Выйти
+        </Button>
+      ) : (
+        <Link to={"/sign-in"}>Войти как админ</Link>
+      )}
     </AppBar>
   );
 };
