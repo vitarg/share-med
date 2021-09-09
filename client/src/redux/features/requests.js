@@ -16,6 +16,11 @@ export default function requests(state = initialState, action) {
         ...state,
         error: action.error,
       };
+    case "requestsGet/fetch/fulfilled":
+      return {
+        ...state,
+        requests: action.payload,
+      };
     default:
       return state;
   }
@@ -41,6 +46,22 @@ export const fetchRequest = (medicationId, name, tel, email, message) => {
       }
     } catch (e) {
       dispatch({ type: "requests/fetch/rejected", error: e.toString() });
+    }
+  };
+};
+
+export const fetchRequestGet = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`http://localhost:4000/requests/${id}`);
+      const json = await response.json();
+      if (json.error) {
+        dispatch({ type: "requestsGet/fetch/rejected", error: json.error });
+      } else {
+        dispatch({ type: "requestsGet/fetch/fulfilled", payload: json });
+      }
+    } catch (e) {
+      dispatch({ type: "requestsGet/fetch/rejected", error: e.toString() });
     }
   };
 };

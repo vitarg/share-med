@@ -35,7 +35,7 @@ const RequestPage = () => {
     const classes = useStyles();
 
     const { medicationId } = useParams()
-  console.log(medicationId)
+    
     const dispatch = useDispatch();
 
     const [name, setName] = useState('')
