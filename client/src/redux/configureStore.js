@@ -9,3 +9,4 @@ export const store = createStore(
   combineReducers({ medications, categories, application }),
   composeWithDevTools(applyMiddleware(thunk))
 );
+

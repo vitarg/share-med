@@ -22,6 +22,7 @@ module.exports.adminsController = {
       return res.json("Аккаунт успешно зарегистрирован");
     } catch (e) {
       return res.status(400).json(`Ошибка при регистрации: ${e.toString()}`);
+
     }
   },
   login: async (req, res) => {
