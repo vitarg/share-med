@@ -11,8 +11,9 @@ import {
   CardContent,
   CardMedia,
   Grid, TextField,
-  Typography,
+  Typography
 } from "@material-ui/core";
+
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -24,12 +25,19 @@ const MainPage = () => {
 
   const { id } = useParams();
 
-  const { medications } = useSelector((state) => state.medications);
+  const { medications, loading } = useSelector((state) => state.medications);
+
   const [search, setSearch] = useState('')
   const some = (e) => {
     setSearch(e.target.value)
   }
-  console.log(search)
+
+  if (loading) {
+    return (<div>
+        Идет загрузка, подождите пожалуйста
+    </div>
+    );
+  }
 
   if (id) {
     return (<>
