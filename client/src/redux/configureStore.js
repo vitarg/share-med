@@ -5,7 +5,6 @@ import categories from "./features/categories";
 import application from "./features/application";
 import requests from "./features/requests";
 import { composeWithDevTools } from "redux-devtools-extension";
-import requests from './features/requests';
 
 export const store = createStore(
   combineReducers({ medications, categories, application, requests }),
