@@ -9,21 +9,19 @@ export default function requests(state = initialState, action) {
     case "requests/fetch/pending":
       return {
         ...state,
-        loading: true
-      }
+        loading: true,
+      };
     case "requests/fetch/fulfilled":
       return {
         ...state,
         requests: action.payload,
-        loading: false
-      }
+        loading: false,
+      };
     case "requests/fetch/rejected":
       return {
         ...state,
         error: action.error,
-        loading: false
-      }
-
+        loading: false,
       };
     case "requestsGet/fetch/fulfilled":
       return {
@@ -38,12 +36,15 @@ export default function requests(state = initialState, action) {
 export const fetchRequest = (medicationId, name, tel, email, message) => {
   return async (dispatch) => {
     try {
-      dispatch({type: "requests/fetch/pending"})
-      const response = await fetch(`http://localhost:4000/requests/${medicationId}`, {
-        method: "POST",
-        body: JSON.stringify({ name, tel, email, message, medicationId}),
-        headers: { "Content-type": "application/json" }
-      });
+      dispatch({ type: "requests/fetch/pending" });
+      const response = await fetch(
+        `http://localhost:4000/requests/${medicationId}`,
+        {
+          method: "POST",
+          body: JSON.stringify({ name, tel, email, message, medicationId }),
+          headers: { "Content-type": "application/json" },
+        }
+      );
 
       const json = await response.json();
 
