@@ -32,19 +32,19 @@ const RequestPage = () => {
     }
   }));
 
-    const classes = useStyles();
+  const classes = useStyles();
   const { medications } = useSelector((state) => state.medications);
 
-    const { medicationId } = useParams()
-    const dispatch = useDispatch();
+  const { medicationId } = useParams()
+  const dispatch = useDispatch();
 
-    const [name, setName] = useState('')
+  const [name, setName] = useState('')
   const [tel, setTel] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
-
   const [text, setText] = useState('')
-    const sendRequest = () => {
+  
+  const sendRequest = () => {
       dispatch(fetchRequest(medicationId, name, tel, email, message))
       setText('Заявка успешно отправлена')
     }
