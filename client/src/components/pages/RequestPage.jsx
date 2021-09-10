@@ -8,7 +8,7 @@ import {
   Typography
 } from '@material-ui/core';
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from 'react-router';
+import { useParams } from 'react-router';
 import { fetchRequest } from '../../redux/features/requests';
 
 
@@ -33,7 +33,10 @@ const RequestPage = () => {
   }));
 
   const classes = useStyles();
+  const { requests, loading } = useSelector((state) => state.requests);
+
   const { medications } = useSelector((state) => state.medications);
+
 
   const { medicationId } = useParams()
   const dispatch = useDispatch();
@@ -43,11 +46,19 @@ const RequestPage = () => {
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
   const [text, setText] = useState('')
-  
-  const sendRequest = () => {
-      dispatch(fetchRequest(medicationId, name, tel, email, message))
-      setText('Заявка успешно отправлена')
+
+    const sendRequest = () => {
+      if (name === '' || tel === '' || message === '' || email === '') {
+        return setText('Вы не заполнили все поля')
+      } else if (email.indexOf('@')) {
+        return setText('Email введен неверно')
+      } else {
+        dispatch(fetchRequest(medicationId, name, tel, email, message))
+        setText('Заявка успешно отправлена')
+      }
     }
+
+
   return <div className={classes.root}>
     <Paper elevation={3}>
       <Typography variant="h6" gutterBottom className={classes.gridItem}>
