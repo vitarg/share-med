@@ -4,18 +4,25 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
 import { getMedications } from "../../redux/features/medications"
 import { Link } from 'react-router-dom';
+import { fetchRequestGet } from "../../redux/features/requests"
 
 function SinglePage() {
   const dispatch = useDispatch();
   const { id } = useParams();
   const { medications } = useSelector(state => state.medications);
+  const { requests } = useSelector(state => state.requests);
+  const token = useSelector((state) => state.application.token);
 
   useEffect(() => {
-    dispatch(getMedications());
-  }, [])
+    dispatch(fetchRequestGet(id))
+  },[])
 
+  // useEffect(() => {
+  //   dispatch(getMedications(id));
+  // }, [])
+  
   const find = medications.find(item => {
-    if (id == item._id) {
+    if (id === item._id) {
       return item;
     }
   })
@@ -23,7 +30,7 @@ function SinglePage() {
   return (
     <Grid container>
       <Grid item xs={5}>
-        {find.image}
+        {/* {find.image} */}
       </Grid>
       <Grid item xs={7}>
         <Typography component="h1" variant="h4">{find.name}</Typography>
@@ -37,6 +44,14 @@ function SinglePage() {
             Оставить заявку
           </Link></Button></Grid>
         </Grid>
+        
+      </Grid>
+      <Grid container>
+        {token ? requests.map(item => {
+          return (
+            <Grid key={item._id} item xs={9}>{item.name}</Grid>
+          )
+        }) : ""}
       </Grid>
     </Grid>
   );

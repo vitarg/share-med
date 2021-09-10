@@ -1,8 +1,8 @@
 const initialState = {
   requests: [],
   loading: false,
-  error: null
-}
+  error: null,
+};
 
 export default function requests(state = initialState, action) {
   switch (action.type) {
@@ -23,8 +23,15 @@ export default function requests(state = initialState, action) {
         error: action.error,
         loading: false
       }
+
+      };
+    case "requestsGet/fetch/fulfilled":
+      return {
+        ...state,
+        requests: action.payload,
+      };
     default:
-      return state
+      return state;
   }
 }
 
@@ -37,6 +44,7 @@ export const fetchRequest = (medicationId, name, tel, email, message) => {
         body: JSON.stringify({ name, tel, email, message, medicationId}),
         headers: { "Content-type": "application/json" }
       });
+
       const json = await response.json();
 
       if (json.error) {
@@ -44,9 +52,24 @@ export const fetchRequest = (medicationId, name, tel, email, message) => {
       } else {
         dispatch({ type: "requests/fetch/fulfilled", payload: json });
       }
-
     } catch (e) {
       dispatch({ type: "requests/fetch/rejected", error: e.toString() });
     }
   };
-}
+};
+
+export const fetchRequestGet = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`http://localhost:4000/requests/${id}`);
+      const json = await response.json();
+      if (json.error) {
+        dispatch({ type: "requestsGet/fetch/rejected", error: json.error });
+      } else {
+        dispatch({ type: "requestsGet/fetch/fulfilled", payload: json });
+      }
+    } catch (e) {
+      dispatch({ type: "requestsGet/fetch/rejected", error: e.toString() });
+    }
+  };
+};
