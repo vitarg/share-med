@@ -50,7 +50,7 @@ const RequestPage = () => {
     const sendRequest = () => {
       if (name === '' || tel === '' || message === '' || email === '') {
         return setText('Вы не заполнили все поля')
-      } else if (email.indexOf('@')) {
+      } else if(email.indexOf("@") === -1 || email[0] === "@") {
         return setText('Email введен неверно')
       } else {
         dispatch(fetchRequest(medicationId, name, tel, email, message))
