@@ -33,28 +33,23 @@ module.exports.requestsController = {
       let testEmailAccount = await nodemailer.createTestAccount();
 
       let transporter = nodemailer.createTransport({
-        host: "smtp.ethereal.email",
-        port: 587,
-        secure: false,
+        host: "smtp.mail.ru",
+        port: 465,
+        secure: true,
         auth: {
-          user: testEmailAccount.user,
-          pass: testEmailAccount.pass,
+          user: `${process.env.nodemailer_login}`,
+          pass: `${process.env.nodemailer_password}`,
         },
       });
 
       let result = await transporter.sendMail({
-        from: "<bisliev_adam@mail.ru>",
-        to: `${data.email}, bislievaab@mail.ru`,
+        from: `${process.env.nodemailer_login}`,
+        to: data.email,
         subject: "О заявке про лекарство",
         text: "Вы успешно получили лекарство.",
-        html: "Вы успешно получили <Strong>лекарство</Strong>.",
+        html: "<h1>Вы успешно получили лекарство.</h1>",
       });
-
-      // console.log(result);
-      console.log("Message sent: %s", result.messageId);
-
-      console.log("Preview URL: %s", nodemailer.getTestMessageUrl(result));
-
+      console.log(result);
       // await Request.deleteMany({
       //   medicationId: data.medicationId,
       // });
