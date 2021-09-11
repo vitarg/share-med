@@ -1,4 +1,4 @@
-import { Grid, Typography,Button,Paper } from '@material-ui/core';
+import { Grid, Typography, Button, Paper, CircularProgress } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
@@ -9,8 +9,8 @@ import { fetchRequestGet } from "../../redux/features/requests"
 function SinglePage() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { medications } = useSelector(state => state.medications);
-  const { requests } = useSelector(state => state.requests);
+  const { medications} = useSelector(state => state.medications);
+  const { requests, loading } = useSelector(state => state.requests);
   const token = useSelector((state) => state.application.token);
 
   useEffect(() => {
@@ -47,30 +47,35 @@ function SinglePage() {
         
       </Grid>
       <Grid container>
-      <Grid item xs={12}><h1>Requests</h1></Grid>
+        {
+          loading ? <CircularProgress /> : ( <>
+            <Grid item xs={12}><h1>Requests</h1></Grid>
         {token ? requests.map(item => {
           return (
-            <Grid item xs={10}>
-              <Paper style={{ padding: "40px 20px", marginTop: 20}}>
-              <Grid container wrap="nowrap" spacing={2}>
-                <Grid justifyContent="left" item xs zeroMinWidth>
-                  <h4 style={{ margin: 0, textAlign: "left" }}>{item.name}</h4>
-                  <p style={{ textAlign: "left" }}>
-                    {item.message}
-                  </p>
-                  <p style={{ textAlign: "left", color: "gray" }}>
-                    {item.tel}<br></br>
-                    {item.email}
-                  </p>
-                  <Button variant="outlined" style={{ textAlign: "left", color: "green" }} >
-                    Принять
-                  </Button>
-                </Grid>
-              </Grid>
-            </Paper>
-            </Grid>
+          <Grid item xs={10}>
+          <Paper style={{ padding: "40px 20px", marginTop: 20}}>
+          <Grid container wrap="nowrap" spacing={2}>
+          <Grid justifyContent="left" item xs zeroMinWidth>
+          <h4 style={{ margin: 0, textAlign: "left" }}>{item.name}</h4>
+          <p style={{ textAlign: "left" }}>
+        {item.message}
+          </p>
+          <p style={{ textAlign: "left", color: "gray" }}>
+        {item.tel}<br></br>
+        {item.email}
+          </p>
+          <Button variant="outlined" style={{ textAlign: "left", color: "green" }} >
+          Принять
+          </Button>
+          </Grid>
+          </Grid>
+          </Paper>
+          </Grid>
           )
         }) : ""}
+          </> )
+        }
+
       </Grid>
     </Grid>
   );
