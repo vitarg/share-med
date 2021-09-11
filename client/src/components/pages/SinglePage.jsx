@@ -1,76 +1,105 @@
-import { Grid, Typography,Button,Paper } from '@material-ui/core';
-import React, { useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { useParams } from 'react-router';
+import {
+  Grid,
+  Typography,
+  Button,
+  Paper,
+  CircularProgress,
+} from "@material-ui/core";
+import React, { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { useParams } from "react-router";
 // import { getMedications } from "../../redux/features/medications"
-import { Link } from 'react-router-dom';
-import { fetchRequestGet } from "../../redux/features/requests"
+import { Link } from "react-router-dom";
+import { fetchRequestGet } from "../../redux/features/requests";
 
 function SinglePage() {
   const dispatch = useDispatch();
   const { id } = useParams();
-  const { medications } = useSelector(state => state.medications);
-  const { requests } = useSelector(state => state.requests);
+  const { medications } = useSelector((state) => state.medications);
+  const { requests, loading } = useSelector((state) => state.requests);
   const token = useSelector((state) => state.application.token);
 
   useEffect(() => {
-    dispatch(fetchRequestGet(id))
-  },[])
+    dispatch(fetchRequestGet(id));
+  }, []);
 
   // useEffect(() => {
   //   dispatch(getMedications(id));
   // }, [])
 
-  const find = medications.find(item => {
+  const find = medications.find((item) => {
     if (id === item._id) {
       return item;
     }
-  })
-  console.log(requests)
+  });
+  console.log(requests);
   return (
     <Grid container>
       <Grid item xs={5}>
         {/* {find.image} */}
       </Grid>
       <Grid item xs={7}>
-        <Typography component="h1" variant="h4">{find.name}</Typography>
+        <Typography component="h1" variant="h4">
+          {find.name}
+        </Typography>
         <Grid container>
-          <Typography component="h1" variant="h5">{find.descr}</Typography>
+          <Typography component="h1" variant="h5">
+            {find.descr}
+          </Typography>
         </Grid>
         <Grid container>
-          <Grid item xs={3}><Typography component="h1" variant="h6">{find.price}₽</Typography></Grid>
+          <Grid item xs={3}>
+            <Typography component="h1" variant="h6">
+              {find.price}₽
+            </Typography>
+          </Grid>
           <Grid item xs={3}></Grid>
-          <Grid item xs={6}><Button variant="contained" color="primary"><Link to={`/requests/${id}`}>
-            Оставить заявку
-          </Link></Button></Grid>
+          <Grid item xs={6}>
+            <Button variant="contained" color="primary">
+              <Link to={`/requests/${id}`}>Оставить заявку</Link>
+            </Button>
+          </Grid>
         </Grid>
-        
       </Grid>
       <Grid container>
-      <Grid item xs={12}><h1>Requests</h1></Grid>
-        {token ? requests.map(item => {
-          return (
-            <Grid item xs={10}>
-              <Paper style={{ padding: "40px 20px", marginTop: 20}}>
-              <Grid container wrap="nowrap" spacing={2}>
-                <Grid justifyContent="left" item xs zeroMinWidth>
-                  <h4 style={{ margin: 0, textAlign: "left" }}>{item.name}</h4>
-                  <p style={{ textAlign: "left" }}>
-                    {item.message}
-                  </p>
-                  <p style={{ textAlign: "left", color: "gray" }}>
-                    {item.tel}<br></br>
-                    {item.email}
-                  </p>
-                  <Button variant="outlined" style={{ textAlign: "left", color: "green" }} >
-                    Принять
-                  </Button>
-                </Grid>
-              </Grid>
-            </Paper>
+        {loading ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <Grid item xs={12}>
+              <h1>Requests</h1>
             </Grid>
-          )
-        }) : ""}
+            {token
+              ? requests.map((item) => {
+                  return (
+                    <Grid item xs={10}>
+                      <Paper style={{ padding: "40px 20px", marginTop: 20 }}>
+                        <Grid container wrap="nowrap" spacing={2}>
+                          <Grid justifyContent="left" item xs zeroMinWidth>
+                            <h4 style={{ margin: 0, textAlign: "left" }}>
+                              {item.name}
+                            </h4>
+                            <p style={{ textAlign: "left" }}>{item.message}</p>
+                            <p style={{ textAlign: "left", color: "gray" }}>
+                              {item.tel}
+                              <br></br>
+                              {item.email}
+                            </p>
+                            <Button
+                              variant="outlined"
+                              style={{ textAlign: "left", color: "green" }}
+                            >
+                              Принять
+                            </Button>
+                          </Grid>
+                        </Grid>
+                      </Paper>
+                    </Grid>
+                  );
+                })
+              : ""}
+          </>
+        )}
       </Grid>
     </Grid>
   );
