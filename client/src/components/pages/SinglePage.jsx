@@ -2,7 +2,7 @@ import { Grid, Typography,Button,Paper } from '@material-ui/core';
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from 'react-router';
-// import { getMedications } from "../../redux/features/medications"
+import { getMedications } from "../../redux/features/medications"
 import { Link } from 'react-router-dom';
 import { fetchRequestGet } from "../../redux/features/requests"
 
@@ -17,18 +17,19 @@ function SinglePage() {
     dispatch(fetchRequestGet(id))
   },[])
 
-  // useEffect(() => {
-  //   dispatch(getMedications(id));
-  // }, [])
+  useEffect(() => {
+    dispatch(getMedications());
+  }, [])
 
   const find = medications.find(item => {
     if (id === item._id) {
       return item;
     }
-  })
-  console.log(requests)
+  }) ;
+  console.log(find)
   return (
-    <Grid container>
+    <>
+    {find ? <Grid container>
       <Grid item xs={5}>
         {/* {find.image} */}
       </Grid>
@@ -72,7 +73,8 @@ function SinglePage() {
           )
         }) : ""}
       </Grid>
-    </Grid>
+    </Grid> : ""}
+    </>
   );
 }
 
