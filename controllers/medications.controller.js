@@ -57,7 +57,7 @@ module.exports.medicationsController = {
         req.files.image.name
       )}`;
 
-      req.files.image.mv(`./public${newFileName}`, async (err) => {
+      await req.files.image.mv(`./public${newFileName}`, async (err) => {
         if (err) {
           console.log(err);
         } else {
