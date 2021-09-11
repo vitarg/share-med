@@ -8,5 +8,6 @@ router.get(
   "/requests/:medicationId",
   requestsController.getRequestByMedication
 );
+router.patch("/requests/:id/accept", requestsController.acceptRequest);
 
 module.exports = router;
