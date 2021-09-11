@@ -1,9 +1,36 @@
 import React from "react";
-import { AppBar, Box, Button } from "@material-ui/core";
-import { Link } from "react-router-dom";
+import { AppBar, Button, CardMedia, makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import { Link } from "react-router-dom";
+import LocalHospitalIcon from "@material-ui/icons/LocalHospital";
+
+const useStyles = makeStyles((theme) => ({
+  title: {
+    fontSize: 20,
+  },
+  appbar: {
+    background: "#fff",
+    padding: 20,
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
+  },
+  logout: {
+    width: 130,
+    height: 40,
+  },
+  login: {
+    height: 40,
+  },
+  logo: {
+    marginRight: 20,
+  },
+}));
 
 const Header = () => {
+  const classes = useStyles();
+
   const token = useSelector((state) => state.application.token);
 
   const handleLogout = () => {
@@ -11,22 +38,35 @@ const Header = () => {
   };
 
   return (
-    <AppBar position={"static"}>
-      <Box>
-        <Button component={Link} to={"/"}>
-          Share medication
-        </Button>
-      </Box>
+    <AppBar className={classes.appbar}>
+      <Button component={Link} to={"/"} className={classes.title}>
+        <img
+          src="https://image.flaticon.com/icons/png/512/883/883407.png"
+          alt="logo"
+          width={40}
+          className={classes.logo}
+        />
+        <span>Share medication</span>
+      </Button>
       {token ? (
-        <Box>
-          <Button variant={"contained"} onClick={handleLogout}>
-            Выйти
-          </Button>
-        </Box>
+        <Button
+          className={classes.logout}
+          variant={"outlined"}
+          color={"secondary"}
+          onClick={handleLogout}
+        >
+          Выйти
+        </Button>
       ) : (
-        <Box>
-          <Link to={"/sign-in"}>Войти как админ</Link>
-        </Box>
+        <Button
+          className={classes.login}
+          component={Link}
+          to={"/sign-in"}
+          variant={"outlined"}
+          color={"secondary"}
+        >
+          Войти как админ
+        </Button>
       )}
     </AppBar>
   );
