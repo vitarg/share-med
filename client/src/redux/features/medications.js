@@ -8,7 +8,7 @@ export default function medications(state = initialState, action) {
     case "medications/fetch/pending":
       return {
         ...state,
-        loading: true
+        loading: true,
       };
     case "medications/fetch/fulfilled":
       return {
@@ -24,7 +24,7 @@ export default function medications(state = initialState, action) {
 export const getMedications = () => {
   return async (dispatch) => {
     try {
-      dispatch({type: "medications/fetch/pending"})
+      dispatch({ type: "medications/fetch/pending" });
       const response = await fetch("http://localhost:4000/medications");
       const json = await response.json();
 
