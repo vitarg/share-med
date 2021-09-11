@@ -35,3 +35,42 @@ export const getMedications = () => {
     }
   };
 };
+
+export const addMedication = (
+  name,
+  price,
+  description,
+  category,
+  img,
+  expiryDate,
+  hasRecipe
+) => {
+  return async (dispatch) => {
+    try {
+      console.log(description)
+      const response = await fetch("http://localhost:4000/medications", {
+        method: "POST",
+        body: JSON.stringify({
+          name,
+          price,
+          descr: description,
+          category,
+          img,
+          expiryDate,
+          hasRecipe,
+        }),
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const json = await response.json();
+
+      dispatch({ type: "medications/add-medication/fulfilled", payload: json });
+    } catch (e) {
+      dispatch({
+        type: "categories/add-medication/rejected",
+        error: e.toString(),
+      });
+    }
+  };
+};
