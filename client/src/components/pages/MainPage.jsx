@@ -15,7 +15,6 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import Loading from "../Loading";
 
 const MainPage = () => {
   const dispatch = useDispatch();
