@@ -17,7 +17,6 @@ import {
 } from "@material-ui/core";
 
 import DialogForm from "./DialogForm";
-import Loading from '../Loading';
 
 const MainPage = () => {
   const dispatch = useDispatch();
@@ -32,12 +31,10 @@ const MainPage = () => {
     setOpen(true);
   };
 
-  const { medications } = useSelector((state) => state.medications);
-  const token = useSelector((state) => state.application.token);
-
   const { id } = useParams();
 
   const { medications, loading } = useSelector((state) => state.medications);
+  const token = useSelector((state) => state.application.token);
 
   const [search, setSearch] = useState("");
   const some = (e) => {
@@ -51,7 +48,6 @@ const MainPage = () => {
       </div>
     );
   }
-
 
   if (id) {
     return (
@@ -106,6 +102,16 @@ const MainPage = () => {
   }
   return (
     <>
+
+      {token ? (
+        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          Добавить +
+        </Button>
+      ) : (
+        ""
+      )}
+      <DialogForm setOpen={setOpen} open={open} />
+
       <TextField
         id="standard-search"
         label="Search field"
@@ -131,6 +137,7 @@ const MainPage = () => {
                       <Typography gutterBottom variant="h5" component="h2">
                         {item.name}
                       </Typography>
+
                       <Typography
                         variant="h6"
                         color="textSecondary"
@@ -139,6 +146,14 @@ const MainPage = () => {
                         {item.price ? item.price : "Бесплатно"}
                       </Typography>
                       <Typography
+                        variant="h6"
+                        color="textSecondary"
+                        component="p"
+                      >
+                        {item.price ? item.price : "Бесплатно"}
+                      </Typography>
+                      <Typography
+
                         variant="body1"
                         color="textSecondary"
                         component="p"
@@ -156,7 +171,6 @@ const MainPage = () => {
               </Grid>
             );
           })}
-
         </Grid>
     </>
 
