@@ -7,13 +7,6 @@ module.exports.requestsController = {
     try {
       const { name, tel, email, message, medicationId } = req.body;
 
-      // const requ = await Request.create({
-      //   name: req.body.name,
-      //   tel: req.body.tel,
-      //   email: req.body.email,
-      //   message: req.body.message,
-      //   medicationId: req.params.medicationId,
-      // });
       await Request.create({ name, tel, email, message, medicationId });
       res.json("Пользователь создан");
     } catch (e) {
@@ -27,6 +20,13 @@ module.exports.requestsController = {
       });
 
       return res.json(getRequest);
+    } catch (e) {
+      res.json("Error in: " + e);
+    }
+  },
+  acceptRequest: async (req, res) => {
+    try {
+      const data = await Request.findById(req.params.id);
     } catch (e) {
       res.json("Error in: " + e);
     }
