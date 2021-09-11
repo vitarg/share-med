@@ -13,15 +13,25 @@ import {
   Grid, TextField,
   Typography
 } from "@material-ui/core";
+import DialogForm from "./DialogForm";
 import Loading from '../Loading';
-
 
 const MainPage = () => {
   const dispatch = useDispatch();
 
+  const [open, setOpen] = React.useState(false);
+
   useEffect(() => {
     dispatch(getMedications());
   }, []);
+
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const { medications } = useSelector((state) => state.medications);
+  const token = useSelector((state) => state.application.token);
 
 
   const { id } = useParams();
@@ -39,6 +49,7 @@ const MainPage = () => {
     </div>
     );
   }
+
 
   if (id) {
     return (<>
@@ -91,6 +102,18 @@ const MainPage = () => {
   }
   return (
     <>
+
+      {token ? (
+        <Button variant="outlined" color="primary" onClick={handleClickOpen}>
+          Добавить +
+        </Button>
+      ) : (
+        ""
+      )}
+      <DialogForm setOpen={setOpen} open={open} />
+      <Grid container justifyContent={"space-around"}>
+        {medications.map((item) => {
+
       <TextField
         id="standard-search"
         label="Search field"
@@ -104,6 +127,7 @@ const MainPage = () => {
         {medications
         .filter(item => search === "" ? item : item.name.toLowerCase().includes(search))
         .map((item) => {
+
           return (
             <Grid item xs={3} key={item._id}>
               <Card>
@@ -116,7 +140,15 @@ const MainPage = () => {
                     <Typography gutterBottom variant="h5" component="h2">
                       {item.name}
                     </Typography>
+
+                    <Typography
+                      variant="h6"
+                      color="textSecondary"
+                      component="p"
+                    >
+
                     <Typography variant="h6" color="textSecondary" component="p">
+
                       {item.price ? item.price : "Бесплатно"}
                     </Typography>
                     <Typography
@@ -139,7 +171,6 @@ const MainPage = () => {
         })}
       </Grid>
     </>
-
   );
 };
 
