@@ -5,7 +5,7 @@ const jwt = require("jsonwebtoken");
 module.exports.requestsController = {
   addRequest: async (req, res) => {
     try {
-      const { name, tel, email, message, medicationId} = req.body;
+      const { name, tel, email, message, medicationId } = req.body;
 
       // const requ = await Request.create({
       //   name: req.body.name,
@@ -14,7 +14,7 @@ module.exports.requestsController = {
       //   message: req.body.message,
       //   medicationId: req.params.medicationId,
       // });
-      await Request.create({name, tel, email, message, medicationId})
+      await Request.create({ name, tel, email, message, medicationId });
       res.json("Пользователь создан");
     } catch (e) {
       res.json("Ошибка в addRequest");

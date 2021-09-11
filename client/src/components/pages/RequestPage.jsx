@@ -7,8 +7,8 @@ import {
   TextField,
   Typography
 } from '@material-ui/core';
-import { useDispatch } from 'react-redux';
-import { useHistory, useParams } from 'react-router';
+import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router';
 import { fetchRequest } from '../../redux/features/requests';
 
 
@@ -32,23 +32,33 @@ const RequestPage = () => {
     }
   }));
 
-    const classes = useStyles();
+  const classes = useStyles();
+  const { requests, loading } = useSelector((state) => state.requests);
 
-    const { medicationId } = useParams()
-  console.log(medicationId)
-    const dispatch = useDispatch();
+  const { medications } = useSelector((state) => state.medications);
 
-    const [name, setName] = useState('')
+
+  const { medicationId } = useParams()
+  const dispatch = useDispatch();
+
+  const [name, setName] = useState('')
   const [tel, setTel] = useState('')
   const [email, setEmail] = useState('')
   const [message, setMessage] = useState('')
-
-  const history = useHistory()
+  const [text, setText] = useState('')
 
     const sendRequest = () => {
-      dispatch(fetchRequest(medicationId, name, tel, email, message))
-      history.push('/great')
+      if (name === '' || tel === '' || message === '' || email === '') {
+        return setText('Вы не заполнили все поля')
+      } else if(email.indexOf("@") === -1 || email[0] === "@") {
+        return setText('Email введен неверно')
+      } else {
+        dispatch(fetchRequest(medicationId, name, tel, email, message))
+        setText('Заявка успешно отправлена')
+      }
     }
+
+
   return <div className={classes.root}>
     <Paper elevation={3}>
       <Typography variant="h6" gutterBottom className={classes.gridItem}>
@@ -108,6 +118,9 @@ const RequestPage = () => {
           <Button variant="contained" color="secondary" onClick={sendRequest}>
             Отправить запрос
           </Button>
+        </Grid>
+        <Grid item xs={12} sm={8}>
+          {text}
         </Grid>
       </Grid>
     </Paper>

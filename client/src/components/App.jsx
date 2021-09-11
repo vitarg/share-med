@@ -14,8 +14,6 @@ import { useSelector } from "react-redux";
 function App() {
   const token = useSelector((state) => state.application.token);
 
-  console.log(token);
-
   return (
     <BrowserRouter>
       <Header />
@@ -38,10 +36,6 @@ function App() {
             <Route path="/requests/:medicationId">
               <RequestPage />
             </Route>
-            <Route path="/great">
-              Заявка успешно отправлена, ответ придет на почту
-            </Route>
-
             <Route path={"/sign-in"}>
               <SignInPage />
             </Route>
