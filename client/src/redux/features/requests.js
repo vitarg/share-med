@@ -34,6 +34,25 @@ export default function requests(state = initialState, action) {
         requests: action.payload,
         loading: false,
       };
+    case "acceptRequest/fetch/fulfilled":
+      return {
+        ...state,
+        // requests: state.requests.filter((item) => {
+        //   if (item.medicationId != action.payload) {
+        //     return item;
+        //   }
+        // }),
+        requests: state.requests.map((item) => {
+          if (item.medicationId == action.payload) {
+            return {
+              ...item,
+              inProcess: true,
+            };
+          }
+          return item;
+        }),
+        loading: false,
+      };
     default:
       return state;
   }
@@ -78,6 +97,35 @@ export const fetchRequestGet = (id) => {
       }
     } catch (e) {
       dispatch({ type: "requestsGet/fetch/rejected", error: e.toString() });
+    }
+  };
+};
+
+export const acceptRequest = (id, medicationId) => {
+  return async (dispatch) => {
+    try {
+      dispatch({ type: "acceptRequest/fetch/pending" });
+      const response = await fetch(
+        `http://localhost:4000/requests/${id}/accept`,
+        {
+          method: "PATCH",
+          body: JSON.stringify({
+            id,
+          }),
+          headers: { "Content-type": "application/json" },
+        }
+      );
+      const json = await response.json();
+      if (json.error) {
+        dispatch({ type: "acceptRequest/fetch/rejected", error: json.error });
+      } else {
+        dispatch({
+          type: "acceptRequest/fetch/fulfilled",
+          payload: medicationId,
+        });
+      }
+    } catch (e) {
+      dispatch({ type: "acceptRequest/fetch/rejected", error: e.toString() });
     }
   };
 };

@@ -11,6 +11,7 @@ import { useParams } from "react-router";
 import { getMedications } from "../../redux/features/medications";
 import { Link } from "react-router-dom";
 import { fetchRequestGet } from "../../redux/features/requests";
+import { acceptRequest } from "../../redux/features/requests";
 
 function SinglePage() {
   const dispatch = useDispatch();
@@ -32,6 +33,11 @@ function SinglePage() {
       return item;
     }
   });
+
+  const handleAccept = (id,medicationId) => {
+    dispatch(acceptRequest(id,medicationId));
+  }
+
   return (
     <>
       {find ? (
@@ -100,6 +106,8 @@ function SinglePage() {
                                     textAlign: "left",
                                     color: "green",
                                   }}
+                                  onClick={() => {handleAccept(item._id,item.medicationId)}}
+                                  disabled={item.inProcess}
                                 >
                                   Принять
                                 </Button>
