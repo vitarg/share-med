@@ -6,6 +6,11 @@ const initialState = {
 
 export default function requests(state = initialState, action) {
   switch (action.type) {
+    case "requests/get/fetch/pending":
+      return {
+        ... state,
+        loading: true
+      }
     case "requests/fetch/pending":
       return {
         ...state,
@@ -21,13 +26,13 @@ export default function requests(state = initialState, action) {
       return {
         ...state,
         error: action.error,
-        loading: false,
-      };
+        loading: false
+      }
     case "requestsGet/fetch/fulfilled":
       return {
         ...state,
         requests: action.payload,
-      };
+      }
     default:
       return state;
   }
@@ -62,6 +67,7 @@ export const fetchRequest = (medicationId, name, tel, email, message) => {
 export const fetchRequestGet = (id) => {
   return async (dispatch) => {
     try {
+      dispatch({type: "requests/get/fetch/pending"})
       const response = await fetch(`http://localhost:4000/requests/${id}`);
       const json = await response.json();
       if (json.error) {

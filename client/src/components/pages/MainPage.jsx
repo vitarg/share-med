@@ -9,10 +9,11 @@ import {
   CardActionArea,
   CardActions,
   CardContent,
-  CardMedia,
+  CardMedia, CircularProgress,
   Grid, TextField,
   Typography
 } from "@material-ui/core";
+import Loading from '../Loading';
 
 
 const MainPage = () => {
@@ -34,7 +35,7 @@ const MainPage = () => {
 
   if (loading) {
     return (<div>
-        Идет загрузка, подождите пожалуйста
+        <CircularProgress />
     </div>
     );
   }
