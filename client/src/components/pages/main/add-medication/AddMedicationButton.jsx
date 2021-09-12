@@ -16,6 +16,8 @@ const AddMedicationButton = ({ setOpen }) => {
       </Button>
     );
   }
+
+  return <></>;
 };
 
 export default AddMedicationButton;
