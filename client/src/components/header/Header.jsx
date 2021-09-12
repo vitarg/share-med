@@ -38,7 +38,7 @@ const Header = () => {
   };
 
   return (
-    <AppBar className={classes.appbar}>
+    <AppBar position={"static"} className={classes.appbar}>
       <Button component={Link} to={"/"} className={classes.title}>
         <img
           src="https://image.flaticon.com/icons/png/512/883/883407.png"
