@@ -20,6 +20,7 @@ const LoginLogoutButton = () => {
 
   const handleLogout = () => {
     localStorage.removeItem("token");
+    document.location.reload();
   };
 
   if (token) {

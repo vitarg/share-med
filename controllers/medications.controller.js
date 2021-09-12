@@ -21,7 +21,7 @@ module.exports.medicationsController = {
   },
   getAllMedications: async (req, res) => {
     try {
-      const data = await Medication.find({});
+      const data = await Medication.find({}).populate("category");
       res.json(data);
     } catch (err) {
       res.json(err);
