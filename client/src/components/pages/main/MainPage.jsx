@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMedications } from "../../../redux/features/medications";
-import { useParams } from "react-router";
-import { Link } from "react-router-dom";
 import {
   Box,
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardMedia,
   CircularProgress,
   Grid,
   makeStyles,
   TextField,
-  Typography,
 } from "@material-ui/core";
 import AddMedicationDialog from "./add-medication/AddMedicationDialog";
 import AddMedicationButton from "./add-medication/AddMedicationButton";
@@ -35,9 +26,9 @@ const useStyles = makeStyles((theme) => ({
   contentHeader: {
     display: "flex",
     justifyContent: "space-between",
+    alignItems: "center",
     marginBottom: 20,
   },
-  contentBody: {},
 }));
 
 const MainPage = () => {
@@ -50,8 +41,6 @@ const MainPage = () => {
   useEffect(() => {
     dispatch(getMedications());
   }, []);
-
-
 
   const { loading } = useSelector((state) => state.medications);
 
@@ -80,8 +69,9 @@ const MainPage = () => {
           <Box className={classes.contentHeader}>
             <TextField
               id="standard-search"
-              label="Search field"
+              label="Найти лекарство"
               type="search"
+              variant={"outlined"}
               onChange={handleFilter}
             />
 
