@@ -9,9 +9,9 @@ import {
   TextField,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { addMedication } from "../../redux/features/medications";
+import { addMedication } from "../../../../redux/features/medications";
 
-const DialogForm = ({ open, setOpen }) => {
+const AddMedicationDialog = ({ open, setOpen }) => {
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
@@ -155,4 +155,4 @@ const DialogForm = ({ open, setOpen }) => {
   );
 };
 
-export default DialogForm;
+export default AddMedicationDialog;
