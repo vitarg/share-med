@@ -14,6 +14,9 @@ function Sidebar() {
 
   return (
     <List component="nav" aria-label="secondary mailbox folders">
+      <NavLink exact to={"/"}>
+        Все лекарства
+      </NavLink>
       {categories.map((item) => {
         return (
           <ListItem key={item._id}>
@@ -28,4 +31,3 @@ function Sidebar() {
 }
 
 export default Sidebar;
-
