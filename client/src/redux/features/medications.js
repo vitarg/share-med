@@ -25,7 +25,7 @@ export const getMedications = () => {
   return async (dispatch) => {
     try {
       dispatch({ type: "medications/fetch/pending" });
-      const response = await fetch("http://localhost:4000/medications");
+      const response = await fetch("/medications");
       const json = await response.json();
 
       dispatch({ type: "medications/fetch/fulfilled", payload: json });
@@ -46,8 +46,8 @@ export const addMedication = (
 ) => {
   return async (dispatch) => {
     try {
-      console.log(description)
-      const response = await fetch("http://localhost:4000/medications", {
+      console.log(description);
+      const response = await fetch("/medications", {
         method: "POST",
         body: JSON.stringify({
           name,

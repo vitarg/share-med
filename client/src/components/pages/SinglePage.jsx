@@ -67,6 +67,11 @@ function SinglePage() {
                 </Button>
               </Grid>
             </Grid>
+            <Grid container>
+            <Grid item xs={6}>
+                   Срок годности в днях - {find.expiryDate - (new Date().getDate() - new Date(find.createdAt).getDate())} 
+              </Grid>
+            </Grid>
           </Grid>
           <Grid container>
             {loading ? (

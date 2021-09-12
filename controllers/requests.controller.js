@@ -30,8 +30,9 @@ module.exports.requestsController = {
     try {
       const data = await Request.findById(req.params.id);
 
-      let testEmailAccount = await nodemailer.createTestAccount();
+      const medications = await Medications.findById(data.medicationId);
 
+      console.log(medications);
       let transporter = nodemailer.createTransport({
         host: "smtp.mail.ru",
         port: 465,
@@ -42,14 +43,16 @@ module.exports.requestsController = {
         },
       });
 
-      let result = await transporter.sendMail({
+      await transporter.sendMail({
         from: `${process.env.nodemailer_login}`,
         to: data.email,
-        subject: "О заявке про лекарство",
-        text: "Вы успешно получили лекарство.",
-        html: "<h1>Вы успешно получили лекарство.</h1>",
+        subject: "Medications",
+        text: `Ваша заявка на лекарство ${medications.name} одобрена.
+               Можете забрать свое лекарство по адресу Трошева.7`,
+        html: `<h1>Ваша заявка на лекарство ${medications.name} одобрена.</h1>
+               <h2>Можете забрать свое лекарство по адресу Трошева.7</h2>`,
       });
-      console.log(result);
+
       // await Request.deleteMany({
       //   medicationId: data.medicationId,
       // });

@@ -50,7 +50,7 @@ export default function application(state = initialState, action) {
 export const createAdmin = (name, login, password) => async (dispatch) => {
   dispatch({ type: "application/signup/pending" });
 
-  const response = await fetch("http://localhost:4000/admins", {
+  const response = await fetch("/admins", {
     method: "POST",
     body: JSON.stringify({ name, login, password }),
     headers: {
@@ -70,7 +70,7 @@ export const createAdmin = (name, login, password) => async (dispatch) => {
 export const auth = (login, password) => async (dispatch) => {
   dispatch({ type: "application/signin/pending" });
 
-  const response = await fetch("http://localhost:4000/admins/login", {
+  const response = await fetch("/admins/login", {
     method: "POST",
     body: JSON.stringify({ login, password }),
     headers: {

@@ -19,7 +19,7 @@ export default function categories(state = initialState, action) {
 export const fetchAllCategories = () => {
   return async (dispatch) => {
     try {
-      const response = await fetch("http://localhost:4000/categories");
+      const response = await fetch("/categories");
       const json = await response.json();
 
       dispatch({ type: "categories/fetch/fulfilled", payload: json });
