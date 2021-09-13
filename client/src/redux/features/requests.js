@@ -41,7 +41,7 @@ export default function requests(state = initialState, action) {
           if (item.medicationId == action.payload) {
             return {
               ...item,
-              inProcess: true,
+              isAccept: true,
             };
           }
           return item;
