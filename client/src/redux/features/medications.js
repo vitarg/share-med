@@ -1,6 +1,8 @@
+
+
 const initialState = {
   medications: [],
-  loading: false,
+  loading: false
 };
 
 export default function medications(state = initialState, action) {
@@ -14,23 +16,28 @@ export default function medications(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        medications: action.payload,
+        medications: [...state.medications, ...action.payload],
       };
     default:
       return state;
   }
 }
 
-export const getMedications = () => {
+export const getMedications = (currentPage, setCurrentPage, setFetching) => {
   return async (dispatch) => {
     try {
-      dispatch({ type: "medications/fetch/pending" });
-      const response = await fetch("/medications");
+      // dispatch({ type: "medications/fetch/pending"});
+      console.log('fetch')
+      const response = await fetch(`/medications/?limit=10&page=${currentPage}`);
       const json = await response.json();
 
-      dispatch({ type: "medications/fetch/fulfilled", payload: json });
+      await dispatch({ type: "medications/fetch/fulfilled", payload: json });
+      await setCurrentPage(prevState => prevState + 1)
+
     } catch (e) {
       dispatch({ type: "medications/fetch/rejected", error: e.toString() });
+    } finally {
+      return setFetching(false)
     }
   };
 };
