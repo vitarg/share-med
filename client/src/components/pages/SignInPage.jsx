@@ -11,7 +11,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { auth } from "../../redux/features/application";
 
@@ -56,6 +56,7 @@ const SignInPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
+
     dispatch(auth(login, password));
   };
 
@@ -70,7 +71,7 @@ const SignInPage = () => {
           Авторизация
         </Typography>
         <Box>
-          <Typography>{String(error)}</Typography>
+          <Typography>{error}</Typography>
         </Box>
         <form
           onSubmit={(e) => handleSubmit(e)}

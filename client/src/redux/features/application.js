@@ -86,6 +86,7 @@ export const auth = (login, password) => async (dispatch) => {
     dispatch({ type: "application/signin/fulfilled", payload: json });
 
     localStorage.setItem("token", json.token);
+    window.location.href = '/';
   }
 };
 
