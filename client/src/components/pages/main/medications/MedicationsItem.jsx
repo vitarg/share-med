@@ -16,7 +16,7 @@ import { Link } from "react-router-dom";
 const useStyles = makeStyles({
   card: {
     boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)",
-    borderRadius: 10
+    borderRadius: 10,
   },
   imgBox: {
     background: "url('/no-pictures.svg') center center/30% no-repeat",
@@ -35,6 +35,7 @@ const useStyles = makeStyles({
 
 const MedicationsItem = ({ item }) => {
   const classes = useStyles();
+
   return (
     <Grid item xs={3} key={item._id} className={classes.item}>
       <Card className={classes.card}>

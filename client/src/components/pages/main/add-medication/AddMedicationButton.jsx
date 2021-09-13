@@ -1,8 +1,17 @@
 import React from "react";
-import { Button } from "@material-ui/core";
+import { Button, makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
+import AddIcon from '@material-ui/icons/Add';
+
+const useStyles = makeStyles({
+  addBtn: {
+    height: 42
+  }
+})
 
 const AddMedicationButton = ({ setOpen }) => {
+  const classes = useStyles()
+
   const token = useSelector((state) => state.application.token);
 
   const handleClickOpen = () => {
@@ -11,8 +20,8 @@ const AddMedicationButton = ({ setOpen }) => {
 
   if (token) {
     return (
-      <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-        Добавить +
+      <Button className={classes.addBtn} variant="outlined" color="primary" onClick={handleClickOpen} endIcon={<AddIcon/>}>
+        Добавить
       </Button>
     );
   }

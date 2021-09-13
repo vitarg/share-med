@@ -17,7 +17,7 @@ const Medications = ({ search }) => {
       search === "" ? item : item.name.toLowerCase().includes(search)
     )
     .map((item) => {
-      return <MedicationsItem item={item} />;
+      return <MedicationsItem item={item}/>;
     });
 };
 
