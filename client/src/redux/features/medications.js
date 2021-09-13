@@ -85,7 +85,6 @@ export const addMedication = (
 export const removeMedication = (id) => {
   return async (dispatch) => {
     try {
-      dispatch({ type: "medications/remove/pending" });
       const response = await fetch(`/medications/${id}`, {
         method: "DELETE",
       });
