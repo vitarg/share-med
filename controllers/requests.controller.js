@@ -29,6 +29,9 @@ module.exports.requestsController = {
   acceptRequest: async (req, res) => {
     try {
       const data = await Request.findById(req.params.id);
+      await Request.findByIdAndUpdate(req.params.id, {
+        isAccept: true,
+      });
 
       const medications = await Medications.findById(data.medicationId);
 

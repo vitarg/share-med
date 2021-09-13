@@ -10,6 +10,10 @@ const requestSchema = mongoose.Schema(
       type: mongoose.Schema.Types.ObjectId,
       ref: "Medication",
     },
+    isAccept: {
+      type: Boolean,
+      default: false,
+    },
   },
   { timestamps: true }
 );
