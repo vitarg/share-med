@@ -77,9 +77,11 @@ function SinglePage() {
                    Срок годности в днях - {find.expiryDate - (new Date().getDate() - new Date(find.createdAt).getDate())} 
               </Grid>
               <Grid item xs={6}>
+                   {token ? 
                    <Button variant="contained" color="secondary" onClick={() => {handleDelete(find._id)}}>
                       <Link to="/">Secondary</Link>
-                  </Button>
+                  </Button> 
+                  : ""}
               </Grid>
             </Grid>
           </Grid>

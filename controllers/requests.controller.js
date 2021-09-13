@@ -55,10 +55,6 @@ module.exports.requestsController = {
         html: `<h1>Ваша заявка на лекарство ${medications.name} одобрена.</h1>
                <h2>Можете забрать свое лекарство по адресу Трошева.7</h2>`,
       });
-
-      // await Request.deleteMany({
-      //   medicationId: data.medicationId,
-      // });
       res.json(`Заявка принята ${data}`);
     } catch (e) {
       res.json("Error in: " + e);
