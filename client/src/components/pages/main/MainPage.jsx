@@ -37,32 +37,35 @@ const MainPage = () => {
 
   const [open, setOpen] = React.useState(false);
   const medications = useSelector((state) => state.medications.medications);
-  console.log(medications.length)
+  console.log(medications.length);
 
-  const [currentPage, setCurrentPage] = useState(1)
-  const [fetching, setFetching] = useState(true)
+  const [currentPage, setCurrentPage] = useState(1);
+  const [fetching, setFetching] = useState(true);
 
   useEffect(() => {
     if (fetching) {
-      dispatch(getMedications(currentPage, setCurrentPage, setFetching))
+      dispatch(getMedications(currentPage, setCurrentPage, setFetching));
     }
-    }, [fetching]
-  )
-  console.log(currentPage)
+  }, [fetching]);
+  console.log(currentPage);
 
   const scrollHandler = (e) => {
-    if (e.target.documentElement.scrollHeight - (e.target.documentElement.scrollTop + window.innerHeight) < 100) {
-      setFetching(true)
+    if (
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+      100
+    ) {
+      setFetching(true);
     }
-  }
+  };
 
   useEffect(() => {
-    document.addEventListener("scroll", scrollHandler)
+    document.addEventListener("scroll", scrollHandler);
 
     return () => {
-      document.removeEventListener('scroll', scrollHandler)
-    }
-  }, [])
+      document.removeEventListener("scroll", scrollHandler);
+    };
+  }, []);
 
   const { loading } = useSelector((state) => state.medications);
 
@@ -103,7 +106,7 @@ const MainPage = () => {
           </Box>
 
           <Grid container spacing={3}>
-            <Medications search={search}/>
+            <Medications search={search} />
           </Grid>
         </Grid>
       </Grid>

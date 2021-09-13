@@ -12,13 +12,14 @@ const Medications = ({ search }) => {
     ? medications.filter((e) => e.category._id === id)
     : medications;
 
-
   return filteredMedications
     .filter((item) =>
-      search === "" ? item : item.name.toLowerCase().includes(search.toLowerCase())
+      search === ""
+        ? item
+        : item.name.toLowerCase().includes(search.toLowerCase())
     )
     .map((item) => {
-      return <MedicationsItem item={item}/>;
+      return <MedicationsItem item={item} />;
     });
 };
 
