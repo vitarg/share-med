@@ -29,6 +29,9 @@ module.exports.requestsController = {
   acceptRequest: async (req, res) => {
     try {
       const data = await Request.findById(req.params.id);
+      await Request.findByIdAndUpdate(req.params.id, {
+        isAccept: true,
+      });
 
       const medications = await Medications.findById(data.medicationId);
 
@@ -52,10 +55,6 @@ module.exports.requestsController = {
         html: `<h1>Ваша заявка на лекарство ${medications.name} одобрена.</h1>
                <h2>Можете забрать свое лекарство по адресу Трошева.7</h2>`,
       });
-
-      // await Request.deleteMany({
-      //   medicationId: data.medicationId,
-      // });
       res.json(`Заявка принята ${data}`);
     } catch (e) {
       res.json("Error in: " + e);

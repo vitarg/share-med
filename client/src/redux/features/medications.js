@@ -18,6 +18,15 @@ export default function medications(state = initialState, action) {
         loading: false,
         medications: [...state.medications, ...action.payload],
       };
+    case "medications/remove/fulfilled":
+      return {
+        ...state,
+        medications: state.medications.filter((item) => {
+          if (item != action.payload) {
+            return item;
+          }
+        }),
+      };
     default:
       return state;
   }
@@ -53,7 +62,6 @@ export const addMedication = (
 ) => {
   return async (dispatch) => {
     try {
-      console.log(description);
       const response = await fetch("/medications", {
         method: "POST",
         body: JSON.stringify({
@@ -77,6 +85,21 @@ export const addMedication = (
         type: "categories/add-medication/rejected",
         error: e.toString(),
       });
+    }
+  };
+};
+
+export const removeMedication = (id) => {
+  return async (dispatch) => {
+    try {
+      const response = await fetch(`/medications/${id}`, {
+        method: "DELETE",
+      });
+      const json = await response.json();
+
+      dispatch({ type: "medications/remove/fulfilled", payload: id });
+    } catch (e) {
+      dispatch({ type: "medications/remove/rejected", error: e.toString() });
     }
   };
 };

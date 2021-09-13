@@ -1,6 +1,7 @@
 const path = require("path");
 const Medication = require("../models/Medication.model");
 const { v4: uuidv4 } = require("uuid");
+const Request = require("../models/Request.model");
 
 module.exports.medicationsController = {
   createMedication: async (req, res) => {
@@ -43,6 +44,9 @@ module.exports.medicationsController = {
     try {
       await Medication.findByIdAndRemove(req.params.id);
       res.json("Лекарство удалено");
+      await Request.deleteMany({
+        medicationId: req.params.id,
+      });
     } catch (err) {
       res.json(err);
     }

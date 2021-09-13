@@ -12,6 +12,7 @@ import { getMedications } from "../../redux/features/medications";
 import { Link } from "react-router-dom";
 import { fetchRequestGet } from "../../redux/features/requests";
 import { acceptRequest } from "../../redux/features/requests";
+import { removeMedication } from "../../redux/features/medications"
 
 function SinglePage() {
   const dispatch = useDispatch();
@@ -36,6 +37,10 @@ function SinglePage() {
 
   const handleAccept = (id,medicationId) => {
     dispatch(acceptRequest(id,medicationId));
+  }
+
+  const handleDelete = (id) => {
+    dispatch(removeMedication(id));
   }
 
   return (
@@ -68,8 +73,15 @@ function SinglePage() {
               </Grid>
             </Grid>
             <Grid container>
-            <Grid item xs={6}>
+              <Grid item xs={6}>
                    Срок годности в днях - {find.expiryDate - (new Date().getDate() - new Date(find.createdAt).getDate())} 
+              </Grid>
+              <Grid item xs={6}>
+                   {token ? 
+                   <Button variant="contained" color="secondary" onClick={() => {handleDelete(find._id)}}>
+                      <Link to="/">Secondary</Link>
+                  </Button> 
+                  : ""}
               </Grid>
             </Grid>
           </Grid>
@@ -112,7 +124,7 @@ function SinglePage() {
                                     color: "green",
                                   }}
                                   onClick={() => {handleAccept(item._id,item.medicationId)}}
-                                  disabled={item.inProcess}
+                                  disabled={item.isAccept}
                                 >
                                   Принять
                                 </Button>
