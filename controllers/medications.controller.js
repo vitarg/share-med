@@ -22,7 +22,7 @@ module.exports.medicationsController = {
   },
   getAllMedications: async (req, res) => {
     try {
-      const { page = 1, limit = 5 } = req.query;
+      const { page = 1, limit = 50 } = req.query;
       const data = await Medication.find({})
       .limit(limit * 1)
       .skip((page - 1) * limit)
