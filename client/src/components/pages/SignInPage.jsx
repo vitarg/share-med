@@ -70,9 +70,6 @@ const SignInPage = () => {
         <Typography component="h1" variant="h5">
           Авторизация
         </Typography>
-        <Box>
-          <Typography>{error}</Typography>
-        </Box>
         <form
           onSubmit={(e) => handleSubmit(e)}
           className={classes.form}
@@ -102,7 +99,7 @@ const SignInPage = () => {
             id="password"
             autoComplete="current-password"
           />
-
+          <Typography>{error}</Typography>
           <Button
             disabled={signingIn}
             type="submit"

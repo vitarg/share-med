@@ -29,7 +29,9 @@ module.exports.medicationsController = {
   },
   getMedication: async (req, res) => {
     try {
-      const data = await Medication.findById(req.params.id);
+      const data = await Medication.findById(req.params.id).populate(
+        "category"
+      );
       res.json(data);
     } catch (err) {
       res.json(err);
