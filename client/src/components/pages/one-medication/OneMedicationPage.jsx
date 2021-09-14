@@ -41,6 +41,12 @@ const useStyles = makeStyles({
     backgroundColor: "#e5e5e5",
     background: "url('/no-pictures.svg') center center/30% no-repeat",
   },
+  image: {
+    width: "auto",
+    maxWidth: "100%",
+    height: "100%",
+    minWidth: "100%",
+  },
   itemTxtBottom: {
     display: "flex",
     justifyContent: "space-between",
@@ -107,13 +113,19 @@ function OneMedicationPage() {
         <Grid container className={classes.content}>
           <Grid item xs={5} className={classes.leftColumn}>
             <Box className={classes.imgBox}>
-              <CardMedia component={"img"} src={find.img} />
+              <CardMedia
+                className={classes.image}
+                component={"img"}
+                src={find.img}
+              />
             </Box>
           </Grid>
           <Grid item xs={7} className={classes.rightColumn}>
             {token ? (
               <Button
                 className={classes.btnDelete}
+                component={Link}
+                to={"/"}
                 variant="contained"
                 color="secondary"
                 onClick={() => {
