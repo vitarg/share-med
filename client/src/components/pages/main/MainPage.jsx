@@ -33,13 +33,38 @@ const useStyles = makeStyles((theme) => ({
 
 const MainPage = () => {
   const classes = useStyles();
-
   const dispatch = useDispatch();
 
   const [open, setOpen] = React.useState(false);
+  const medications = useSelector((state) => state.medications.medications);
+  console.log(medications.length);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const [fetching, setFetching] = useState(true);
 
   useEffect(() => {
-    dispatch(getMedications());
+    if (fetching) {
+      dispatch(getMedications(currentPage, setCurrentPage, setFetching));
+    }
+  }, [fetching]);
+  console.log(currentPage);
+
+  const scrollHandler = (e) => {
+    if (
+      e.target.documentElement.scrollHeight -
+        (e.target.documentElement.scrollTop + window.innerHeight) <
+      100
+    ) {
+      setFetching(true);
+    }
+  };
+
+  useEffect(() => {
+    document.addEventListener("scroll", scrollHandler);
+
+    return () => {
+      document.removeEventListener("scroll", scrollHandler);
+    };
   }, []);
 
   const { loading } = useSelector((state) => state.medications);

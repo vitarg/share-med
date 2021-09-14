@@ -10,15 +10,15 @@ const useStyles = makeStyles((theme) => ({
   },
   listTitle: {
     color: "#484d52",
-    marginLeft: 16
+    marginLeft: 16,
   },
   link: {
     color: "#6c757d",
     textDecoration: "none",
   },
   active: {
-    color: "#000"
-  }
+    color: "#000",
+  },
 }));
 
 function Sidebar() {
@@ -39,7 +39,12 @@ function Sidebar() {
     >
       {/*<Typography variant={'h6'} className={classes.listTitle}>Категории</Typography>*/}
       <ListItem>
-        <NavLink activeClassName={classes.active} className={classes.link} exact to={"/"}>
+        <NavLink
+          activeClassName={classes.active}
+          className={classes.link}
+          exact
+          to={"/"}
+        >
           Все лекарства
         </NavLink>
       </ListItem>
