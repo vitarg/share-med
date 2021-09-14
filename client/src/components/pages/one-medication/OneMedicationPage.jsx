@@ -107,20 +107,24 @@ function OneMedicationPage() {
         <Grid container className={classes.content}>
           <Grid item xs={5} className={classes.leftColumn}>
             <Box className={classes.imgBox}>
-              <CardMedia />
+              <CardMedia component={"img"} src={find.img} />
             </Box>
           </Grid>
           <Grid item xs={7} className={classes.rightColumn}>
-            <Button
-              className={classes.btnDelete}
-              variant="contained"
-              color="secondary"
-              onClick={() => {
-                handleDelete(find._id);
-              }}
-            >
-              Удалить
-            </Button>
+            {token ? (
+              <Button
+                className={classes.btnDelete}
+                variant="contained"
+                color="secondary"
+                onClick={() => {
+                  handleDelete(find._id);
+                }}
+              >
+                Удалить
+              </Button>
+            ) : (
+              ""
+            )}
 
             <Typography
               component="h1"

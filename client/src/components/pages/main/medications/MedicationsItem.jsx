@@ -42,7 +42,8 @@ const MedicationsItem = ({ item }) => {
         <CardActionArea>
           <Box className={classes.imgBox}>
             <CardMedia
-              image="/static/images/cards/contemplative-reptile.jpg"
+              component={'img'}
+              src={item.img}
               title="Contemplative Reptile"
             />
           </Box>
