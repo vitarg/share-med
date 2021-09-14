@@ -5,7 +5,7 @@ import Header from "./header/Header";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
 import MainPage from "./pages/main/MainPage";
-import SinglePage from "./pages/SinglePage";
+import OneMedicationPage from "./pages/one-medication/OneMedicationPage";
 import RequestPage from "./pages/RequestPage";
 import { useSelector } from "react-redux";
 
@@ -24,7 +24,7 @@ function App() {
           <MainPage />
         </Route>
         <Route path="/medications/:id">
-          <SinglePage />
+          <OneMedicationPage />
         </Route>
         <Route path="/requests/:medicationId">
           <RequestPage />
