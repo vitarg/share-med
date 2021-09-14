@@ -19,10 +19,18 @@ const useStyles = makeStyles({
     borderRadius: 10,
   },
   imgBox: {
+    padding: 16,
     background: "url('/no-pictures.svg') center center/30% no-repeat",
-    backgroundColor: "#e5e5e5",
-    width: "100%",
+    backgroundColor: "#ffffff",
+    width: "calc(100% - 32px)",
     height: 200,
+  },
+  image: {
+    objectFit: "contain",
+    width: "100%",
+    maxWidth: "100%",
+    minHeight: "100%",
+    maxHeight: "100%",
   },
   item: {
     height: "100%",
@@ -42,7 +50,8 @@ const MedicationsItem = ({ item }) => {
         <CardActionArea>
           <Box className={classes.imgBox}>
             <CardMedia
-              component={'img'}
+              className={classes.image}
+              component={"img"}
               src={item.img}
               title="Contemplative Reptile"
             />

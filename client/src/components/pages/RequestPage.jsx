@@ -72,7 +72,7 @@ const RequestPage = () => {
               required
               id="firstName"
               name="firstName"
-              label="Name"
+              label="Имя"
               fullWidth
               autoComplete="given-name"
               onChange={(e) => setName(e.target.value)}
@@ -84,7 +84,7 @@ const RequestPage = () => {
               required
               id="Number"
               name="Number"
-              label="Number"
+              label="Телефон"
               fullWidth
               type={"tel"}
               onChange={(e) => setTel(e.target.value)}
@@ -97,7 +97,7 @@ const RequestPage = () => {
               required
               id="address"
               name="address"
-              label="email"
+              label="Эл. почта"
               fullWidth
               autoComplete="email"
               onChange={(e) => setEmail(e.target.value)}
@@ -117,7 +117,7 @@ const RequestPage = () => {
             />
           </Grid>
           <Grid item xs={12} sm={8}>
-            <Button variant="contained" color="secondary" onClick={sendRequest}>
+            <Button variant="contained" color="primary" onClick={sendRequest}>
               Отправить запрос
             </Button>
           </Grid>
