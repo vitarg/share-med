@@ -1,6 +1,7 @@
 const path = require("path");
 const Medication = require("../models/Medication.model");
 const { v4: uuidv4 } = require("uuid");
+const Request = require("../models/Request.model");
 
 module.exports.medicationsController = {
   createMedication: async (req, res) => {
@@ -21,7 +22,11 @@ module.exports.medicationsController = {
   },
   getAllMedications: async (req, res) => {
     try {
-      const data = await Medication.find({}).populate("category");
+      const { page = 1, limit = 5 } = req.query;
+      const data = await Medication.find({})
+      .limit(limit * 1)
+      .skip((page - 1) * limit)
+      .populate("category")
       res.json(data);
     } catch (err) {
       res.json(err);
@@ -41,6 +46,9 @@ module.exports.medicationsController = {
     try {
       await Medication.findByIdAndRemove(req.params.id);
       res.json("Лекарство удалено");
+      await Request.deleteMany({
+        medicationId: req.params.id,
+      });
     } catch (err) {
       res.json(err);
     }

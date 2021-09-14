@@ -47,15 +47,6 @@ export default function requests(state = initialState, action) {
           return item;
         }),
       };
-    // case "acceptRequest/fetch/fulfilled":
-    //   return {
-    //     ...state,
-    //     // requests: state.requests.filter((item) => {
-    //     //   if (item.medicationId != action.payload) {
-    //     //     return item;
-    //     //   }
-    //     // }),
-    //   };
     default:
       return state;
   }

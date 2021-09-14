@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import MedicationsItem from "./MedicationsItem";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
@@ -14,10 +14,12 @@ const Medications = ({ search }) => {
 
   return filteredMedications
     .filter((item) =>
-      search === "" ? item : item.name.toLowerCase().includes(search)
+      search === ""
+        ? item
+        : item.name.toLowerCase().includes(search.toLowerCase())
     )
     .map((item) => {
-      return <MedicationsItem item={item}/>;
+      return <MedicationsItem item={item} />;
     });
 };
 
