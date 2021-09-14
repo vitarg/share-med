@@ -83,13 +83,13 @@ const MainPage = () => {
     setSearch(e.target.value);
   };
 
-  // if (loading) {
-  //   return (
-  //     <div>
-  //       <CircularProgress />
-  //     </div>
-  //   );
-  // }
+  if (loading) {
+    return (
+       <div>
+         <CircularProgress />
+       </div>
+    );
+   }
 
   return (
     <>
@@ -117,7 +117,6 @@ const MainPage = () => {
             <Medications search={search} />
           </Grid>
         </Grid>
-        {loading && <CircularProgress />}
       </Grid>
     </>
   );

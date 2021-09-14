@@ -16,7 +16,7 @@ export default function medications(state = initialState, action) {
       return {
         ...state,
         loading: false,
-        medications: [...state.medications, ...action.payload],
+        medications: action.payload,
       };
     case "medications/remove/fulfilled":
       return {
@@ -36,8 +36,7 @@ export const getMedications = (currentPage) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "medications/fetch/pending"});
-      console.log('fetch')
-      const response = await fetch(`/medications/?limit=50&page=${currentPage}`);
+      const response = await fetch(`/medications`);
       const json = await response.json();
 
       await dispatch({ type: "medications/fetch/fulfilled", payload: json });
