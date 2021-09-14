@@ -32,6 +32,7 @@ module.exports.medicationsController = {
       res.json(err);
     }
   },
+
   getMedication: async (req, res) => {
     try {
       const data = await Medication.findById(req.params.id).populate(

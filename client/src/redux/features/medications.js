@@ -32,21 +32,18 @@ export default function medications(state = initialState, action) {
   }
 }
 
-export const getMedications = (currentPage, setCurrentPage, setFetching) => {
+export const getMedications = (currentPage) => {
   return async (dispatch) => {
     try {
-      // dispatch({ type: "medications/fetch/pending"});
+      dispatch({ type: "medications/fetch/pending"});
       console.log('fetch')
-      const response = await fetch(`/medications/?limit=10&page=${currentPage}`);
+      const response = await fetch(`/medications/?limit=50&page=${currentPage}`);
       const json = await response.json();
 
       await dispatch({ type: "medications/fetch/fulfilled", payload: json });
-      await setCurrentPage(prevState => prevState + 1)
 
     } catch (e) {
       dispatch({ type: "medications/fetch/rejected", error: e.toString() });
-    } finally {
-      return setFetching(false)
     }
   };
 };
