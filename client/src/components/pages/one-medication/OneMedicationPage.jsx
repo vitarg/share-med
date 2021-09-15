@@ -105,6 +105,7 @@ function OneMedicationPage() {
 
   const handleDelete = (id) => {
     dispatch(removeMedication(id));
+
   };
 
   if (find) {
