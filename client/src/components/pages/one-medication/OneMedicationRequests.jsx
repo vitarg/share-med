@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
   Box,
@@ -10,6 +10,8 @@ import {
 } from "@material-ui/core";
 import { acceptRequest } from "../../../redux/features/requests";
 import medications from "../../../redux/features/medications";
+import {fetchRequestGet} from "../../../redux/features/requests";
+import { useParams } from "react-router";
 
 const useStyles = makeStyles({
   cardWrapper: {

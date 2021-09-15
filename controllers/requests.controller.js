@@ -9,8 +9,14 @@ module.exports.requestsController = {
     try {
       const { name, tel, email, message, medicationId } = req.body;
 
-      await Request.create({ name, tel, email, message, medicationId });
-      res.json("Пользователь создан");
+      const data = await Request.create({
+        name,
+        tel,
+        email,
+        message,
+        medicationId,
+      });
+      res.json(data);
     } catch (e) {
       res.json("Ошибка в addRequest");
     }

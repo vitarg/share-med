@@ -20,7 +20,7 @@ export default function requests(state = initialState, action) {
     case "requests/fetch/fulfilled":
       return {
         ...state,
-        requests: action.payload,
+        requests: [...state.requests, action.payload],
         loading: false,
       };
     case "requests/fetch/rejected":
