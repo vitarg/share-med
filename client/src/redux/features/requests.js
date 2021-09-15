@@ -1,6 +1,7 @@
 const initialState = {
   requests: [],
   loading: false,
+  acceptLoading: false,
   error: null,
 };
 
@@ -37,8 +38,14 @@ export default function requests(state = initialState, action) {
     case "acceptRequest/fetch/pending":
       return {
         ...state,
+        acceptLoading: true,
+      };
+    case "acceptRequest/fetch/fulfilled":
+      return {
+        ...state,
+        acceptLoading: false,
         requests: state.requests.map((item) => {
-          if (item.medicationId == action.payload) {
+          if (item._id === action.payload) {
             return {
               ...item,
               isAccept: true,
@@ -96,6 +103,7 @@ export const acceptRequest = (id, medicationId) => {
   return async (dispatch) => {
     try {
       dispatch({ type: "acceptRequest/fetch/pending", payload: medicationId });
+
       const response = await fetch(`/requests/${id}/accept`, {
         method: "PATCH",
         body: JSON.stringify({
@@ -103,13 +111,15 @@ export const acceptRequest = (id, medicationId) => {
         }),
         headers: { "Content-type": "application/json" },
       });
+
       const json = await response.json();
+
       if (json.error) {
         dispatch({ type: "acceptRequest/fetch/rejected", error: json.error });
       } else {
         dispatch({
           type: "acceptRequest/fetch/fulfilled",
-          payload: medicationId,
+          payload: id,
         });
       }
     } catch (e) {

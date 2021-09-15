@@ -37,6 +37,7 @@ const useStyles = makeStyles({
   },
   btnBox: {
     padding: 16,
+    paddingTop: 0,
     justifyContent: "flex-end",
   },
 });
@@ -53,7 +54,6 @@ const MedicationsItem = ({ item }) => {
               className={classes.image}
               component={"img"}
               src={item.img}
-              title="Contemplative Reptile"
             />
           </Box>
           <CardContent>

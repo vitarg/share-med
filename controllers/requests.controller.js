@@ -28,13 +28,13 @@ module.exports.requestsController = {
   },
   acceptRequest: async (req, res) => {
     try {
-      const data = await Request.findById(req.params.id);
+      const request = await Request.findById(req.params.id);
 
       await Request.findByIdAndUpdate(req.params.id, {
         isAccept: true,
       });
 
-      const medications = await Medications.findById(data.medicationId);
+      const medications = await Medications.findById(request.medicationId);
 
       let transporter = nodemailer.createTransport({
         host: "smtp.mail.ru",
@@ -48,16 +48,16 @@ module.exports.requestsController = {
 
       await transporter.sendMail({
         from: `${process.env.nodemailer_login}`,
-        to: data.email,
+        to: request.email,
         subject: "Medications",
         text: `Ваша заявка на лекарство ${medications.name} одобрена.
                Можете забрать свое лекарство по адресу Трошева.7`,
         html: `<h1>Ваша заявка на лекарство ${medications.name} одобрена.</h1>
                <h2>Можете забрать свое лекарство по адресу Трошева.7</h2>`,
       });
-      res.json(`Заявка принята ${data}`);
+      res.json(`Заявка принята ${request}`);
     } catch (e) {
-      res.json("Error in: " + e);
+      res.json("Error: " + e.toString());
     }
   },
 };
