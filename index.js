@@ -2,6 +2,7 @@ const express = require("express");
 const mongoose = require("mongoose");
 const fileUpload = require("express-fileupload");
 const cors = require("cors");
+const path = require("path");
 require("dotenv").config();
 
 const app = express();
@@ -11,6 +12,10 @@ app.use(express.static("public"));
 app.use(fileUpload());
 app.use(cors());
 app.use(require("./routes/index"));
+
+app.get("*", (req, res) => {
+  res.sendFile(path.resolve(__dirname, "client", "build", "index.html"));
+});
 
 mongoose.connect(process.env.MONGO).then(() => {
   app.listen(process.env.PORT, () => {
