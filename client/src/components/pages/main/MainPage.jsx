@@ -73,7 +73,7 @@ const MainPage = () => {
 
   useEffect(() => {
     dispatch(getMedications(1));
-  }, [])
+  }, []);
 
   const loading = useSelector((state) => state.medications.loading);
 
@@ -85,11 +85,11 @@ const MainPage = () => {
 
   if (loading) {
     return (
-       <div>
-         <CircularProgress />
-       </div>
+      <div>
+        <CircularProgress />
+      </div>
     );
-   }
+  }
 
   return (
     <>
