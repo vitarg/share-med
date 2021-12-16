@@ -45,6 +45,8 @@ const useStyles = makeStyles({
 const MedicationsItem = ({ item }) => {
   const classes = useStyles();
 
+  console.log('item', item);
+
   return (
     <Grid item xs={3} key={item._id} className={classes.item}>
       <Card className={classes.card}>
@@ -62,7 +64,7 @@ const MedicationsItem = ({ item }) => {
             </Typography>
 
             <Typography gutterBottom component="h2">
-              {item.category.name}
+              {item?.category?.name}
             </Typography>
 
             <Typography variant="h6" color="textSecondary" component="p">
