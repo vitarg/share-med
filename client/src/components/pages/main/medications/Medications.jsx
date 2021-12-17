@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import MedicationsItem from "./MedicationsItem";
 import { useParams } from "react-router";
 import { useSelector } from "react-redux";
@@ -9,7 +9,7 @@ const Medications = ({ search }) => {
   const medications = useSelector((state) => state.medications.medications);
 
   const filteredMedications = id
-    ? medications.filter((e) => e.category._id === id)
+    ? medications.filter((e) => e?.category?._id === id)
     : medications;
 
   return filteredMedications

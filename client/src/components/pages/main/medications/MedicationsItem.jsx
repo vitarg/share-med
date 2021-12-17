@@ -45,8 +45,6 @@ const useStyles = makeStyles({
 const MedicationsItem = ({ item }) => {
   const classes = useStyles();
 
-  console.log('item', item);
-
   return (
     <Grid item xs={3} key={item._id} className={classes.item}>
       <Card className={classes.card}>
