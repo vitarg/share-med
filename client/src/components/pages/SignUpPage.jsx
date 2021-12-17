@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import {
   Avatar,
   Box,
@@ -42,9 +42,9 @@ const SignUpPage = () => {
   const signingUp = useSelector((state) => state.application.signingUp);
   const error = useSelector((state) => state.application.error);
 
-  const [name, setName] = useState("");
-  const [login, setLogin] = useState("");
-  const [password, setPassword] = useState("");
+  const [name, setName] = React.useState("");
+  const [login, setLogin] = React.useState("");
+  const [password, setPassword] = React.useState("");
 
   const handleChangeName = (e) => {
     setName(e.target.value);

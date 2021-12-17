@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { Button, makeStyles } from "@material-ui/core";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   title: {
     fontSize: 20,
   },
@@ -11,7 +11,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const HeaderLogo = () => {
+const Logo = () => {
   const classes = useStyles();
   return (
     <Button component={Link} to={"/"} className={classes.title}>
@@ -26,4 +26,4 @@ const HeaderLogo = () => {
   );
 };
 
-export default HeaderLogo;
+export default Logo;
