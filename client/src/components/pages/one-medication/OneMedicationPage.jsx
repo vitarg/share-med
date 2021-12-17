@@ -2,7 +2,6 @@ import {
   Grid,
   Typography,
   Button,
-  Paper,
   CircularProgress,
   CardMedia,
   Box,
@@ -15,10 +14,8 @@ import { useParams } from "react-router";
 import { getMedications } from "../../../redux/features/medications";
 import { Link } from "react-router-dom";
 import { fetchRequestGet } from "../../../redux/features/requests";
-import { acceptRequest } from "../../../redux/features/requests";
 import { removeMedication } from "../../../redux/features/medications";
 import OneMedicationRequests from "./OneMedicationRequests";
-import BackspaceIcon from "@material-ui/icons/Backspace";
 
 const useStyles = makeStyles({
   leftColumn: {
@@ -36,16 +33,16 @@ const useStyles = makeStyles({
     position: "relative",
   },
   imgBox: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
     width: 400,
     height: 350,
     backgroundColor: "#e5e5e5",
     background: "url('/no-pictures.svg') center center/30% no-repeat",
   },
   image: {
-    width: "auto",
-    maxWidth: "100%",
-    height: "100%",
-    minWidth: "100%",
+    width: "100%",
   },
   itemTxtBottom: {
     display: "flex",
@@ -89,8 +86,8 @@ function OneMedicationPage() {
 
   const { id } = useParams();
 
-  const { medications } = useSelector((state) => state.medications);
-  const { requests, loading } = useSelector((state) => state.requests);
+  const medications  = useSelector((state) => state.medications.medications);
+  const loading = useSelector((state) => state.requests.loading);
   const token = useSelector((state) => state.application.token);
 
   useEffect(() => {
