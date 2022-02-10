@@ -3,7 +3,7 @@ import { Button, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   logout: {
     width: 130,
     height: 40,
@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const LoginLogoutButton = () => {
+const AuthBtn = () => {
   const classes = useStyles();
 
   const token = useSelector((state) => state.application.token);
@@ -49,4 +49,4 @@ const LoginLogoutButton = () => {
   }
 };
 
-export default LoginLogoutButton;
+export default AuthBtn;
