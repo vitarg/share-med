@@ -1,21 +1,14 @@
 import React from "react";
-import { AppBar, makeStyles } from "@material-ui/core";
 import Logo from "./logo";
 import AuthBtn from "./auth-button";
-import { appbar } from "./styles";
-
-const useStyles = makeStyles((theme) => ({
-  appbar,
-}));
+import { AppBarHeader } from "./styles";
 
 const Header = () => {
-  const classes = useStyles();
-
   return (
-    <AppBar position="static" className={classes.appbar}>
+    <AppBarHeader position="static">
       <Logo />
       <AuthBtn />
-    </AppBar>
+    </AppBarHeader>
   );
 };
 
