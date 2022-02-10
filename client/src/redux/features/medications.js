@@ -1,5 +1,3 @@
-
-
 const initialState = {
   medications: [],
   loading: false
@@ -22,7 +20,7 @@ export default function medications(state = initialState, action) {
       return {
         ...state,
         medications: state.medications.filter((item) => {
-          if (item != action.payload) {
+          if (item !== action.payload) {
             return item;
           }
         }),
