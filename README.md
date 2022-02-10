@@ -2,13 +2,13 @@
 ---
 При разработке приложения мы использовали следующий стек технологий:
 
-|     **Frontend**    |     **Backend**    |
-|---------------------|--------------------|
-| React               | Node.js            |
-| Redux / Redux Thunk | Express            |
-| React Router        | MongoDB / Mongoose |
-| Material UI         | JWT / Bcrypt       |
-|                     | Nodemailer         |
+| **Frontend**        | **Backend**  | **Database** |
+|---------------------|--------------|--------------|
+| React               | Node.js      | MongoDB      |
+| Redux / Redux Thunk | Express      |              |
+| React Router        | Mongoose     |              |
+| Material UI         | JWT / Bcrypt |              |
+|                     | Nodemailer   |              |
 
 ---
 
