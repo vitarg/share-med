@@ -29,4 +29,6 @@
 
 ---
 
+Проект выгружен на хостин Heroku, [здесь](https://share-medication.herokuapp.com/) можно пощупать live версию
+
 Проект разработан в команде с [Бислиевым Адамом](https://github.com/bislievv) и [Салманом](https://github.com/Salman-13)
