@@ -10,7 +10,7 @@ const Medications = ({ search }) => {
 
   if (id) {
     return medications
-      .filter((item) => item.category.id === id)
+      .filter((item) => item.category._id === id)
       .map((item) => <MedicationsItem key={item._id} item={item} />);
   }
 

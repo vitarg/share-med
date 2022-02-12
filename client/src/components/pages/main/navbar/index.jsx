@@ -4,8 +4,9 @@ import AddMedicationButton from "../add-medication/AddMedicationButton";
 import AddMedicationDialog from "../add-medication/AddMedicationDialog";
 import { MainNavbar } from "../styles";
 
-const Navbar = ({ handleChangeFilter }) => {
+const Navbar = ({ onChangeFilter }) => {
   const [open, setOpen] = React.useState(false);
+
 
   return (
     <MainNavbar>
@@ -14,7 +15,7 @@ const Navbar = ({ handleChangeFilter }) => {
         label="Найти лекарство"
         type="search"
         variant={"outlined"}
-        onChange={handleChangeFilter}
+        onChange={onChangeFilter}
       />
 
       <AddMedicationButton setOpen={setOpen} />
