@@ -1,18 +1,16 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMedications } from "../../../redux/features/medications";
-import AddMedicationDialog from "./add-medication/AddMedicationDialog";
-import AddMedicationButton from "./add-medication/AddMedicationButton";
-import Index from "./sidebar";
+import Sidebar from "./sidebar";
 import Medications from "./medications/Medications";
-import { CircularProgress, Grid, TextField } from "@mui/material";
-import { GridSidebar, LoadingWrapper, MainNavbar } from "./styles";
+import { CircularProgress, Grid } from "@mui/material";
+import { GridSidebar, LoadingWrapper } from "./styles";
+import Navbar from "./navbar";
 
 const Main = () => {
   const loading = useSelector((state) => state?.medications.loading);
 
   const [search, setSearch] = useState("");
-  const [open, setOpen] = React.useState(false);
 
   const dispatch = useDispatch();
 
@@ -20,7 +18,7 @@ const Main = () => {
     dispatch(getMedications());
   }, []);
 
-  const handleFilter = (e) => {
+  const handleChangeFilter = (e) => {
     setSearch(e.target.value);
   };
 
@@ -36,23 +34,11 @@ const Main = () => {
     <>
       <Grid container style={{ minHeight: "calc(100vh - 92px)" }}>
         <GridSidebar container item xs={2}>
-          <Index />
+          <Sidebar />
         </GridSidebar>
 
         <Grid item xs={10} style={{ padding: 40 }}>
-          <MainNavbar>
-            <TextField
-              id="standard-search"
-              label="Найти лекарство"
-              type="search"
-              variant={"outlined"}
-              onChange={handleFilter}
-            />
-
-            <AddMedicationButton setOpen={setOpen} />
-
-            <AddMedicationDialog setOpen={setOpen} open={open} />
-          </MainNavbar>
+          <Navbar onChangeFilter={handleChangeFilter} />
 
           <Grid container spacing={3}>
             <Medications search={search} />
