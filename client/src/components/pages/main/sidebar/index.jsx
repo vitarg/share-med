@@ -37,7 +37,6 @@ function Sidebar() {
       aria-label="secondary mailbox folders"
       className={classes.list}
     >
-      {/*<Typography variant={'h6'} className={classes.listTitle}>Категории</Typography>*/}
       <ListItem>
         <NavLink
           activeClassName={classes.active}

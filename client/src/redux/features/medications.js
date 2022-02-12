@@ -30,7 +30,7 @@ export default function medications(state = initialState, action) {
   }
 }
 
-export const getMedications = (currentPage) => {
+export const getMedications = () => {
   return async (dispatch) => {
     try {
       dispatch({ type: "medications/fetch/pending"});

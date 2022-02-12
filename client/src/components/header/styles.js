@@ -8,4 +8,5 @@ export const AppBarHeader = styled(AppBar)({
   justifyContent: "space-between",
   alignItems: "center",
   boxShadow: "0 .5rem 1rem rgba(0, 0, 0,.15)",
+  position: 'static'
 });

@@ -5,7 +5,7 @@ import { AppBarHeader } from "./styles";
 
 const Header = () => {
   return (
-    <AppBarHeader position="static">
+    <AppBarHeader>
       <Logo />
       <AuthBtn />
     </AppBarHeader>
