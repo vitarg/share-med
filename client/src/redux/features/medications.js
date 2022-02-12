@@ -1,6 +1,6 @@
 const initialState = {
   medications: [],
-  loading: false
+  loading: false,
 };
 
 export default function medications(state = initialState, action) {
@@ -19,11 +19,9 @@ export default function medications(state = initialState, action) {
     case "medications/remove/fulfilled":
       return {
         ...state,
-        medications: state.medications.filter((item) => {
-          if (item !== action.payload) {
-            return item;
-          }
-        }),
+        medications: state.medications.filter(
+          (item) => item !== action.payload
+        ),
       };
     default:
       return state;
@@ -33,12 +31,11 @@ export default function medications(state = initialState, action) {
 export const getMedications = () => {
   return async (dispatch) => {
     try {
-      dispatch({ type: "medications/fetch/pending"});
+      dispatch({ type: "medications/fetch/pending" });
       const response = await fetch(`/medications`);
       const json = await response.json();
 
       await dispatch({ type: "medications/fetch/fulfilled", payload: json });
-
     } catch (e) {
       dispatch({ type: "medications/fetch/rejected", error: e.toString() });
     }
@@ -86,10 +83,9 @@ export const addMedication = (
 export const removeMedication = (id) => {
   return async (dispatch) => {
     try {
-      const response = await fetch(`/medications/${id}`, {
+      await fetch(`/medications/${id}`, {
         method: "DELETE",
       });
-      const json = await response.json();
 
       dispatch({ type: "medications/remove/fulfilled", payload: id });
     } catch (e) {

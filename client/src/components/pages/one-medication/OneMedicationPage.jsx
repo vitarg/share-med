@@ -86,17 +86,14 @@ function OneMedicationPage() {
 
   const { id } = useParams();
 
-  const medications  = useSelector((state) => state.medications.medications);
-  const loading = useSelector((state) => state.requests.loading);
-  const token = useSelector((state) => state.application.token);
+  const medications  = useSelector((state) => state?.medications.medications);
+  const loading = useSelector((state) => state?.requests.loading);
+  const token = useSelector((state) => state?.application.token);
 
   useEffect(() => {
     dispatch(fetchRequestGet(id));
-  }, []);
-
-  useEffect(() => {
     dispatch(getMedications());
-  }, []);
+  }, [dispatch, id]);
 
   const find = medications.find((item) => id === item._id);
 

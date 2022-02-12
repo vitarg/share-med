@@ -1,17 +1,7 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  Box,
-  Button,
-  Grid,
-  makeStyles,
-  Paper,
-  Typography,
-} from "@material-ui/core";
+import { Box, Button, makeStyles, Paper, Typography } from "@material-ui/core";
 import { acceptRequest } from "../../../redux/features/requests";
-import medications from "../../../redux/features/medications";
-import {fetchRequestGet} from "../../../redux/features/requests";
-import { useParams } from "react-router";
 
 const useStyles = makeStyles({
   cardWrapper: {
@@ -54,9 +44,9 @@ const OneMedicationRequests = () => {
 
   const dispatch = useDispatch();
 
-  const requests = useSelector((state) => state.requests.requests);
-  const acceptLoading = useSelector((state) => state.requests.acceptLoading);
-  const token = useSelector((state) => state.application.token);
+  const requests = useSelector((state) => state?.requests.requests);
+  const acceptLoading = useSelector((state) => state?.requests.acceptLoading);
+  const token = useSelector((state) => state?.application.token);
 
   const handleAccept = (id, medicationId) => {
     dispatch(acceptRequest(id, medicationId));

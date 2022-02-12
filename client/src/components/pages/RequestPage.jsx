@@ -7,33 +7,30 @@ import {
   TextField,
   Typography,
 } from "@material-ui/core";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { fetchRequest } from "../../redux/features/requests";
 
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    padding: "20px",
+    "& > *": {
+      width: theme.spacing(70),
+      margin: "auto",
+      height: theme.spacing(70),
+      textAlign: "center",
+      justifyContent: "center",
+    },
+  },
+  gridItem: {
+    marginTop: "20px",
+  },
+}));
+
 const RequestPage = () => {
-  const useStyles = makeStyles((theme) => ({
-    root: {
-      display: "flex",
-      flexWrap: "wrap",
-      padding: "20px",
-      "& > *": {
-        width: theme.spacing(70),
-        margin: "auto",
-        height: theme.spacing(70),
-        textAlign: "center",
-        justifyContent: "center",
-      },
-    },
-    gridItem: {
-      marginTop: "20px",
-    },
-  }));
-
   const classes = useStyles();
-  const { requests, loading } = useSelector((state) => state.requests);
-
-  const { medications } = useSelector((state) => state.medications);
 
   const { medicationId } = useParams();
   const dispatch = useDispatch();

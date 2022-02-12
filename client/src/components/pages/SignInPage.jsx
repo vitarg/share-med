@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import {
   Avatar,
-  Box,
   Button,
   Container,
   CssBaseline,
@@ -27,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
     backgroundColor: theme.palette.secondary.main,
   },
   form: {
-    width: "100%", // Fix IE 11 issue.
+    width: "100%",
     marginTop: theme.spacing(3),
   },
   submit: {
@@ -43,8 +42,8 @@ const SignInPage = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  const signingIn = useSelector((state) => state.application.signingIn);
-  const error = useSelector((state) => state.application.error);
+  const signingIn = useSelector((state) => state?.application.signingIn);
+  const error = useSelector((state) => state?.application.error);
 
   const handleChangeLogin = (e) => {
     setLogin(e.target.value);

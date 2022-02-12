@@ -16,7 +16,7 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(getMedications());
-  }, []);
+  }, [dispatch]);
 
   const handleChangeFilter = (e) => {
     setSearch(e.target.value);
