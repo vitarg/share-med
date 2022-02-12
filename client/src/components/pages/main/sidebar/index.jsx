@@ -1,10 +1,10 @@
-import { List, ListItem, makeStyles, Typography } from "@material-ui/core";
+import { List, ListItem, makeStyles } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
 import { fetchAllCategories } from "../../../../redux/features/categories";
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   list: {
     marginTop: 16,
   },
@@ -25,7 +25,7 @@ function Sidebar() {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const { categories } = useSelector((state) => state.categories);
+  const { categories } = useSelector((state) => state?.categories);
 
   useEffect(() => {
     dispatch(fetchAllCategories());
@@ -37,7 +37,6 @@ function Sidebar() {
       aria-label="secondary mailbox folders"
       className={classes.list}
     >
-      {/*<Typography variant={'h6'} className={classes.listTitle}>Категории</Typography>*/}
       <ListItem>
         <NavLink
           activeClassName={classes.active}

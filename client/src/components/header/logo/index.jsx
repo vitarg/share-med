@@ -1,25 +1,16 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Button, makeStyles } from "@material-ui/core";
+import { Button } from "@mui/material";
 
-const useStyles = makeStyles(() => ({
-  title: {
-    fontSize: 20,
-  },
-  logo: {
-    marginRight: 20,
-  },
-}));
 
 const Logo = () => {
-  const classes = useStyles();
   return (
-    <Button component={Link} to={"/"} className={classes.title}>
+    <Button component={Link} to={"/"} style={{ fontSize: 20 }}>
       <img
         src="https://image.flaticon.com/icons/png/512/883/883407.png"
         alt="logo"
         width={40}
-        className={classes.logo}
+        style={{ marginRight: 20 }}
       />
       <span>Share medication</span>
     </Button>

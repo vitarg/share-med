@@ -4,7 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import Header from "./header";
 import SignInPage from "./pages/SignInPage";
 import SignUpPage from "./pages/SignUpPage";
-import MainPage from "./pages/main/MainPage";
+import Index from "./pages/main";
 import OneMedicationPage from "./pages/one-medication/OneMedicationPage";
 import RequestPage from "./pages/RequestPage";
 import { useSelector } from "react-redux";
@@ -18,10 +18,10 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <MainPage />
+          <Index />
         </Route>
         <Route exact path="/medications/categories/:id">
-          <MainPage />
+          <Index />
         </Route>
         <Route path="/medications/:id">
           <OneMedicationPage />
