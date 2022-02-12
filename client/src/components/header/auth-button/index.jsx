@@ -1,21 +1,9 @@
 import React from "react";
-import { Button, makeStyles } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import { useSelector } from "react-redux";
-
-const useStyles = makeStyles(() => ({
-  logout: {
-    width: 130,
-    height: 40,
-  },
-  login: {
-    height: 40,
-  },
-}));
+import { AuthButton } from "./styles";
 
 const AuthBtn = () => {
-  const classes = useStyles();
-
   const token = useSelector((state) => state.application.token);
 
   const handleLogout = () => {
@@ -25,26 +13,24 @@ const AuthBtn = () => {
 
   if (token) {
     return (
-      <Button
-        className={classes.logout}
+      <AuthButton
         variant={"outlined"}
         color={"secondary"}
         onClick={handleLogout}
       >
         Выйти
-      </Button>
+      </AuthButton>
     );
   } else {
     return (
-      <Button
-        className={classes.login}
+      <AuthButton
         component={Link}
         to={"/sign-in"}
         variant={"outlined"}
         color={"secondary"}
       >
         Войти как админ
-      </Button>
+      </AuthButton>
     );
   }
 };
