@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { getMedications } from "../../../redux/features/medications";
-import { Box, Grid, makeStyles, TextField } from "@material-ui/core";
 import AddMedicationDialog from "./add-medication/AddMedicationDialog";
 import AddMedicationButton from "./add-medication/AddMedicationButton";
 import Index from "./sidebar";
 import Medications from "./medications/Medications";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Grid, TextField } from "@mui/material";
 import { GridSidebar, LoadingWrapper, MainNavbar } from "./styles";
 
 const Main = () => {
-  const loading = useSelector((state) => state.medications.loading);
+  const loading = useSelector((state) => state?.medications.loading);
 
   const [search, setSearch] = useState("");
   const [open, setOpen] = React.useState(false);
