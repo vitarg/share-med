@@ -11,10 +11,10 @@ import {
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { getMedications } from "../../../redux/features/medications";
+import { getMedications } from "../../../store/features/medications";
 import { Link } from "react-router-dom";
-import { fetchRequestGet } from "../../../redux/features/requests";
-import { removeMedication } from "../../../redux/features/medications";
+import { fetchRequestGet } from "../../../store/features/requests";
+import { removeMedication } from "../../../store/features/medications";
 import OneMedicationRequests from "./OneMedicationRequests";
 
 const useStyles = makeStyles({

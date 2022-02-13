@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, makeStyles, Paper, Typography } from "@material-ui/core";
-import { acceptRequest } from "../../../redux/features/requests";
+import { acceptRequest } from "../../../store/features/requests";
 
 const useStyles = makeStyles({
   cardWrapper: {
