@@ -4,11 +4,11 @@
 
 | **Frontend**        | **Backend**  | **Database** |
 |---------------------|--------------|--------------|
-| React               | Node.js      | MongoDB      |
-| Redux / Redux Thunk | Express      |              |
-| React Router        | Mongoose     |              |
-| Material UI         | JWT / Bcrypt |              |
-|                     | Nodemailer   |              |
+| TypeScript          | Node.js      | MongoDB      |
+| React               | Express      |              |
+| Redux / Redux Thunk | Mongoose     |              |
+| React Router        | JWT / Bcrypt |              |
+| Material UI         | Nodemailer   |              |
 
 ---
 
