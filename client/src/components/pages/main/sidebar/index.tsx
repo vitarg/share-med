@@ -29,7 +29,7 @@ function Sidebar() {
 
   useEffect(() => {
     dispatch(fetchAllCategories());
-  }, []);
+  }, [dispatch]);
 
   return (
     <List

@@ -12,6 +12,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
+import { Medication } from "../../../../redux/features/medications";
 
 const useStyles = makeStyles({
   card: {
@@ -42,7 +43,11 @@ const useStyles = makeStyles({
   },
 });
 
-const MedicationsItem = ({ item }) => {
+interface MedicationsItemProps {
+  item: Medication;
+}
+
+const MedicationsItem: React.FC<MedicationsItemProps> = ({ item }) => {
   const classes = useStyles();
 
   return (

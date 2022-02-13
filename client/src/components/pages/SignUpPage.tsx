@@ -12,8 +12,9 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 import { createAdmin } from "../../redux/features/application";
+import { useDispatch, useSelector } from "react-redux";
+import appSelectors from "../../redux/selectors/app";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -39,28 +40,34 @@ const SignUpPage = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
-  const signingUp = useSelector((state) => state.application.signingUp);
-  const error = useSelector((state) => state.application.error);
+  const signingUp = useSelector(appSelectors.signingUp);
+  const error = useSelector(appSelectors.error);
 
-  const [name, setName] = React.useState("");
-  const [login, setLogin] = React.useState("");
-  const [password, setPassword] = React.useState("");
+  const [name, setName] = React.useState<string>("");
+  const [login, setLogin] = React.useState<string>("");
+  const [password, setPassword] = React.useState<string>("");
 
-  const handleChangeName = (e) => {
+  const handleChangeName = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setName(e.target.value);
   };
 
-  const handleChangeLogin = (e) => {
+  const handleChangeLogin = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setLogin(e.target.value);
   };
 
-  const handleChangePassword = (e) => {
+  const handleChangePassword = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    dispatch(createAdmin(name, login, password));
+    dispatch(createAdmin({ name, login, password }));
   };
 
   return (

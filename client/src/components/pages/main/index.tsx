@@ -6,9 +6,10 @@ import Medications from "./medications/Medications";
 import { CircularProgress, Grid } from "@mui/material";
 import { GridSidebar, LoadingWrapper } from "./styles";
 import Navbar from "./navbar";
+import medicationsSelectors from "../../../redux/selectors/medications";
 
 const Main = () => {
-  const loading = useSelector((state) => state?.medications.loading);
+  const loading = useSelector(medicationsSelectors.loading);
 
   const [search, setSearch] = useState("");
 
@@ -16,9 +17,11 @@ const Main = () => {
 
   useEffect(() => {
     dispatch(getMedications());
-  }, []);
+  }, [dispatch]);
 
-  const handleChangeFilter = (e) => {
+  const handleChangeFilter = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setSearch(e.target.value);
   };
 
