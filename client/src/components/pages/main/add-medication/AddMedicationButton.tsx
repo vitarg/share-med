@@ -2,6 +2,7 @@ import React from "react";
 import { Button, makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
+import appSelectors from "../../../../redux/selectors/app";
 
 const useStyles = makeStyles({
   addBtn: {
@@ -9,10 +10,16 @@ const useStyles = makeStyles({
   },
 });
 
-const AddMedicationButton = ({ setOpen }) => {
+interface AddMedicationButtonProps {
+  setOpen: (arg: boolean) => void;
+}
+
+const AddMedicationButton: React.FC<AddMedicationButtonProps> = ({
+  setOpen,
+}) => {
   const classes = useStyles();
 
-  const token = useSelector((state) => state.application.token);
+  const token = useSelector(appSelectors.token);
 
   const handleClickOpen = () => {
     setOpen(true);

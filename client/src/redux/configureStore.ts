@@ -1,12 +1,11 @@
-import { applyMiddleware, combineReducers, createStore } from "redux";
-import thunk from "redux-thunk";
-import medications from "./features/medications";
-import categories from "./features/categories";
-import application from "./features/application";
-import requests from "./features/requests";
-import { composeWithDevTools } from "redux-devtools-extension";
+import { configureStore } from "@reduxjs/toolkit";
+import applicationReducer from "./features/application";
 
-export const store = createStore(
-  combineReducers({ medications, categories, application, requests }),
-  composeWithDevTools(applyMiddleware(thunk))
-);
+export const store = configureStore({
+  reducer: {
+    application: applicationReducer,
+  },
+});
+
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;

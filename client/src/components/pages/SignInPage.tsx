@@ -12,7 +12,8 @@ import {
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { auth } from "../../redux/features/application";
+import appSelectors from "../../redux/selectors/app";
+import { signIn } from "../../redux/features/application";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -42,21 +43,25 @@ const SignInPage = () => {
   const [login, setLogin] = useState("");
   const [password, setPassword] = useState("");
 
-  const signingIn = useSelector((state) => state?.application.signingIn);
-  const error = useSelector((state) => state?.application.error);
+  const signingIn = useSelector(appSelectors.signingIn);
+  const error = useSelector(appSelectors.error);
 
-  const handleChangeLogin = (e) => {
+  const handleChangeLogin = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setLogin(e.target.value);
   };
 
-  const handleChangePassword = (e) => {
+  const handleChangePassword = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setPassword(e.target.value);
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    dispatch(auth(login, password));
+    dispatch(signIn({ login, password }));
   };
 
   return (

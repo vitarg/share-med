@@ -1,95 +1,97 @@
-const initialState = {
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+import { SerializedError } from "@reduxjs/toolkit/dist/createAsyncThunk";
+
+export interface ApplicationState {
+  signingUp: boolean;
+  signingIn: boolean;
+  error: SerializedError | null;
+  token: string | null;
+}
+
+const initialState: ApplicationState = {
   signingUp: false,
   signingIn: false,
   error: null,
   token: localStorage.getItem("token"),
 };
 
-export default function application(state = initialState, action) {
-  switch (action.type) {
-    case "application/signup/pending":
-      return {
-        ...state,
-        signingUp: true,
-        error: null,
-      };
-    case "application/signup/fulfilled":
-      return {
-        ...state,
-        signingUp: false,
-      };
-    case "application/signup/rejected":
-      return {
-        ...state,
-        signingUp: false,
-        error: action.error,
-      };
-    case "application/signin/pending":
-      return {
-        ...state,
-        signingIn: true,
-        error: null,
-      };
-    case "application/signin/fulfilled":
-      return {
-        ...state,
-        signingIn: false,
-        token: action.payload.token,
-      };
-    case "application/signin/rejected":
-      return {
-        ...state,
-        signingIn: false,
-        error: action.error,
-      };
-    default:
-      return state;
-  }
+interface createAdminPayload {
+  name: string;
+  login: string;
+  password: string;
 }
 
-export const createAdmin = (name, login, password) => async (dispatch) => {
-  dispatch({ type: "application/signup/pending" });
+export const createAdmin = createAsyncThunk(
+  "application/sign-up",
+  async (payload: createAdminPayload, { rejectWithValue }) => {
+    const response = await axios.post("/admins", {
+      ...payload,
+    });
 
-  const response = await fetch("/admins", {
-    method: "POST",
-    body: JSON.stringify({ name, login, password }),
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
-
-  const json = response.json();
-
-  if (json.error) {
-    dispatch({ type: "application/signup/rejected", error: json.error });
-  } else {
-    dispatch({ type: "application/signup/fulfilled", payload: json });
+    if (!response.data.ok) {
+      rejectWithValue(response.data.error);
+    }
+    return response.data;
   }
-};
+);
 
-export const auth = (login, password) => async (dispatch) => {
-  dispatch({ type: "application/signin/pending" });
+interface signInPayload {
+  login: string;
+  password: string;
+}
 
-  const response = await fetch("/admins/login", {
-    method: "POST",
-    body: JSON.stringify({ login, password }),
-    headers: {
-      "Content-type": "application/json",
-    },
-  });
+export const signIn = createAsyncThunk(
+  "application/sign-in",
+  async (payload: signInPayload, { rejectWithValue }) => {
+    const response = await axios.post("/admins/login", { ...payload });
 
-  const json = await response.json();
+    if (!response.data.ok) {
+      rejectWithValue(response.data.error);
+    }
 
-  if (json.error) {
-    dispatch({ type: "application/signin/rejected", error: json.error });
-  } else {
-    dispatch({ type: "application/signin/fulfilled", payload: json });
-
-    localStorage.setItem("token", json.token);
-    window.location.href = '/';
+    return response.data;
   }
-};
+);
 
-export const logOut = () => {
-  localStorage.setItem("token", null);
-};
+export const applicationSlice = createSlice({
+  name: "application",
+  initialState,
+  reducers: {
+    logout: (state) => {
+      state.token = null;
+      localStorage.setItem("token", "");
+    },
+  },
+  extraReducers: (builder) => {
+    builder.addCase(createAdmin.pending, (state) => {
+      state.signingUp = true;
+      state.error = null;
+    });
+    builder.addCase(createAdmin.rejected, (state, action) => {
+      state.signingUp = false;
+      state.error = action.error;
+    });
+    builder.addCase(createAdmin.fulfilled, (state) => {
+      state.signingUp = false;
+      state.error = null;
+    });
+
+    builder.addCase(signIn.pending, (state) => {
+      state.signingIn = true;
+      state.error = null;
+    });
+    builder.addCase(signIn.rejected, (state, action) => {
+      state.signingIn = false;
+      state.error = action.error;
+    });
+    builder.addCase(signIn.fulfilled, (state) => {
+      state.signingIn = false;
+      state.error = null;
+    });
+  },
+});
+
+export const { logout } = applicationSlice.actions;
+
+export default applicationSlice.reducer;

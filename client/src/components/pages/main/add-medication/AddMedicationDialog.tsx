@@ -11,43 +11,53 @@ import {
 import { useDispatch } from "react-redux";
 import { addMedication } from "../../../../redux/features/medications";
 
-const AddMedicationDialog = ({ open, setOpen }) => {
+interface AddMedicationDialogProps {
+  open: boolean;
+  setOpen: (arg: boolean) => void;
+}
+
+const AddMedicationDialog: React.FC<AddMedicationDialogProps> = ({
+  open,
+  setOpen,
+}) => {
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState<string>("0");
   const [category, setCategory] = useState("");
   const [img, setImg] = useState("");
   const [expiryDate, setExpireDate] = useState("");
-  const [hasRecipe, setHasRecipe] = useState(false);
+  const [hasRecipe, setHasRecipe] = useState<boolean>(false);
 
-  const handleChangeName = (e) => {
+  const handleChangeName = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setName(e.target.value);
   };
 
-  const handleChangeDescription = (e) => {
+  const handleChangeDescription = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setDescription(e.target.value);
   };
 
-  const handleChangePrice = (e) => {
+  const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setPrice(e.target.value);
   };
 
-  const handleChangeCategory = (e) => {
+  const handleChangeCategory = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setCategory(e.target.value);
   };
 
-  const handleChangeImg = (e) => {
+  const handleChangeImg = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setImg(e.target.value);
   };
 
-  const handleChangeExpireDate = (e) => {
+  const handleChangeExpireDate = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setExpireDate(e.target.value);
   };
 
-  const handleChangeHasRecipe = (e) => {
-    setHasRecipe(e.target.value);
+  const handleChangeHasRecipe = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+    setHasRecipe(e.target.checkValidity);
   };
 
   const handleClose = () => {
@@ -139,7 +149,7 @@ const AddMedicationDialog = ({ open, setOpen }) => {
           autoFocus
           id="recipe"
           label="Нужен рецепт?"
-          type="text"
+          type="checkbox"
           fullWidth
         />
       </DialogContent>

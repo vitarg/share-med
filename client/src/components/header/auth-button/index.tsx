@@ -1,13 +1,17 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { AuthButton } from "./styles";
+import appSelectors from "../../../redux/selectors/app";
+import { logout } from "../../../redux/features/application";
 
 const AuthBtn = () => {
-  const token = useSelector((state) => state.application.token);
+  const token = useSelector(appSelectors.token);
+
+  const dispatch = useDispatch();
 
   const handleLogout = () => {
-    localStorage.removeItem("token");
+    dispatch(logout());
     document.location.reload();
   };
 
@@ -22,8 +26,10 @@ const AuthBtn = () => {
       </AuthButton>
     );
   } else {
+
     return (
       <AuthButton
+        // @ts-ignore
         component={Link}
         to={"/sign-in"}
         variant={"outlined"}
