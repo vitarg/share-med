@@ -6,7 +6,7 @@
 |---------------------|--------------|--------------|
 | TypeScript          | Node.js      | MongoDB      |
 | React               | Express      |              |
-| Redux / Redux Thunk | Mongoose     |              |
+| Redux Toolkit       | Mongoose     |              |
 | React Router        | JWT / Bcrypt |              |
 | Material UI         | Nodemailer   |              |
 
