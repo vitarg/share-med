@@ -4,9 +4,14 @@ import AddMedicationButton from "../add-medication/AddMedicationButton";
 import AddMedicationDialog from "../add-medication/AddMedicationDialog";
 import { MainNavbar } from "../styles";
 
-const Navbar = ({ onChangeFilter }) => {
-  const [open, setOpen] = React.useState(false);
+interface NavbarProps {
+  onChangeFilter: (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => void;
+}
 
+const Navbar: React.FC<NavbarProps> = ({ onChangeFilter }) => {
+  const [open, setOpen] = React.useState(false);
 
   return (
     <MainNavbar>

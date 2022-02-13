@@ -36,27 +36,39 @@ const AddMedicationDialog: React.FC<AddMedicationDialogProps> = ({
     setName(e.target.value);
   };
 
-  const handleChangeDescription = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChangeDescription = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setDescription(e.target.value);
   };
 
-  const handleChangePrice = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChangePrice = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setPrice(e.target.value);
   };
 
-  const handleChangeCategory = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChangeCategory = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setCategory(e.target.value);
   };
 
-  const handleChangeImg = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChangeImg = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setImg(e.target.value);
   };
 
-  const handleChangeExpireDate = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+  const handleChangeExpireDate = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     setExpireDate(e.target.value);
   };
 
-  const handleChangeHasRecipe = (e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>) => {
+  const handleChangeHasRecipe = (
+    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+  ) => {
     setHasRecipe(e.target.checkValidity);
   };
 
@@ -66,15 +78,15 @@ const AddMedicationDialog: React.FC<AddMedicationDialogProps> = ({
 
   const handleSubmit = () => {
     dispatch(
-      addMedication(
+      addMedication({
         name,
-        price,
+        price: Number(price),
         description,
         category,
         img,
         expiryDate,
-        hasRecipe
-      )
+        hasRecipe,
+      })
     );
     setOpen(false);
   };
