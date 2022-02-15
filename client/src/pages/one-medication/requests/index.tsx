@@ -41,7 +41,7 @@ const useStyles = makeStyles({
   },
 });
 
-const OneMedicationRequests = () => {
+const Requests = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -107,4 +107,4 @@ const OneMedicationRequests = () => {
   return <></>;
 };
 
-export default OneMedicationRequests;
+export default Requests;

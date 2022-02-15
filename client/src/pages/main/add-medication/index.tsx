@@ -9,14 +9,14 @@ import {
   TextField,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { addMedication } from "../../../../store/features/medications";
+import { addMedication } from "../../../store/features/medications";
 
-interface AddMedicationDialogProps {
+interface AddMedicationProps {
   open: boolean;
   setOpen: (arg: boolean) => void;
 }
 
-const AddMedicationDialog: React.FC<AddMedicationDialogProps> = ({
+const AddMedication: React.FC<AddMedicationProps> = ({
   open,
   setOpen,
 }) => {
@@ -177,4 +177,4 @@ const AddMedicationDialog: React.FC<AddMedicationDialogProps> = ({
   );
 };
 
-export default AddMedicationDialog;
+export default AddMedication;

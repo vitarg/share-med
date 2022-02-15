@@ -11,13 +11,13 @@ import {
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { getMedications } from "../../../store/features/medications";
+import { getMedications } from "../../store/features/medications";
 import { Link } from "react-router-dom";
-import { removeMedication } from "../../../store/features/medications";
-import OneMedicationRequests from "./OneMedicationRequests";
-import medicationsSelectors from "../../../store/selectors/medications";
-import appSelectors from "../../../store/selectors/app";
-import { getRequests } from "../../../store/features/requests";
+import { removeMedication } from "../../store/features/medications";
+import Index from "./requests";
+import medicationsSelectors from "../../store/selectors/medications";
+import appSelectors from "../../store/selectors/app";
+import { getRequests } from "../../store/features/requests";
 
 const useStyles = makeStyles({
   leftColumn: {
@@ -81,7 +81,7 @@ const useStyles = makeStyles({
   },
 });
 
-const OneMedicationPage: React.FC = () => {
+const OneMedication: React.FC = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -196,7 +196,7 @@ const OneMedicationPage: React.FC = () => {
               )}
             </>
           )}
-          <OneMedicationRequests />
+          <Index />
         </Box>
       </>
     );
@@ -205,4 +205,4 @@ const OneMedicationPage: React.FC = () => {
   return <></>;
 };
 
-export default OneMedicationPage;
+export default OneMedication;

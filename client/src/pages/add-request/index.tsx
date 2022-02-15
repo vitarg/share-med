@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RequestPage = () => {
+const AddRequest = () => {
   const classes = useStyles();
 
   const { medicationId } = useParams<{ medicationId?: string }>();
@@ -129,4 +129,4 @@ const RequestPage = () => {
   );
 };
 
-export default RequestPage;
+export default AddRequest;

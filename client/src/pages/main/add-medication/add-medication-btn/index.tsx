@@ -10,11 +10,11 @@ const useStyles = makeStyles({
   },
 });
 
-interface AddMedicationButtonProps {
+interface AddMedicationBtnProps {
   setOpen: (arg: boolean) => void;
 }
 
-const AddMedicationButton: React.FC<AddMedicationButtonProps> = ({
+const AddMedicationBtn: React.FC<AddMedicationBtnProps> = ({
   setOpen,
 }) => {
   const classes = useStyles();
@@ -42,4 +42,4 @@ const AddMedicationButton: React.FC<AddMedicationButtonProps> = ({
   return <></>;
 };
 
-export default AddMedicationButton;
+export default AddMedicationBtn;

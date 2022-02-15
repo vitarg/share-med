@@ -12,9 +12,9 @@ import {
 } from "@material-ui/core";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
-import { createAdmin } from "../../store/features/application";
+import { createAdmin } from "../../../store/features/application";
 import { useDispatch, useSelector } from "react-redux";
-import appSelectors from "../../store/selectors/app";
+import appSelectors from "../../../store/selectors/app";
 
 const useStyles = makeStyles((theme) => ({
   paper: {
@@ -36,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const SignUpPage = () => {
+const SignUp = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
@@ -148,4 +148,4 @@ const SignUpPage = () => {
   );
 };
 
-export default SignUpPage;
+export default SignUp;
