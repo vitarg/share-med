@@ -1,18 +1,11 @@
 import { List, ListItem, makeStyles } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { NavLink } from "react-router-dom";
 import categoriesSelectors from "../../store/selectors/categories";
 import { getCategories } from "../../store/features/categories";
+import { NavLink } from "react-router-dom";
 
 const useStyles = makeStyles(() => ({
-  list: {
-    marginTop: 16,
-  },
-  listTitle: {
-    color: "#484d52",
-    marginLeft: 16,
-  },
   link: {
     color: "#6c757d",
     textDecoration: "none",
@@ -23,8 +16,6 @@ const useStyles = makeStyles(() => ({
 }));
 
 function Sidebar() {
-  const classes = useStyles();
-
   const categories = useSelector(categoriesSelectors.categories);
 
   const dispatch = useDispatch();
@@ -37,12 +28,11 @@ function Sidebar() {
     <List
       component="nav"
       aria-label="secondary mailbox folders"
-      className={classes.list}
+      style={{ marginTop: 16 }}
     >
       <ListItem>
         <NavLink
-          activeClassName={classes.active}
-          className={classes.link}
+          activeClassName='nav'
           exact
           to={"/"}
         >
