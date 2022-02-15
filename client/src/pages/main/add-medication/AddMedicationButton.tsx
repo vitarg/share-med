@@ -2,7 +2,7 @@ import React from "react";
 import { Button, makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
-import appSelectors from "../../../../store/selectors/app";
+import appSelectors from "../../../store/selectors/app";
 
 const useStyles = makeStyles({
   addBtn: {

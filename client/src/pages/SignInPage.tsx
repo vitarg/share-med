@@ -12,8 +12,8 @@ import {
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import appSelectors from "../../store/selectors/app";
-import { signIn } from "../../store/features/application";
+import appSelectors from "../store/selectors/app";
+import { signIn } from "../store/features/application";
 
 const useStyles = makeStyles((theme) => ({
   paper: {

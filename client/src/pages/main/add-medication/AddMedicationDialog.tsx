@@ -9,7 +9,7 @@ import {
   TextField,
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { addMedication } from "../../../../store/features/medications";
+import { addMedication } from "../../../store/features/medications";
 
 interface AddMedicationDialogProps {
   open: boolean;

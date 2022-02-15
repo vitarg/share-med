@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { addRequest } from "../../store/features/requests";
+import { addRequest } from "../store/features/requests";
 
 const useStyles = makeStyles((theme) => ({
   root: {
