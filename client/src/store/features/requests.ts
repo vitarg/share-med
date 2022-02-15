@@ -1,129 +1,134 @@
-const initialState = {
+import { SerializedError } from "@reduxjs/toolkit/dist/createAsyncThunk";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import axios from "axios";
+
+export interface Request {
+  _id: string;
+  name: string;
+  tel: string;
+  email: string;
+  message: string;
+  medicationId: string;
+  isAccept: boolean;
+}
+
+interface RequestsState {
+  requests: Request[];
+  loading: boolean;
+  error: SerializedError | null;
+}
+
+const initialState: RequestsState = {
   requests: [],
   loading: false,
-  acceptLoading: false,
   error: null,
 };
 
-export default function requests(state = initialState, action) {
-  switch (action.type) {
-    case "requestsGet/fetch/pending":
-      return {
-        ...state,
-        loading: true,
-      };
-    case "requests/fetch/pending":
-      return {
-        ...state,
-        loading: true,
-      };
-    case "requests/fetch/fulfilled":
-      return {
-        ...state,
-        requests: [...state.requests, action.payload],
-        loading: false,
-      };
-    case "requests/fetch/rejected":
-      return {
-        ...state,
-        error: action.error,
-        loading: false,
-      };
-    case "requestsGet/fetch/fulfilled":
-      return {
-        ...state,
-        requests: action.payload,
-        loading: false,
-      };
-    case "acceptRequest/fetch/pending":
-      return {
-        ...state,
-        acceptLoading: true,
-      };
-    case "acceptRequest/fetch/fulfilled":
-      return {
-        ...state,
-        acceptLoading: false,
-        requests: state.requests.map((item) => {
-          if (item._id === action.payload) {
-            return {
-              ...item,
-              isAccept: true,
-            };
-          }
-          return item;
-        }),
-      };
-    default:
-      return state;
-  }
+interface AddRequestProps {
+  medicationId: string;
+  name: string;
+  tel: string;
+  email: string;
+  message: string;
 }
 
-export const fetchRequest = (medicationId, name, tel, email, message) => {
-  return async (dispatch) => {
-    try {
-      dispatch({ type: "requests/fetch/pending" });
-      const response = await fetch(`/requests/${medicationId}`, {
-        method: "POST",
-        body: JSON.stringify({ name, tel, email, message, medicationId }),
-        headers: { "Content-type": "application/json" },
-      });
+export const addRequest = createAsyncThunk(
+  "requests/add",
+  async (payload: AddRequestProps, { rejectWithValue }) => {
+    const response = await axios.post("/requests", {
+      payload,
+    });
 
-      const json = await response.json();
-
-      if (json.error) {
-        dispatch({ type: "requests/fetch/rejected", error: json.error });
-      } else {
-        dispatch({ type: "requests/fetch/fulfilled", payload: json });
-      }
-    } catch (e) {
-      dispatch({ type: "requests/fetch/rejected", error: e.toString() });
+    if (!response.data.ok) {
+      rejectWithValue(response.data.error);
     }
-  };
-};
 
-export const fetchRequestGet = (id) => {
-  return async (dispatch) => {
-    try {
-      dispatch({ type: "requestsGet/fetch/pending" });
-      const response = await fetch(`/requests/${id}`);
-      const json = await response.json();
-      if (json.error) {
-        dispatch({ type: "requestsGet/fetch/rejected", error: json.error });
-      } else {
-        dispatch({ type: "requestsGet/fetch/fulfilled", payload: json });
-      }
-    } catch (e) {
-      dispatch({ type: "requestsGet/fetch/rejected", error: e.toString() });
+    return response.data;
+  }
+);
+
+interface GetRequestsProps {
+  id: string;
+}
+
+export const getRequests = createAsyncThunk(
+  "requests/get",
+  async (payload: GetRequestsProps, { rejectWithValue }) => {
+    const response = await axios.get(`/requests/${payload.id}`);
+
+    if (!response.data.ok) {
+      rejectWithValue(response.data.error);
     }
-  };
-};
 
-export const acceptRequest = (id, medicationId) => {
-  return async (dispatch) => {
-    try {
-      dispatch({ type: "acceptRequest/fetch/pending", payload: medicationId });
+    return response.data;
+  }
+);
 
-      const response = await fetch(`/requests/${id}/accept`, {
-        method: "PATCH",
-        body: JSON.stringify({
-          id,
-        }),
-        headers: { "Content-type": "application/json" },
-      });
+interface AcceptRequestProps {
+  id: string;
+  medicationId: string;
+}
 
-      const json = await response.json();
+export const acceptRequest = createAsyncThunk(
+  "requests/accept",
+  async (payload: AcceptRequestProps, { rejectWithValue }) => {
+    const response = await axios.patch(`/requests/${payload.id}/accept`);
 
-      if (json.error) {
-        dispatch({ type: "acceptRequest/fetch/rejected", error: json.error });
-      } else {
-        dispatch({
-          type: "acceptRequest/fetch/fulfilled",
-          payload: id,
-        });
-      }
-    } catch (e) {
-      dispatch({ type: "acceptRequest/fetch/rejected", error: e.toString() });
+    if (!response.data.ok) {
+      rejectWithValue(response.data.error);
     }
-  };
-};
+
+    return response.data;
+  }
+);
+
+const requestsSlice = createSlice({
+  name: "requests",
+  initialState,
+  reducers: {},
+  extraReducers: (builder) => {
+    builder.addCase(addRequest.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(addRequest.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    });
+    builder.addCase(addRequest.fulfilled, (state) => {
+      state.loading = false;
+      state.error = null;
+    });
+
+    builder.addCase(getRequests.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(getRequests.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    });
+    builder.addCase(getRequests.fulfilled, (state, action) => {
+      state.loading = false;
+      state.error = null;
+      state.requests = action.payload;
+    });
+
+    builder.addCase(acceptRequest.pending, (state) => {
+      state.loading = true;
+      state.error = null;
+    });
+    builder.addCase(acceptRequest.rejected, (state, action) => {
+      state.loading = false;
+      state.error = action.error;
+    });
+    builder.addCase(acceptRequest.fulfilled, (state, action) => {
+      state.loading = false;
+      state.error = null;
+    });
+  },
+});
+
+export const {} = requestsSlice.actions;
+
+export default requestsSlice.reducer;

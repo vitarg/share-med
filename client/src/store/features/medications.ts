@@ -4,7 +4,7 @@ import { SerializedError } from "@reduxjs/toolkit/dist/createAsyncThunk";
 import { Category } from "./categories";
 
 export interface Medication {
-  _id?: string;
+  _id: string;
   name: string;
   price: number;
   description: string;
@@ -29,7 +29,7 @@ const initialState: MedicationsState = {
 };
 
 export const getMedications = createAsyncThunk(
-  "medications/fetch",
+  "medications/get",
   async (_, { rejectWithValue }) => {
     const response = await axios.get("/medications");
 
@@ -52,7 +52,7 @@ interface AddMedicationProps {
 }
 
 export const addMedication = createAsyncThunk(
-  "medications/add-medication",
+  "medications/add",
   async (payload: AddMedicationProps, { rejectWithValue }) => {
     const response = await axios.post("/medications", {
       ...payload,
@@ -71,7 +71,7 @@ interface RemoveMedicationProps {
 }
 
 export const removeMedication = createAsyncThunk(
-  "medications/add-medication",
+  "medications/remove",
   async (payload: RemoveMedicationProps, { rejectWithValue }) => {
     const response = await axios.delete(`/medications/${payload.id}`);
 
@@ -97,21 +97,7 @@ const medicationsSlice = createSlice({
       state.error = action.error;
     });
     builder.addCase(getMedications.fulfilled, (state, action) => {
-      state.medications.push({
-        _id: "ads",
-        name: "string",
-        price: 12,
-        description: "string",
-        category: {
-          _id: "asd",
-          name: "asd",
-        },
-        img: "string",
-        hasRecipe: false,
-        expiryDate: "string",
-        createdAt: "string",
-        updatedAt: "string",
-      });
+      state.medications = action.payload;
       state.loading = false;
       state.error = null;
     });

@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { fetchRequest } from "../../store/features/requests";
+import { addRequest } from "../../store/features/requests";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,7 +32,7 @@ const useStyles = makeStyles((theme) => ({
 const RequestPage = () => {
   const classes = useStyles();
 
-  const { medicationId } = useParams();
+  const { medicationId } = useParams<{ medicationId?: string }>();
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
@@ -47,7 +47,9 @@ const RequestPage = () => {
     } else if (email.indexOf("@") === -1 || email[0] === "@") {
       return setText("Email введен неверно");
     } else {
-      dispatch(fetchRequest(medicationId, name, tel, email, message));
+      if (medicationId) {
+        dispatch(addRequest({ medicationId, name, tel, email, message }));
+      }
       setText("Заявка успешно отправлена");
     }
   };
