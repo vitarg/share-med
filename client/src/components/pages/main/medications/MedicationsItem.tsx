@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { Medication } from "../../../../redux/features/medications";
+import { Medication } from "../../../../store/features/medications";
 
 const useStyles = makeStyles({
   card: {

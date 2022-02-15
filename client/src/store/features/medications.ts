@@ -1,91 +1,10 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import axios from "axios";
 import { SerializedError } from "@reduxjs/toolkit/dist/createAsyncThunk";
-
-// function medications(state = initialState, action) {
-//   switch (action.type) {
-//     case "medications/fetch/pending":
-//       return {
-//         ...state,
-//         loading: true,
-//       };
-//     case "medications/fetch/fulfilled":
-//       return {
-//         ...state,
-//         loading: false,
-//         medications: action.payload,
-//       };
-//     case "medications/remove/fulfilled":
-//       return {
-//         ...state,
-//         medications: state.medications.filter(
-//           (item) => item !== action.payload
-//         ),
-//       };
-//     default:
-//       return state;
-//   }
-// }
-
-// export const addMedication = (
-//   name,
-//   price,
-//   description,
-//   category,
-//   img,
-//   expiryDate,
-//   hasRecipe
-// ) => {
-//   return async (dispatch) => {
-//     try {
-//       const response = await fetch("/medications", {
-//         method: "POST",
-//         body: JSON.stringify({
-//           name,
-//           price,
-//           descr: description,
-//           category,
-//           img,
-//           expiryDate,
-//           hasRecipe,
-//         }),
-//         headers: {
-//           "Content-Type": "application/json",
-//         },
-//       });
-//       const json = await response.json();
-//
-//       dispatch({ type: "medications/add-medication/fulfilled", payload: json });
-//     } catch (e) {
-//       dispatch({
-//         type: "categories/add-medication/rejected",
-//         error: e.toString(),
-//       });
-//     }
-//   };
-// };
-
-// export const removeMedication = (id) => {
-//   return async (dispatch) => {
-//     try {
-//       await fetch(`/medications/${id}`, {
-//         method: "DELETE",
-//       });
-//
-//       dispatch({ type: "medications/remove/fulfilled", payload: id });
-//     } catch (e) {
-//       dispatch({ type: "medications/remove/rejected", error: e.toString() });
-//     }
-//   };
-// };
-
-interface Category {
-  _id?: string;
-  name: string;
-}
+import { Category } from "./categories";
 
 export interface Medication {
-  _id?: string;
+  _id: string;
   name: string;
   price: number;
   description: string;
@@ -110,7 +29,7 @@ const initialState: MedicationsState = {
 };
 
 export const getMedications = createAsyncThunk(
-  "medications/fetch",
+  "medications/get",
   async (_, { rejectWithValue }) => {
     const response = await axios.get("/medications");
 
@@ -133,7 +52,7 @@ interface AddMedicationProps {
 }
 
 export const addMedication = createAsyncThunk(
-  "medications/add-medication",
+  "medications/add",
   async (payload: AddMedicationProps, { rejectWithValue }) => {
     const response = await axios.post("/medications", {
       ...payload,
@@ -152,7 +71,7 @@ interface RemoveMedicationProps {
 }
 
 export const removeMedication = createAsyncThunk(
-  "medications/add-medication",
+  "medications/remove",
   async (payload: RemoveMedicationProps, { rejectWithValue }) => {
     const response = await axios.delete(`/medications/${payload.id}`);
 
@@ -178,21 +97,7 @@ const medicationsSlice = createSlice({
       state.error = action.error;
     });
     builder.addCase(getMedications.fulfilled, (state, action) => {
-      state.medications.push({
-        _id: "ads",
-        name: "string",
-        price: 12,
-        description: "string",
-        category: {
-          _id: "asd",
-          name: "asd",
-        },
-        img: "string",
-        hasRecipe: false,
-        expiryDate: "string",
-        createdAt: "string",
-        updatedAt: "string",
-      });
+      state.medications = action.payload;
       state.loading = false;
       state.error = null;
     });

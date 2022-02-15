@@ -1,7 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Box, Button, makeStyles, Paper, Typography } from "@material-ui/core";
-import { acceptRequest } from "../../../redux/features/requests";
+import { acceptRequest } from "../../../store/features/requests";
+import requestsSelectors from "../../../store/selectors/requests";
+import appSelectors from "../../../store/selectors/app";
 
 const useStyles = makeStyles({
   cardWrapper: {
@@ -44,12 +46,12 @@ const OneMedicationRequests = () => {
 
   const dispatch = useDispatch();
 
-  const requests = useSelector((state) => state?.requests.requests);
-  const acceptLoading = useSelector((state) => state?.requests.acceptLoading);
-  const token = useSelector((state) => state?.application.token);
+  const requests = useSelector(requestsSelectors.requests);
+  const acceptLoading = useSelector(requestsSelectors.loading);
+  const token = useSelector(appSelectors.token);
 
-  const handleAccept = (id, medicationId) => {
-    dispatch(acceptRequest(id, medicationId));
+  const handleAccept = (id: string, medicationId: string) => {
+    dispatch(acceptRequest({ id, medicationId }));
   };
 
   const hasAccepted = requests.find((e) => e.isAccept);
@@ -57,45 +59,49 @@ const OneMedicationRequests = () => {
   const disableBtn = hasAccepted || acceptLoading;
 
   if (token) {
-    return requests.map((item) => {
-      return (
-        <Box className={classes.cardWrapper}>
-          <Paper
-            className={`${classes.card} ${
-              item.isAccept ? classes.accepted : ""
-            }`}
-          >
-            <Typography variant={"h6"}>
-              <span className={classes.cardSpan}>Имя: </span>
-              {item.name}
-            </Typography>
+    return (
+      <>
+        {requests.map((item) => {
+          return (
+            <Box className={classes.cardWrapper}>
+              <Paper
+                className={`${classes.card} ${
+                  item.isAccept ? classes.accepted : ""
+                }`}
+              >
+                <Typography variant={"h6"}>
+                  <span className={classes.cardSpan}>Имя: </span>
+                  {item.name}
+                </Typography>
 
-            <Typography>
-              <span className={classes.cardSpan}>Сообщение: </span>
-              {item.message}
-            </Typography>
-            <Typography>
-              <span className={classes.cardSpan}>Телефон: </span>
-              {item.tel}
-            </Typography>
-            <Typography>
-              <span className={classes.cardSpan}>Эл. почта: </span>
-              {item.email}
-            </Typography>
+                <Typography>
+                  <span className={classes.cardSpan}>Сообщение: </span>
+                  {item.message}
+                </Typography>
+                <Typography>
+                  <span className={classes.cardSpan}>Телефон: </span>
+                  {item.tel}
+                </Typography>
+                <Typography>
+                  <span className={classes.cardSpan}>Эл. почта: </span>
+                  {item.email}
+                </Typography>
 
-            <Button
-              className={classes.btnAccept}
-              variant="contained"
-              color={"primary"}
-              onClick={() => handleAccept(item._id, item.medicationId)}
-              disabled={disableBtn}
-            >
-              Принять
-            </Button>
-          </Paper>
-        </Box>
-      );
-    });
+                <Button
+                  className={classes.btnAccept}
+                  variant="contained"
+                  color={"primary"}
+                  onClick={() => handleAccept(item._id, item.medicationId)}
+                  disabled={Boolean(disableBtn)}
+                >
+                  Принять
+                </Button>
+              </Paper>
+            </Box>
+          );
+        })}
+      </>
+    );
   }
 
   return <></>;

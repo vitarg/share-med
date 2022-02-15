@@ -11,11 +11,13 @@ import {
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { getMedications } from "../../../redux/features/medications";
+import { getMedications } from "../../../store/features/medications";
 import { Link } from "react-router-dom";
-import { fetchRequestGet } from "../../../redux/features/requests";
-import { removeMedication } from "../../../redux/features/medications";
+import { removeMedication } from "../../../store/features/medications";
 import OneMedicationRequests from "./OneMedicationRequests";
+import medicationsSelectors from "../../../store/selectors/medications";
+import appSelectors from "../../../store/selectors/app";
+import { getRequests } from "../../../store/features/requests";
 
 const useStyles = makeStyles({
   leftColumn: {
@@ -79,26 +81,28 @@ const useStyles = makeStyles({
   },
 });
 
-function OneMedicationPage() {
+const OneMedicationPage: React.FC = () => {
   const classes = useStyles();
 
   const dispatch = useDispatch();
 
-  const { id } = useParams();
+  const { id } = useParams<{ id?: string }>();
 
-  const medications  = useSelector((state) => state?.medications.medications);
-  const loading = useSelector((state) => state?.requests.loading);
-  const token = useSelector((state) => state?.application.token);
+  const medications = useSelector(medicationsSelectors.medications);
+  const loading = useSelector(medicationsSelectors.loading);
+  const token = useSelector(appSelectors.token);
 
   useEffect(() => {
-    dispatch(fetchRequestGet(id));
+    if (id) {
+      dispatch(getRequests({ id }));
+    }
     dispatch(getMedications());
   }, [dispatch, id]);
 
   const find = medications.find((item) => id === item._id);
 
-  const handleDelete = (id) => {
-    dispatch(removeMedication(id));
+  const handleDelete = (id: string) => {
+    dispatch(removeMedication({ id }));
   };
 
   if (find) {
@@ -148,14 +152,14 @@ function OneMedicationPage() {
 
             <Typography component="h1" variant="h5" className={classes.descr}>
               <span className={classes.descrSpan}>Описание:</span> <br />
-              {find.descr}
+              {find.description}
             </Typography>
 
             <Box className={classes.itemTxtBottom}>
               <Typography>
                 До истечения срока годности осталось -{" "}
                 {`${
-                  find.expiryDate -
+                  Number(find.expiryDate) -
                   (new Date().getDate() - new Date(find.createdAt).getDate())
                 } дней`}
               </Typography>
@@ -199,6 +203,6 @@ function OneMedicationPage() {
   }
 
   return <></>;
-}
+};
 
 export default OneMedicationPage;

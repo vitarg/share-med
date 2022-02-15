@@ -2,7 +2,8 @@ import { List, ListItem, makeStyles } from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { NavLink } from "react-router-dom";
-import { fetchAllCategories } from "../../../../redux/features/categories";
+import categoriesSelectors from "../../../../store/selectors/categories";
+import { getCategories } from "../../../../store/features/categories";
 
 const useStyles = makeStyles(() => ({
   list: {
@@ -24,11 +25,12 @@ const useStyles = makeStyles(() => ({
 function Sidebar() {
   const classes = useStyles();
 
+  const categories = useSelector(categoriesSelectors.categories);
+
   const dispatch = useDispatch();
-  const { categories } = useSelector((state) => state?.categories);
 
   useEffect(() => {
-    dispatch(fetchAllCategories());
+    dispatch(getCategories());
   }, [dispatch]);
 
   return (
