@@ -1,37 +1,11 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Grid,
-  makeStyles,
-  Paper,
-  TextField,
-  Typography,
-} from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
 import { addRequest } from "../../store/features/requests";
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-    padding: "20px",
-    "& > *": {
-      width: theme.spacing(70),
-      margin: "auto",
-      height: theme.spacing(70),
-      textAlign: "center",
-      justifyContent: "center",
-    },
-  },
-  gridItem: {
-    marginTop: "20px",
-  },
-}));
+import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
+import { Root } from "./styles";
 
 const AddRequest = () => {
-  const classes = useStyles();
-
   const { medicationId } = useParams<{ medicationId?: string }>();
   const dispatch = useDispatch();
 
@@ -55,16 +29,16 @@ const AddRequest = () => {
   };
 
   return (
-    <div className={classes.root}>
+    <Root>
       <Paper elevation={3}>
-        <Typography variant="h6" gutterBottom className={classes.gridItem}>
+        <Typography variant="h6" gutterBottom style={{ marginTop: 20 }}>
           Заявка на лекарство
         </Typography>
         <Grid
           container
           spacing={3}
-          className={classes.gridItem}
           justifyContent={"center"}
+          style={{ marginTop: 20 }}
         >
           <Grid item xs={12} sm={8}>
             <TextField
@@ -125,7 +99,7 @@ const AddRequest = () => {
           </Grid>
         </Grid>
       </Paper>
-    </div>
+    </Root>
   );
 };
 
