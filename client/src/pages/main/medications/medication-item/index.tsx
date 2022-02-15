@@ -12,7 +12,7 @@ import {
   Typography,
 } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { Medication } from "../../../store/features/medications";
+import { Medication } from "../../../../store/features/medications";
 
 const useStyles = makeStyles({
   card: {
@@ -43,11 +43,11 @@ const useStyles = makeStyles({
   },
 });
 
-interface MedicationsItemProps {
+interface MedicationItemProps {
   item: Medication;
 }
 
-const MedicationsItem: React.FC<MedicationsItemProps> = ({ item }) => {
+const MedicationItem: React.FC<MedicationItemProps> = ({ item }) => {
   const classes = useStyles();
 
   return (
@@ -91,4 +91,4 @@ const MedicationsItem: React.FC<MedicationsItemProps> = ({ item }) => {
   );
 };
 
-export default MedicationsItem;
+export default MedicationItem;

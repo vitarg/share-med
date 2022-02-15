@@ -9,7 +9,7 @@ import {
 } from "@material-ui/core";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { addRequest } from "../store/features/requests";
+import { addRequest } from "../../store/features/requests";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +29,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const RequestPage = () => {
+const AddRequest = () => {
   const classes = useStyles();
 
   const { medicationId } = useParams<{ medicationId?: string }>();
@@ -129,4 +129,4 @@ const RequestPage = () => {
   );
 };
 
-export default RequestPage;
+export default AddRequest;

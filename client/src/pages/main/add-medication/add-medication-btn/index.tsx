@@ -2,7 +2,7 @@ import React from "react";
 import { Button, makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
 import AddIcon from "@material-ui/icons/Add";
-import appSelectors from "../../../store/selectors/app";
+import appSelectors from "../../../../store/selectors/app";
 
 const useStyles = makeStyles({
   addBtn: {
@@ -10,11 +10,11 @@ const useStyles = makeStyles({
   },
 });
 
-interface AddMedicationButtonProps {
+interface AddMedicationBtnProps {
   setOpen: (arg: boolean) => void;
 }
 
-const AddMedicationButton: React.FC<AddMedicationButtonProps> = ({
+const AddMedicationBtn: React.FC<AddMedicationBtnProps> = ({
   setOpen,
 }) => {
   const classes = useStyles();
@@ -42,4 +42,4 @@ const AddMedicationButton: React.FC<AddMedicationButtonProps> = ({
   return <></>;
 };
 
-export default AddMedicationButton;
+export default AddMedicationBtn;

@@ -1,10 +1,10 @@
 import React from "react";
 import Header from "./header";
-import SignInPage from "../pages/SignInPage";
-import SignUpPage from "../pages/SignUpPage";
-import Index from "../pages/main";
-import OneMedicationPage from "../pages/one-medication/OneMedicationPage";
-import RequestPage from "../pages/RequestPage";
+import SignIn from "../pages/auth/sign-in";
+import SignUp from "../pages/auth/sign-up";
+import Main from "../pages/main";
+import OneMedication from "../pages/one-medication";
+import AddRequest from "../pages/add-request";
 import { BrowserRouter, Route, Switch } from "react-router-dom";
 
 function App() {
@@ -14,22 +14,22 @@ function App() {
 
       <Switch>
         <Route exact path="/">
-          <Index />
+          <Main />
         </Route>
         <Route exact path="/medications/categories/:id">
-          <Index />
+          <Main />
         </Route>
         <Route path="/medications/:id">
-          <OneMedicationPage />
+          <OneMedication />
         </Route>
         <Route path="/requests/:medicationId">
-          <RequestPage />
+          <AddRequest />
         </Route>
         <Route path={"/sign-in"}>
-          <SignInPage />
+          <SignIn />
         </Route>
         <Route path={"/sign-up"}>
-          <SignUpPage />
+          <SignUp />
         </Route>
       </Switch>
     </BrowserRouter>

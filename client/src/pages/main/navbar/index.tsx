@@ -1,7 +1,7 @@
 import React from "react";
 import { TextField } from "@mui/material";
-import AddMedicationButton from "../add-medication/AddMedicationButton";
-import AddMedicationDialog from "../add-medication/AddMedicationDialog";
+import AddMedicationBtn from "../add-medication/add-medication-btn";
+import AddMedication from "../add-medication";
 import { MainNavbar } from "../styles";
 
 interface NavbarProps {
@@ -23,9 +23,9 @@ const Navbar: React.FC<NavbarProps> = ({ onChangeFilter }) => {
         onChange={onChangeFilter}
       />
 
-      <AddMedicationButton setOpen={setOpen} />
+      <AddMedicationBtn setOpen={setOpen} />
 
-      <AddMedicationDialog setOpen={setOpen} open={open} />
+      <AddMedication setOpen={setOpen} open={open} />
     </MainNavbar>
   );
 };
