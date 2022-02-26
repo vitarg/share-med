@@ -1,14 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Medication } from "../../../../store/features/medications";
+import { Medication } from "../../../../store/slices/medications";
 import {
-  Box,
   Button,
-  Card,
   CardActionArea,
-  CardActions,
   CardContent,
-  CardMedia,
   Grid,
   Typography,
 } from "@mui/material";

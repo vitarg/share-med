@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import appSelectors from "../../../store/selectors/app";
-import { signIn } from "../../../store/features/application";
+import { signIn } from "../../../store/slices/application";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import Auth from "../index";
 

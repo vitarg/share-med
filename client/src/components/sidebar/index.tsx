@@ -1,9 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import categoriesSelectors from "../../store/selectors/categories";
-import { getCategories } from "../../store/features/categories";
+import { getCategories } from "../../store/slices/categories";
 import { NavLink } from "react-router-dom";
-import { List, ListItem } from "@mui/material";
+import { Link, List, ListItem } from "@mui/material";
+import { ListItemNavLink } from "./styles";
 
 function Sidebar() {
   const categories = useSelector(categoriesSelectors.categories);
@@ -21,16 +22,16 @@ function Sidebar() {
       style={{ marginTop: 16 }}
     >
       <ListItem>
-        <NavLink className={() => "asd"} to={"/"}>
+        <ListItemNavLink to={"/"}>
           Все лекарства
-        </NavLink>
+        </ListItemNavLink>
       </ListItem>
       {categories.map((item) => {
         return (
           <ListItem key={item._id}>
-            <NavLink to={`/medications/categories/${item._id}`}>
+            <ListItemNavLink to={`/medications/categories/${item._id}`}>
               {item.name}
-            </NavLink>
+            </ListItemNavLink>
           </ListItem>
         );
       })}

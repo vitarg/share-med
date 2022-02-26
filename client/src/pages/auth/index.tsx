@@ -1,7 +1,7 @@
 import React from "react";
 import { Avatar, Box, Container, CssBaseline, Typography } from "@mui/material";
 import { LockOutlined } from "@mui/icons-material";
-import { AuthPaper, AuthBody } from "./styles";
+import { AuthPaper, FormContent } from "./styles";
 import { SerializedError } from "@reduxjs/toolkit/dist/createAsyncThunk";
 
 interface AuthProps {
@@ -17,18 +17,27 @@ const Auth: React.FC<AuthProps> = ({
   children,
 }) => {
   return (
-    <Container component="main" maxWidth="xs">
+    <Container
+      component="main"
+      style={{
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: 500,
+        minHeight: "calc(100vh - 92px)",
+      }}
+    >
       <Box>{error}</Box>
       <CssBaseline />
       <AuthPaper>
         <Avatar>
           <LockOutlined />
         </Avatar>
-        <Typography component="h1" variant="h5">
+        <Typography component="h1" variant="h5" style={{ marginTop: 20 }}>
           {title}
         </Typography>
-        <form onSubmit={handleOnSubmit} noValidate>
-          <AuthBody>{children}</AuthBody>
+        <form onSubmit={handleOnSubmit} noValidate style={{ marginTop: 20 }}>
+          <FormContent>{children}</FormContent>
         </form>
       </AuthPaper>
     </Container>

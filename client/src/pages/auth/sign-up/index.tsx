@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { createAdmin } from "../../../store/features/application";
+import { createAdmin } from "../../../store/slices/application";
 import { useDispatch, useSelector } from "react-redux";
 import appSelectors from "../../../store/selectors/app";
 import { Button, Grid, TextField } from "@mui/material";
@@ -108,12 +108,18 @@ const SignUp = () => {
         fullWidth
         variant="contained"
         color="primary"
+        style={{ marginTop: 16, marginBottom: 16 }}
       >
         Зарегистрироваться
       </Button>
       <Grid container justifyContent="flex-end">
         <Grid item>
-          <Link to="/sign-in">Уже есть аккаунт? Войти</Link>
+          <Link
+            to="/sign-in"
+            style={{ textDecoration: "none", color: "#333", fontSize: 14 }}
+          >
+            Уже есть аккаунт? <span style={{color: '#5caddc'}}><b>Войти</b></span>
+          </Link>
         </Grid>
       </Grid>
     </Auth>

@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { addRequest } from "../../store/features/requests";
+import { addRequest } from "../../store/slices/requests";
 import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { Root } from "./styles";
 
@@ -9,11 +9,11 @@ const AddRequest = () => {
   const { medicationId } = useParams<{ medicationId?: string }>();
   const dispatch = useDispatch();
 
-  const [name, setName] = useState("");
-  const [tel, setTel] = useState("");
-  const [email, setEmail] = useState("");
-  const [message, setMessage] = useState("");
-  const [text, setText] = useState("");
+  const [name, setName] = useState<string>("");
+  const [tel, setTel] = useState<string>("");
+  const [email, setEmail] = useState<string>("");
+  const [message, setMessage] = useState<string>("");
+  const [text, setText] = useState<string>("");
 
   const sendRequest = () => {
     if (name === "" || tel === "" || message === "" || email === "") {

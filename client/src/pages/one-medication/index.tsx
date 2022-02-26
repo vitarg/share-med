@@ -1,89 +1,61 @@
-import {
-  Grid,
-  Typography,
-  Button,
-  CircularProgress,
-  CardMedia,
-  Box,
-  makeStyles,
-  Divider,
-} from "@material-ui/core";
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { getMedications } from "../../store/features/medications";
+import { getMedications } from "../../store/slices/medications";
 import { Link } from "react-router-dom";
-import { removeMedication } from "../../store/features/medications";
+import { removeMedication } from "../../store/slices/medications";
 import Index from "./requests";
 import medicationsSelectors from "../../store/selectors/medications";
 import appSelectors from "../../store/selectors/app";
-import { getRequests } from "../../store/features/requests";
+import { getRequests } from "../../store/slices/requests";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Divider,
+  Grid,
+  Typography,
+} from "@mui/material";
+import { GridContent, ImgBox } from "./styles";
 
-const useStyles = makeStyles({
-  leftColumn: {
-    display: "flex",
-    justifyContent: "center",
-  },
-  rightColumn: {
-    display: "flex",
-    flexDirection: "column",
-  },
-  content: {
-    margin: "auto",
-    marginTop: 40,
-    width: "75%",
-    position: "relative",
-  },
-  imgBox: {
-    display: "flex",
-    justifyContent: "center",
-    alignItems: "center",
-    width: 400,
-    height: 350,
-    backgroundColor: "#e5e5e5",
-    background: "url('/no-pictures.svg') center center/30% no-repeat",
-  },
-  image: {
-    width: "100%",
-  },
-  itemTxtBottom: {
-    display: "flex",
-    justifyContent: "space-between",
-    alignItems: "flex-end",
-  },
-  descr: {
-    flex: "auto",
-  },
-  btnDelete: {
-    width: 140,
-    position: "absolute",
-    right: 0,
-  },
-  requestsTitle: {
-    marginTop: 40,
-    textAlign: "center",
-  },
-  name: {
-    width: "calc(100% - 150px)",
-  },
-  descrSpan: {
-    fontSize: 16,
-    color: "gray",
-  },
-  categorySpan: {
-    fontSize: 14,
-    color: "gray",
-  },
-  divider: {
-    width: "73%",
-    margin: "auto",
-    marginTop: 80,
-  },
-});
+// const useStyles = makeStyles({
+
+//   itemTxtBottom: {
+//     display: "flex",
+//     justifyContent: "space-between",
+//     alignItems: "flex-end",
+//   },
+//   descr: {
+//     flex: "auto",
+//   },
+//   btnDelete: {
+//     width: 140,
+//     position: "absolute",
+//     right: 0,
+//   },
+//   requestsTitle: {
+//     marginTop: 40,
+//     textAlign: "center",
+//   },
+//   name: {
+//     width: "calc(100% - 150px)",
+//   },
+//   descrSpan: {
+//     fontSize: 16,
+//     color: "gray",
+//   },
+//   categorySpan: {
+//     fontSize: 14,
+//     color: "gray",
+//   },
+//   divider: {
+//     width: "73%",
+//     margin: "auto",
+//     marginTop: 80,
+//   },
+// });
 
 const OneMedication: React.FC = () => {
-  const classes = useStyles();
-
   const dispatch = useDispatch();
 
   const { id } = useParams<{ id?: string }>();
@@ -108,20 +80,16 @@ const OneMedication: React.FC = () => {
   if (find) {
     return (
       <>
-        <Grid container className={classes.content}>
-          <Grid item xs={5} className={classes.leftColumn}>
-            <Box className={classes.imgBox}>
-              <CardMedia
-                className={classes.image}
-                component={"img"}
-                src={find.img}
-              />
-            </Box>
+        <GridContent>
+          <Grid item xs={5}>
+            <ImgBox>
+              <img src={find.img} alt={find.name} style={{ width: "100%" }} />
+            </ImgBox>
           </Grid>
-          <Grid item xs={7} className={classes.rightColumn}>
+          <Grid item xs={7} className={"rightColumn"}>
             {token ? (
               <Button
-                className={classes.btnDelete}
+                className={"btnDelete"}
                 component={Link}
                 to={"/"}
                 variant="contained"
@@ -139,23 +107,23 @@ const OneMedication: React.FC = () => {
             <Typography
               component="h1"
               variant="h4"
-              className={classes.name}
+              className={"name"}
               gutterBottom
             >
               {find.name}
             </Typography>
 
             <Typography>
-              <span className={classes.categorySpan}>Категория: </span>
+              <span className={"categorySpan"}>Категория: </span>
               {find.category.name}
             </Typography>
 
-            <Typography component="h1" variant="h5" className={classes.descr}>
-              <span className={classes.descrSpan}>Описание:</span> <br />
+            <Typography component="h1" variant="h5" className={"descr"}>
+              <span className={"descrSpan"}>Описание:</span> <br />
               {find.description}
             </Typography>
 
-            <Box className={classes.itemTxtBottom}>
+            <Box className={"itemTxtBottom"}>
               <Typography>
                 До истечения срока годности осталось -{" "}
                 {`${
@@ -174,7 +142,7 @@ const OneMedication: React.FC = () => {
               </Button>
             </Box>
           </Grid>
-        </Grid>
+        </GridContent>
         <Box>
           {loading ? (
             <CircularProgress />
@@ -182,11 +150,11 @@ const OneMedication: React.FC = () => {
             <>
               {token ? (
                 <>
-                  <Divider variant={"middle"} className={classes.divider} />
+                  <Divider variant={"middle"} className={"divider"} />
                   <Typography
                     variant={"h4"}
                     gutterBottom
-                    className={classes.requestsTitle}
+                    className={"requestsTitle"}
                   >
                     Заявки
                   </Typography>

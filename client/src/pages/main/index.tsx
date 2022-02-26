@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMedications } from "../../store/features/medications";
+import { getMedications } from "../../store/slices/medications";
 import Sidebar from "../../components/sidebar";
 import Index from "./medications";
 import { CircularProgress, Grid } from "@mui/material";

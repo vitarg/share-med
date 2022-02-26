@@ -13,7 +13,7 @@ export const ImgBox = styled("div")({
   height: 200,
 });
 
-export const MedicationCardMedia = styled(CardMedia)({
+export const MedicationCardMedia = styled('img')({
   objectFit: "contain",
   width: "100%",
   maxWidth: "100%",
