@@ -1,14 +1,14 @@
 import { styled } from "@mui/material";
-import { NavLink } from "react-router-dom";
+import { Link } from "react-router-dom";
 
-export const ListItemNavLink = styled(NavLink)({
-  // color: "#484d52",
+export const RouterLink = styled(Link)({
   marginLeft: 16,
-  color: ('active') ? "#6c757d" : "#484d52",
+  color: "#6c757d",
   textDecoration: "none",
 });
 
-export const ListItemLink = styled(NavLink)({
-  color: "#6c757d",
+export const RouterActiveLink = styled(Link)({
+  marginLeft: 16,
+  color: "#484d52",
   textDecoration: "none",
 });
