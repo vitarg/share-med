@@ -1,10 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { createAdmin } from "../../../store/app/slice";
 import { useDispatch, useSelector } from "react-redux";
 import appSelectors from "../../../store/app/selectors";
 import { Button, Grid, TextField } from "@mui/material";
 import Auth from "../index";
+import { createAdmin } from "../../../store/app/thunks";
 
 // const useStyles = makeStyles((theme) => ({
 //   paper: {
@@ -118,7 +118,10 @@ const SignUp = () => {
             to="/sign-in"
             style={{ textDecoration: "none", color: "#333", fontSize: 14 }}
           >
-            Уже есть аккаунт? <span style={{color: '#5caddc'}}><b>Войти</b></span>
+            Уже есть аккаунт?{" "}
+            <span style={{ color: "#5caddc" }}>
+              <b>Войти</b>
+            </span>
           </Link>
         </Grid>
       </Grid>

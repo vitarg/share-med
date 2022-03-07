@@ -1,9 +1,9 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import categoriesSelectors from "../../store/categories/selectors";
-import { getCategories } from "../../store/categories/slice";
 import { List, ListItem } from "@mui/material";
-import { RouterLink, RouterActiveLink } from "./styles";
+import { RouterLink } from "./styles";
+import { getCategories } from "../../store/categories/thunks";
 
 function Sidebar() {
   const categories = useSelector(categoriesSelectors.categories);

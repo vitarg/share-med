@@ -1,6 +1,5 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Medication } from "../../../../store/medications/slice";
 import {
   Button,
   CardActionArea,
@@ -14,6 +13,7 @@ import {
   MedicationCardActions,
   MedicationCardMedia,
 } from "./styles";
+import { Medication } from "../../../../data/types/medication";
 
 interface MedicationItemProps {
   item: Medication;

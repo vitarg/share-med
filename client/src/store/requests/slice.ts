@@ -1,6 +1,7 @@
 import { SerializedError } from "@reduxjs/toolkit/dist/createAsyncThunk";
 import { createSlice } from "@reduxjs/toolkit";
 import { acceptRequest, addRequest, getRequests } from "./thunks";
+import { Request } from "../../data/types/request";
 
 interface RequestsState {
   requests: Request[];
@@ -54,7 +55,7 @@ const requestsSlice = createSlice({
       state.loading = false;
       state.error = action.error;
     });
-    builder.addCase(acceptRequest.fulfilled, (state, action) => {
+    builder.addCase(acceptRequest.fulfilled, (state) => {
       state.loading = false;
       state.error = null;
     });

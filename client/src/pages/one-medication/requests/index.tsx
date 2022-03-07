@@ -1,9 +1,9 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { acceptRequest } from "../../../store/requests/slice";
-import requestsSelectors from "../../../store/requests/selectors";
 import appSelectors from "../../../store/app/selectors";
+import requestsSelectors from "../../../store/requests/selectors";
 import { Box, Button, Paper, Typography } from "@mui/material";
+import { acceptRequest } from "../../../store/requests/thunks";
 
 // const useStyles = {
 //   cardWrapper: {
