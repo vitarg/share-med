@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useParams } from "react-router";
-import { addRequest } from "../../store/slices/requests";
+import { addRequest } from "../../store/requests/slice";
 import { Button, Grid, Paper, TextField, Typography } from "@mui/material";
 import { Root } from "./styles";
 

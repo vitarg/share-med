@@ -5,7 +5,7 @@ const {
 
 const router = Router();
 
-router.post("/categories", categoriesController.addCategory);
-router.get("/categories", categoriesController.getAllCategories);
+router.post("/selectors", categoriesController.addCategory);
+router.get("/selectors", categoriesController.getAllCategories);
 
 module.exports = router;

@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { getMedications } from "../../store/slices/medications";
+import { getMedications } from "../../store/medications/slice";
 import Sidebar from "../../components/sidebar";
 import Index from "./medications";
 import { CircularProgress, Grid } from "@mui/material";
 import { GridSidebar, LoadingWrapper } from "./styles";
 import Navbar from "../../components/navbar";
-import medicationsSelectors from "../../store/selectors/medications";
+import medicationsSelectors from "../../store/medications/selectors";
 
 const Main = () => {
   const loading = useSelector(medicationsSelectors.loading);

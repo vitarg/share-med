@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { getMedications } from "../../store/slices/medications";
+import { getMedications } from "../../store/medications/slice";
 import { Link } from "react-router-dom";
-import { removeMedication } from "../../store/slices/medications";
+import { removeMedication } from "../../store/medications/slice";
 import Index from "./requests";
-import medicationsSelectors from "../../store/selectors/medications";
-import appSelectors from "../../store/selectors/app";
-import { getRequests } from "../../store/slices/requests";
+import medicationsSelectors from "../../store/medications/selectors";
+import appSelectors from "../../store/app/selectors";
+import { getRequests } from "../../store/requests/slice";
 import {
   Box,
   Button,

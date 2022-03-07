@@ -1,8 +1,8 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { createAdmin } from "../../../store/slices/application";
+import { createAdmin } from "../../../store/app/slice";
 import { useDispatch, useSelector } from "react-redux";
-import appSelectors from "../../../store/selectors/app";
+import appSelectors from "../../../store/app/selectors";
 import { Button, Grid, TextField } from "@mui/material";
 import Auth from "../index";
 

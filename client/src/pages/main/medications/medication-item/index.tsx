@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { Medication } from "../../../../store/slices/medications";
+import { Medication } from "../../../../store/medications/slice";
 import {
   Button,
   CardActionArea,

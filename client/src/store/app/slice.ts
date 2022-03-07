@@ -1,6 +1,6 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
+import { createSlice } from "@reduxjs/toolkit";
 import { SerializedError } from "@reduxjs/toolkit/dist/createAsyncThunk";
+import { createAdmin, signIn } from "./thunks";
 
 export interface ApplicationState {
   signingUp: boolean;
@@ -15,44 +15,6 @@ const initialState: ApplicationState = {
   error: null,
   token: localStorage.getItem("token"),
 };
-
-interface createAdminPayload {
-  name: string;
-  login: string;
-  password: string;
-}
-
-export const createAdmin = createAsyncThunk(
-  "application/sign-up",
-  async (payload: createAdminPayload, { rejectWithValue }) => {
-    const response = await axios.post("/admins", {
-      ...payload,
-    });
-
-    if (!response.data.ok) {
-      rejectWithValue(response.data.error);
-    }
-    return response.data;
-  }
-);
-
-interface signInPayload {
-  login: string;
-  password: string;
-}
-
-export const signIn = createAsyncThunk(
-  "application/sign-in",
-  async (payload: signInPayload, { rejectWithValue }) => {
-    const response = await axios.post("/admins/login", { ...payload });
-
-    if (!response.data.ok) {
-      rejectWithValue(response.data.error);
-    }
-
-    return response.data;
-  }
-);
 
 export const applicationSlice = createSlice({
   name: "application",

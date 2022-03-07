@@ -14,9 +14,9 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Main />} />
-        <Route path="/medications/categories/:id" element={<Main />} />
-        <Route path="/medications/:id" element={<OneMedication />} />
-        <Route path="/requests/:medicationId" element={<AddRequest />} />
+        <Route path="/selectors/selectors/:id" element={<Main />} />
+        <Route path="/selectors/:id" element={<OneMedication />} />
+        <Route path="/selectors/:medicationId" element={<AddRequest />} />
         <Route path={"/sign-in"} element={<SignIn />} />
         <Route path={"/sign-up"} element={<SignUp />} />
       </Routes>
