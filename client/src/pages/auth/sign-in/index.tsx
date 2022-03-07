@@ -2,9 +2,9 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import appSelectors from "../../../store/app/selectors";
-import { signIn } from "../../../store/app/slice";
 import { Button, Grid, TextField, Typography } from "@mui/material";
 import Auth from "../index";
+import { signIn } from "../../../store/app/thunks";
 
 // const useStyles = makeStyles((theme) => ({
 //   paper: {

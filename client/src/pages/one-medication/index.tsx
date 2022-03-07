@@ -1,13 +1,10 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useParams } from "react-router";
-import { getMedications } from "../../store/medications/slice";
 import { Link } from "react-router-dom";
-import { removeMedication } from "../../store/medications/slice";
 import Index from "./requests";
 import medicationsSelectors from "../../store/medications/selectors";
 import appSelectors from "../../store/app/selectors";
-import { getRequests } from "../../store/requests/slice";
 import {
   Box,
   Button,
@@ -17,6 +14,11 @@ import {
   Typography,
 } from "@mui/material";
 import { GridContent, ImgBox } from "./styles";
+import { getRequests } from "../../store/requests/thunks";
+import {
+  getMedications,
+  removeMedication,
+} from "../../store/medications/thunks";
 
 // const useStyles = makeStyles({
 
