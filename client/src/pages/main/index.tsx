@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import Sidebar from "../../components/sidebar";
-import Index from "./medications";
+import Medications from "./medications";
 import { CircularProgress, Grid } from "@mui/material";
 import { GridSidebar, LoadingWrapper } from "./styles";
 import Navbar from "../../components/navbar";
@@ -44,7 +44,7 @@ const Main = () => {
           <Navbar onChangeFilter={handleChangeFilter} />
 
           <Grid container spacing={3}>
-            <Index search={search} />
+            <Medications search={search} />
           </Grid>
         </Grid>
       </Grid>
