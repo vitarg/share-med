@@ -45,11 +45,9 @@ const Medications: React.FC<MedicationsProps> = ({ search }) => {
 
   return (
     <>
-      {medications.map((item) => {
-        console.log("medication", item);
-
-        return <MedicationItem key={item._id} item={item} />;
-      })}
+      {medications.map((item) => (
+        <MedicationItem key={item._id} item={item} />
+      ))}
     </>
   );
 };
