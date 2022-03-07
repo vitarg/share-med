@@ -5,14 +5,14 @@ const {
 
 const router = Router();
 
-router.post("/medications", medicationsController.createMedication);
-router.get("/medications", medicationsController.getAllMedications);
-router.get("/medications/:id", medicationsController.getMedication);
-router.delete("/medications/:id", medicationsController.removeMedication);
+router.post("/selectors", medicationsController.createMedication);
+router.get("/selectors", medicationsController.getAllMedications);
+router.get("/selectors/:id", medicationsController.getMedication);
+router.delete("/selectors/:id", medicationsController.removeMedication);
 router.get(
-  "/medications/categories/:id",
+  "/selectors/selectors/:id",
   medicationsController.getMedicationsByCategory
 );
-router.post("/medications/:id", medicationsController.addImageForMedication);
+router.post("/selectors/:id", medicationsController.addImageForMedication);
 
 module.exports = router;

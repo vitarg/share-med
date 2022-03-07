@@ -1,11 +1,7 @@
 import { SerializedError } from "@reduxjs/toolkit/dist/createAsyncThunk";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-
-export interface Category {
-  _id?: string;
-  name: string;
-}
+import { createSlice } from "@reduxjs/toolkit";
+import { getCategories } from "./thunks";
+import { Category } from "../../data/types/category";
 
 interface CategoriesState {
   categories: Category[];
@@ -18,19 +14,6 @@ const initialState: CategoriesState = {
   loading: false,
   error: null,
 };
-
-export const getCategories = createAsyncThunk(
-  "categories/fetch",
-  async (_, { rejectWithValue }) => {
-    const response = await axios.get("/categories");
-
-    if (!response.data.ok) {
-      rejectWithValue(response.data.error);
-    }
-
-    return response.data;
-  }
-);
 
 const categoriesSlice = createSlice({
   name: "categories",

@@ -1,16 +1,6 @@
 import { SerializedError } from "@reduxjs/toolkit/dist/createAsyncThunk";
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
-import axios from "axios";
-
-export interface Request {
-  _id: string;
-  name: string;
-  tel: string;
-  email: string;
-  message: string;
-  medicationId: string;
-  isAccept: boolean;
-}
+import { createSlice } from "@reduxjs/toolkit";
+import { acceptRequest, addRequest, getRequests } from "./thunks";
 
 interface RequestsState {
   requests: Request[];
@@ -23,64 +13,6 @@ const initialState: RequestsState = {
   loading: false,
   error: null,
 };
-
-interface AddRequestProps {
-  medicationId: string;
-  name: string;
-  tel: string;
-  email: string;
-  message: string;
-}
-
-export const addRequest = createAsyncThunk(
-  "requests/add",
-  async (payload: AddRequestProps, { rejectWithValue }) => {
-    const response = await axios.post("/requests", {
-      payload,
-    });
-
-    if (!response.data.ok) {
-      rejectWithValue(response.data.error);
-    }
-
-    return response.data;
-  }
-);
-
-interface GetRequestsProps {
-  id: string;
-}
-
-export const getRequests = createAsyncThunk(
-  "requests/get",
-  async (payload: GetRequestsProps, { rejectWithValue }) => {
-    const response = await axios.get(`/requests/${payload.id}`);
-
-    if (!response.data.ok) {
-      rejectWithValue(response.data.error);
-    }
-
-    return response.data;
-  }
-);
-
-interface AcceptRequestProps {
-  id: string;
-  medicationId: string;
-}
-
-export const acceptRequest = createAsyncThunk(
-  "requests/accept",
-  async (payload: AcceptRequestProps, { rejectWithValue }) => {
-    const response = await axios.patch(`/requests/${payload.id}/accept`);
-
-    if (!response.data.ok) {
-      rejectWithValue(response.data.error);
-    }
-
-    return response.data;
-  }
-);
 
 const requestsSlice = createSlice({
   name: "requests",

@@ -1,7 +1,7 @@
 import React from "react";
 import { useSelector } from "react-redux";
 import { Add } from "@mui/icons-material";
-import appSelectors from "../../../../store/selectors/app";
+import appSelectors from "../../../../store/app/selectors";
 import { Button } from "@mui/material";
 
 interface AddMedicationBtnProps {

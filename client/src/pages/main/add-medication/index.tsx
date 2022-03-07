@@ -1,17 +1,22 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
-import { addMedication } from "../../../store/slices/medications";
-import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from "@mui/material";
+import {
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogContentText,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
+import { addMedication } from "../../../store/medications/thunks";
 
 interface AddMedicationProps {
   open: boolean;
   setOpen: (arg: boolean) => void;
 }
 
-const AddMedication: React.FC<AddMedicationProps> = ({
-  open,
-  setOpen,
-}) => {
+const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");

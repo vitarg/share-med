@@ -1,8 +1,8 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { acceptRequest } from "../../../store/slices/requests";
-import requestsSelectors from "../../../store/selectors/requests";
-import appSelectors from "../../../store/selectors/app";
+import { acceptRequest } from "../../../store/requests/slice";
+import requestsSelectors from "../../../store/requests/selectors";
+import appSelectors from "../../../store/app/selectors";
 import { Box, Button, Paper, Typography } from "@mui/material";
 
 // const useStyles = {

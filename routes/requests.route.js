@@ -3,11 +3,11 @@ const { requestsController } = require("../controllers/requests.controller");
 
 const router = Router();
 
-router.post("/requests/:medicationId", requestsController.addRequest);
+router.post("/selectors/:medicationId", requestsController.addRequest);
 router.get(
-  "/requests/:medicationId",
+  "/selectors/:medicationId",
   requestsController.getRequestByMedication
 );
-router.patch("/requests/:id/accept", requestsController.acceptRequest);
+router.patch("/selectors/:id/accept", requestsController.acceptRequest);
 
 module.exports = router;

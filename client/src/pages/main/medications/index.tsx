@@ -1,7 +1,7 @@
 import React from "react";
 import Index from "./medication-item";
 import { useSelector } from "react-redux";
-import medicationsSelectors from "../../../store/selectors/medications";
+import medicationsSelectors from "../../../store/medications/selectors";
 import { useParams } from "react-router";
 
 interface MedicationsProps {

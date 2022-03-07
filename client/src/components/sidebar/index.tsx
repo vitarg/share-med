@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import categoriesSelectors from "../../store/selectors/categories";
-import { getCategories } from "../../store/slices/categories";
+import categoriesSelectors from "../../store/categories/selectors";
+import { getCategories } from "../../store/categories/slice";
 import { List, ListItem } from "@mui/material";
 import { RouterLink, RouterActiveLink } from "./styles";
 

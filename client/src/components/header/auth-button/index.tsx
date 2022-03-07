@@ -2,8 +2,8 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthButton } from "./styles";
-import appSelectors from "../../../store/selectors/app";
-import { logout } from "../../../store/slices/application";
+import appSelectors from "../../../store/app/selectors";
+import { logout } from "../../../store/app/slice";
 
 const AuthBtn = () => {
   const token = useSelector(appSelectors.token);
