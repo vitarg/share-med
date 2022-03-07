@@ -1,8 +1,8 @@
 import React from "react";
-import Index from "./medication-item";
 import { useSelector } from "react-redux";
 import medicationsSelectors from "../../../store/medications/selectors";
 import { useParams } from "react-router";
+import MedicationItem from "./medication-item";
 
 interface MedicationsProps {
   search: string;
@@ -19,7 +19,7 @@ const Medications: React.FC<MedicationsProps> = ({ search }) => {
         {medications
           .filter((item) => item.category._id === id)
           .map((item) => (
-            <Index key={item._id} item={item} />
+            <MedicationItem key={item._id} item={item} />
           ))}
       </>
     );
@@ -37,7 +37,7 @@ const Medications: React.FC<MedicationsProps> = ({ search }) => {
                   .includes(search.toString().toLowerCase())
           )
           .map((item) => {
-            return <Index key={item._id} item={item} />;
+            return <MedicationItem key={item._id} item={item} />;
           })}
       </>
     );
@@ -46,7 +46,7 @@ const Medications: React.FC<MedicationsProps> = ({ search }) => {
   return (
     <>
       {medications.map((item) => (
-        <Index key={item._id} item={item} />
+        <MedicationItem key={item._id} item={item} />
       ))}
     </>
   );
