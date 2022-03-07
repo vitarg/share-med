@@ -1,8 +1,8 @@
 import { configureStore } from "@reduxjs/toolkit";
-import applicationReducer from "./features/application";
-import medicationsReducer from "./features/medications";
-import categoriesReducer from "./features/categories";
-import requestsReducer from "./features/requests";
+import applicationReducer from "./slices/application";
+import medicationsReducer from "./slices/medications";
+import categoriesReducer from "./slices/categories";
+import requestsReducer from "./slices/requests";
 
 export const store = configureStore({
   reducer: {

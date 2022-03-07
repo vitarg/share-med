@@ -5,33 +5,21 @@ import SignUp from "../pages/auth/sign-up";
 import Main from "../pages/main";
 import OneMedication from "../pages/one-medication";
 import AddRequest from "../pages/add-request";
-import { BrowserRouter, Route, Switch } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <BrowserRouter>
       <Header />
 
-      <Switch>
-        <Route exact path="/">
-          <Main />
-        </Route>
-        <Route exact path="/medications/categories/:id">
-          <Main />
-        </Route>
-        <Route path="/medications/:id">
-          <OneMedication />
-        </Route>
-        <Route path="/requests/:medicationId">
-          <AddRequest />
-        </Route>
-        <Route path={"/sign-in"}>
-          <SignIn />
-        </Route>
-        <Route path={"/sign-up"}>
-          <SignUp />
-        </Route>
-      </Switch>
+      <Routes>
+        <Route path="/" element={<Main />} />
+        <Route path="/medications/categories/:id" element={<Main />} />
+        <Route path="/medications/:id" element={<OneMedication />} />
+        <Route path="/requests/:medicationId" element={<AddRequest />} />
+        <Route path={"/sign-in"} element={<SignIn />} />
+        <Route path={"/sign-up"} element={<SignUp />} />
+      </Routes>
     </BrowserRouter>
   );
 }

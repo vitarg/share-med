@@ -1,8 +1,8 @@
 import React from "react";
 import { TextField } from "@mui/material";
-import AddMedicationBtn from "../add-medication/add-medication-btn";
-import AddMedication from "../add-medication";
-import { MainNavbar } from "../styles";
+import AddMedicationBtn from "../../pages/main/add-medication/add-medication-btn";
+import AddMedication from "../../pages/main/add-medication";
+import { MainNavbar } from "../../pages/main/styles";
 
 interface NavbarProps {
   onChangeFilter: (

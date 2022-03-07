@@ -1,66 +1,32 @@
 import React from "react";
-import {
-  Box,
-  Button,
-  Card,
-  CardActionArea,
-  CardActions,
-  CardContent,
-  CardMedia,
-  Grid,
-  makeStyles,
-  Typography,
-} from "@material-ui/core";
 import { Link } from "react-router-dom";
-import { Medication } from "../../../../store/features/medications";
-
-const useStyles = makeStyles({
-  card: {
-    boxShadow: "0 .5rem 1rem rgba(0,0,0,.15)",
-    borderRadius: 10,
-  },
-  imgBox: {
-    padding: 16,
-    background: "url('/no-pictures.svg') center center/30% no-repeat",
-    backgroundColor: "#ffffff",
-    width: "calc(100% - 32px)",
-    height: 200,
-  },
-  image: {
-    objectFit: "contain",
-    width: "100%",
-    maxWidth: "100%",
-    minHeight: "100%",
-    maxHeight: "100%",
-  },
-  item: {
-    height: "100%",
-  },
-  btnBox: {
-    padding: 16,
-    paddingTop: 0,
-    justifyContent: "flex-end",
-  },
-});
+import { Medication } from "../../../../store/slices/medications";
+import {
+  Button,
+  CardActionArea,
+  CardContent,
+  Grid,
+  Typography,
+} from "@mui/material";
+import {
+  ImgBox,
+  MedicationCard,
+  MedicationCardActions,
+  MedicationCardMedia,
+} from "./styles";
 
 interface MedicationItemProps {
   item: Medication;
 }
 
 const MedicationItem: React.FC<MedicationItemProps> = ({ item }) => {
-  const classes = useStyles();
-
   return (
-    <Grid item xs={3} key={item._id} className={classes.item}>
-      <Card className={classes.card}>
+    <Grid item xs={3} key={item._id} style={{ height: "100%" }}>
+      <MedicationCard>
         <CardActionArea>
-          <Box className={classes.imgBox}>
-            <CardMedia
-              className={classes.image}
-              component={"img"}
-              src={item.img}
-            />
-          </Box>
+          <ImgBox>
+            <MedicationCardMedia src={item.img} />
+          </ImgBox>
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
               {item.name}
@@ -75,7 +41,7 @@ const MedicationItem: React.FC<MedicationItemProps> = ({ item }) => {
             </Typography>
           </CardContent>
         </CardActionArea>
-        <CardActions className={classes.btnBox}>
+        <MedicationCardActions>
           <Button
             component={Link}
             to={`/medications/${item._id}`}
@@ -85,8 +51,8 @@ const MedicationItem: React.FC<MedicationItemProps> = ({ item }) => {
           >
             Подробнее
           </Button>
-        </CardActions>
-      </Card>
+        </MedicationCardActions>
+      </MedicationCard>
     </Grid>
   );
 };

@@ -1,24 +1,14 @@
 import React from "react";
-import { Button, makeStyles } from "@material-ui/core";
 import { useSelector } from "react-redux";
-import AddIcon from "@material-ui/icons/Add";
+import { Add } from "@mui/icons-material";
 import appSelectors from "../../../../store/selectors/app";
-
-const useStyles = makeStyles({
-  addBtn: {
-    height: 42,
-  },
-});
+import { Button } from "@mui/material";
 
 interface AddMedicationBtnProps {
   setOpen: (arg: boolean) => void;
 }
 
-const AddMedicationBtn: React.FC<AddMedicationBtnProps> = ({
-  setOpen,
-}) => {
-  const classes = useStyles();
-
+const AddMedicationBtn: React.FC<AddMedicationBtnProps> = ({ setOpen }) => {
   const token = useSelector(appSelectors.token);
 
   const handleClickOpen = () => {
@@ -28,11 +18,11 @@ const AddMedicationBtn: React.FC<AddMedicationBtnProps> = ({
   if (token) {
     return (
       <Button
-        className={classes.addBtn}
+        style={{ height: 42 }}
         variant="outlined"
         color="primary"
         onClick={handleClickOpen}
-        endIcon={<AddIcon />}
+        endIcon={<Add />}
       >
         Добавить
       </Button>

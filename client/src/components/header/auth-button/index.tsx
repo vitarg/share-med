@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { AuthButton } from "./styles";
 import appSelectors from "../../../store/selectors/app";
-import { logout } from "../../../store/features/application";
+import { logout } from "../../../store/slices/application";
 
 const AuthBtn = () => {
   const token = useSelector(appSelectors.token);

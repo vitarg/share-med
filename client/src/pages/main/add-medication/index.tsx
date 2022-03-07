@@ -1,15 +1,7 @@
 import React, { useState } from "react";
-import {
-  Button,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogContentText,
-  DialogTitle,
-  TextField,
-} from "@material-ui/core";
 import { useDispatch } from "react-redux";
-import { addMedication } from "../../../store/features/medications";
+import { addMedication } from "../../../store/slices/medications";
+import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, TextField } from "@mui/material";
 
 interface AddMedicationProps {
   open: boolean;
