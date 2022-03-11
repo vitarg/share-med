@@ -1,12 +1,15 @@
 import React, { useState } from "react";
 import { useDispatch } from "react-redux";
 import {
+  Autocomplete,
   Button,
+  Checkbox,
   Dialog,
   DialogActions,
   DialogContent,
   DialogContentText,
   DialogTitle,
+  FormControlLabel,
   TextField,
 } from "@mui/material";
 import { addMedication } from "../../../store/medications/thunks";
@@ -16,13 +19,24 @@ interface AddMedicationProps {
   setOpen: (arg: boolean) => void;
 }
 
+interface OptionsCategory {
+  label: string, id: string
+}
+
+const options = [
+  { label: 'Для сердца', id: "61409cb3064023b83260caff" },
+  { label: 'Нервная система', id: "61409ce5064023b83260cb01" },
+  { label: 'Кости и мышцы', id: "61409d25064023b83260cb03" },
+  { label: 'Прочие препараты', id: "61409d4f064023b83260cb05" },
+]
+
 const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
   const dispatch = useDispatch();
 
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
   const [price, setPrice] = useState<string>("0");
-  const [category, setCategory] = useState("");
+  const [category, setCategory] = useState<OptionsCategory>(options[0]);
   const [img, setImg] = useState("");
   const [expiryDate, setExpireDate] = useState("");
   const [hasRecipe, setHasRecipe] = useState<boolean>(false);
@@ -45,12 +59,6 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
     setPrice(e.target.value);
   };
 
-  const handleChangeCategory = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
-  ) => {
-    setCategory(e.target.value);
-  };
-
   const handleChangeImg = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -64,9 +72,9 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
   };
 
   const handleChangeHasRecipe = (
-    e: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
-    setHasRecipe(e.target.checkValidity);
+    setHasRecipe(e.target.checked);
   };
 
   const handleClose = () => {
@@ -79,7 +87,7 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
         name,
         price: Number(price),
         description,
-        category,
+        category: category.id,
         img,
         expiryDate,
         hasRecipe,
@@ -126,14 +134,14 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
           type="text"
           fullWidth
         />
-        <TextField
-          onChange={(e) => handleChangeCategory(e)}
-          autoFocus
-          margin="dense"
-          id="category"
-          label="Категория"
-          type="text"
-          fullWidth
+        <Autocomplete
+          value={category}
+          onChange={(event: any, newValue: any) => {
+            setCategory(newValue)
+          }}
+          id="controllable-states-demo"
+          options={options}
+          renderInput={(params) => <TextField {...params} label="Категория" />}
         />
         <TextField
           onChange={(e) => handleChangeImg(e)}
@@ -153,13 +161,9 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
           type="text"
           fullWidth
         />
-        <TextField
-          onChange={(e) => handleChangeHasRecipe(e)}
-          autoFocus
-          id="recipe"
+        <FormControlLabel
+          control={<Checkbox checked={hasRecipe} onChange={(e) => handleChangeHasRecipe(e)} />}
           label="Нужен рецепт?"
-          type="checkbox"
-          fullWidth
         />
       </DialogContent>
       <DialogActions>
