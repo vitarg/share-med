@@ -128,10 +128,9 @@ const OneMedication: React.FC = () => {
             <Box className={"itemTxtBottom"}>
               <Typography>
                 До истечения срока годности осталось -{" "}
-                {`${
-                  Number(find.expiryDate) -
+                {`${Number(find.expiryDate) -
                   (new Date().getDate() - new Date(find.createdAt).getDate())
-                } дней`}
+                  } дней`}
               </Typography>
 
               <Button

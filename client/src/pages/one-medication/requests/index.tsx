@@ -1,4 +1,3 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
 import appSelectors from "../../../store/app/selectors";
 import requestsSelectors from "../../../store/requests/selectors";
@@ -61,7 +60,7 @@ const Requests = () => {
       <>
         {requests.map((item) => {
           return (
-            <Box className={"cardWrapper"}>
+            <Box className={"cardWrapper"} key={hasAccepted?._id}>
               <Paper className={`card ${item.isAccept ? "accepted" : ""}`}>
                 <Typography variant={"h6"}>
                   <span className={"cardSpan"}>Имя: </span>
