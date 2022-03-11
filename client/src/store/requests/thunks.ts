@@ -10,7 +10,7 @@ interface AddRequestProps {
 }
 
 export const addRequest = createAsyncThunk(
-  "selectors/add",
+  "requests/add",
   async (payload: AddRequestProps, { rejectWithValue }) => {
     const response = await axios.post("/requests", {
       payload,
@@ -29,7 +29,7 @@ interface GetRequestsProps {
 }
 
 export const getRequests = createAsyncThunk(
-  "selectors/get",
+  "requests/get",
   async (payload: GetRequestsProps, { rejectWithValue }) => {
     const response = await axios.get(`/requests/${payload.id}`);
 
@@ -47,7 +47,7 @@ interface AcceptRequestProps {
 }
 
 export const acceptRequest = createAsyncThunk(
-  "selectors/accept",
+  "requests/accept",
   async (payload: AcceptRequestProps, { rejectWithValue }) => {
     const response = await axios.patch(`/requests/${payload.id}/accept`);
 
