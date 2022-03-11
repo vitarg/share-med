@@ -35,6 +35,9 @@ export const signIn = createAsyncThunk(
       rejectWithValue(response.data.error);
     }
 
+    localStorage.setItem("token", response.data.token);
+    window.location.href = "/";
+
     return response.data;
   }
 );
