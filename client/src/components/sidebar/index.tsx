@@ -1,9 +1,9 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import categoriesSelectors from "../../store/categories/selectors";
 import { List, ListItem } from "@mui/material";
-import { RouterLink } from "./styles";
 import { getCategories } from "../../store/categories/thunks";
+import { NavLink } from "react-router-dom";
 
 function Sidebar() {
   const categories = useSelector(categoriesSelectors.categories);
@@ -21,14 +21,16 @@ function Sidebar() {
       style={{ marginTop: 16 }}
     >
       <ListItem>
-        <RouterLink to={"/"}>Все лекарства</RouterLink>
+        <NavLink to={"/"} className={({ isActive }) => isActive ? "active-link" : "not-active-link"
+        }>Все лекарства</NavLink>
       </ListItem>
       {categories.map((item) => {
         return (
           <ListItem key={item._id}>
-            <RouterLink to={`/medications/categories/${item._id}`}>
+            <NavLink to={`/medications/categories/${item._id}`} className={({ isActive }) => isActive ? "active-link" : "not-active-link"
+            }>
               {item.name}
-            </RouterLink>
+            </NavLink>
           </ListItem>
         );
       })}
