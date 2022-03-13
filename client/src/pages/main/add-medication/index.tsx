@@ -13,6 +13,10 @@ import {
   TextField,
 } from "@mui/material";
 import { addMedication } from "../../../store/medications/thunks";
+import AdapterDateFns from '@mui/lab/AdapterDateFns';
+import LocalizationProvider from '@mui/lab/LocalizationProvider';
+import DatePicker from '@mui/lab/DatePicker';
+import { DesktopDatePicker } from "@mui/lab";
 
 interface AddMedicationProps {
   open: boolean;
@@ -38,7 +42,7 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
   const [price, setPrice] = useState<string>("0");
   const [category, setCategory] = useState<OptionsCategory>(options[0]);
   const [img, setImg] = useState("");
-  const [expiryDate, setExpireDate] = useState("");
+  const [expiryDate, setExpireDate] = useState<any>("");
   const [hasRecipe, setHasRecipe] = useState<boolean>(false);
 
   const handleChangeName = (
@@ -66,9 +70,10 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
   };
 
   const handleChangeExpireDate = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: any
   ) => {
-    setExpireDate(e.target.value);
+    console.log(expiryDate)
+    setExpireDate(e);
   };
 
   const handleChangeHasRecipe = (
@@ -89,7 +94,7 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
         description,
         category: category.id,
         img,
-        expiryDate,
+        expiryDate: expiryDate.toLocaleDateString(),
         hasRecipe,
       })
     );
@@ -152,15 +157,15 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
           type="text"
           fullWidth
         />
-        <TextField
-          onChange={(e) => handleChangeExpireDate(e)}
-          autoFocus
-          margin="dense"
-          id="expire"
-          label="Годен до"
-          type="text"
-          fullWidth
-        />
+        <LocalizationProvider dateAdapter={AdapterDateFns}>
+          <DesktopDatePicker
+            label="Годен до"
+            value={expiryDate}
+            minDate={new Date()}
+            onChange={(e) => handleChangeExpireDate(e)}
+            renderInput={(params) => <TextField fullWidth {...params} />}
+          />
+        </LocalizationProvider>
         <FormControlLabel
           control={<Checkbox checked={hasRecipe} onChange={(e) => handleChangeHasRecipe(e)} />}
           label="Нужен рецепт?"

@@ -4,7 +4,7 @@ export interface Medication {
   _id: string;
   name: string;
   price: number;
-  description: string;
+  descr: string;
   category: Category;
   img: string;
   hasRecipe: boolean;
