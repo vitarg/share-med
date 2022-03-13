@@ -19,6 +19,7 @@ import {
   getMedications,
   removeMedication,
 } from "../../store/medications/thunks";
+import { dateExpiration } from "../../helpers/dateExpiration";
 
 // const useStyles = makeStyles({
 
@@ -122,15 +123,12 @@ const OneMedication: React.FC = () => {
 
             <Typography component="h1" variant="h5" className={"descr"}>
               <span className={"descrSpan"}>Описание:</span> <br />
-              {find.description}
+              {find.descr}
             </Typography>
 
             <Box className={"itemTxtBottom"}>
               <Typography>
-                До истечения срока годности осталось -{" "}
-                {`${Number(find.expiryDate) -
-                  (new Date().getDate() - new Date(find.createdAt).getDate())
-                  } дней`}
+                {dateExpiration(find.expiryDate)}
               </Typography>
 
               <Button

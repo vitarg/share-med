@@ -12,7 +12,7 @@ const medicationSchema = mongoose.Schema(
     },
     img: String,
     hasRecipe: Boolean,
-    expiryDate: Number,
+    expiryDate: String,
   },
   { timestamps: true }
 );
