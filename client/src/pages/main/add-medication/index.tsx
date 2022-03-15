@@ -12,11 +12,10 @@ import {
   FormControlLabel,
   TextField,
 } from "@mui/material";
-import { addMedication } from "../../../store/medications/thunks";
 import AdapterDateFns from '@mui/lab/AdapterDateFns';
 import LocalizationProvider from '@mui/lab/LocalizationProvider';
-import DatePicker from '@mui/lab/DatePicker';
 import { DesktopDatePicker } from "@mui/lab";
+import { addMedication } from "../../../store/medications/thunks";
 
 interface AddMedicationProps {
   open: boolean;
@@ -24,7 +23,8 @@ interface AddMedicationProps {
 }
 
 interface OptionsCategory {
-  label: string, id: string
+  label: string,
+  id: string
 }
 
 const options = [
@@ -42,35 +42,35 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
   const [price, setPrice] = useState<string>("0");
   const [category, setCategory] = useState<OptionsCategory>(options[0]);
   const [img, setImg] = useState("");
-  const [expiryDate, setExpireDate] = useState<any>("");
+  const [expiryDate, setExpireDate] = useState<Date | null>(null);
   const [hasRecipe, setHasRecipe] = useState<boolean>(false);
 
   const handleChangeName = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setName(e.target.value);
   };
 
   const handleChangeDescription = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setDescription(e.target.value);
   };
 
   const handleChangePrice = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setPrice(e.target.value);
   };
 
   const handleChangeImg = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement>
   ) => {
     setImg(e.target.value);
   };
 
   const handleChangeExpireDate = (
-    e: any
+    e: Date | null
   ) => {
     console.log(expiryDate)
     setExpireDate(e);
@@ -94,7 +94,7 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
         description,
         category: category.id,
         img,
-        expiryDate: expiryDate.toLocaleDateString(),
+        expiryDate: expiryDate?.toLocaleDateString() || new Date().toLocaleDateString(),
         hasRecipe,
       })
     );
@@ -113,8 +113,7 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
           Заполните поля, чтобы добавить новое лекарство в каталог
         </DialogContentText>
         <TextField
-          onChange={(e) => handleChangeName(e)}
-          autoFocus
+          onChange={handleChangeName}
           margin="dense"
           id="name"
           label="Название лекарства"
@@ -122,8 +121,7 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
           fullWidth
         />
         <TextField
-          onChange={(e) => handleChangePrice(e)}
-          autoFocus
+          onChange={handleChangePrice}
           margin="dense"
           id="price"
           label="Цена"
@@ -131,8 +129,7 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
           fullWidth
         />
         <TextField
-          onChange={(e) => handleChangeDescription(e)}
-          autoFocus
+          onChange={handleChangeDescription}
           margin="dense"
           id="description"
           label="Описание"
@@ -149,8 +146,7 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
           renderInput={(params) => <TextField {...params} label="Категория" />}
         />
         <TextField
-          onChange={(e) => handleChangeImg(e)}
-          autoFocus
+          onChange={handleChangeImg}
           margin="dense"
           id="imageInput"
           label="Изображение"
@@ -162,12 +158,12 @@ const AddMedication: React.FC<AddMedicationProps> = ({ open, setOpen }) => {
             label="Годен до"
             value={expiryDate}
             minDate={new Date()}
-            onChange={(e) => handleChangeExpireDate(e)}
+            onChange={handleChangeExpireDate}
             renderInput={(params) => <TextField fullWidth {...params} />}
           />
         </LocalizationProvider>
         <FormControlLabel
-          control={<Checkbox checked={hasRecipe} onChange={(e) => handleChangeHasRecipe(e)} />}
+          control={<Checkbox checked={hasRecipe} onChange={handleChangeHasRecipe} />}
           label="Нужен рецепт?"
         />
       </DialogContent>
