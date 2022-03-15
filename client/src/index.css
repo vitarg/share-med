@@ -19,12 +19,12 @@ code {
 
 .active-link {
   margin-left: 16px;
-  color: #6c757d;
+  color: #484d52;
   text-decoration: none;
 }
 
 .not-active-link {
   margin-left: 16px;
-  color: #484d52;
+  color: #6c757d;
   text-decoration: none;
 }
